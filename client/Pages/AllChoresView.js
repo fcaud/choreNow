@@ -1,6 +1,12 @@
 import NavBar from '../Components/NavBar';
-import { Text } from 'react-native-elements';
+import { Text, View } from 'react-native';
+import { styles } from './Styles/AllChoresViewStyles';
 
 export default function AllChoresView() {
-  return <Text>AllChoresView</Text>;
+  return (
+    <View style={styles.container}>
+      <Text>AllChoresView</Text>
+      <NavBar />
+    </View>
+  );
 }

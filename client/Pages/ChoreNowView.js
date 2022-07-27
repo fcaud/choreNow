@@ -1,6 +1,12 @@
 import NavBar from '../Components/NavBar';
-import { Text } from 'react-native-elements';
+import { Text, View } from 'react-native';
+import { styles } from './Styles/ChoreNowViewStyles';
 
 export default function ChoreNowView() {
-  return <Text>ChoreNowView</Text>;
+  return (
+    <View style={styles.container}>
+      <Text>ChoreNowView</Text>
+      <NavBar />
+    </View>
+  );
 }

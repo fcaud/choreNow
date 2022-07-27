@@ -1,6 +1,12 @@
 import NavBar from '../Components/NavBar';
-import { Text } from 'react-native-elements';
+import { Text, View } from 'react-native';
+import { styles } from './Styles/ScheduleViewStyles';
 
 export default function ScheduleView() {
-  return <Text>ScheduleView</Text>;
+  return (
+    <View style={styles.container}>
+      <Text>ScheduleView</Text>
+      <NavBar />
+    </View>
+  );
 }
