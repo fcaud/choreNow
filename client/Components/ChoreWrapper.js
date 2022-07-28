@@ -1,8 +1,9 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { styles } from './Styles/ChoreItemStyles';
+import { styles } from './Styles/ChoreWrapperStyles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import ChoreDetails from './ChoreDetails';
 
-export default function ChoreItem() {
+export default function ChoreWrapper() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -14,6 +15,7 @@ export default function ChoreItem() {
           <FontAwesome name="check" style={styles.icon} />
         </TouchableOpacity>
       </View>
+      <ChoreDetails />
     </View>
   );
 }

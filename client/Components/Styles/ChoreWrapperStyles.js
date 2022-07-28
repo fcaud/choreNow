@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
+    backgroundColor: '#FF7B0F',
+    borderRadius: 20,
   },
 });
 

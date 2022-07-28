@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { styles } from './Styles/NavBarStyles';
-// import SvgComponent from '../assets/logo';
+import SvgComponent from '../assets/logo';
 
 export default function NavBar({ navigation }) {
   return (
@@ -24,9 +24,9 @@ export default function NavBar({ navigation }) {
         style={styles.touchable}
         onPress={() => navigation.navigate('ChoreNowView')}
       >
-        {/* <Image source={require('../assets/')}></Image> */}
-        {/* <SvgComponent /> */}
-        <Octicons name="stopwatch" style={styles.icon} />
+        {/* <Image source={require('../assets/Logo.svg')}></Image> */}
+        <SvgComponent />
+        {/* <Octicons name="stopwatch" style={styles.icon} /> */}
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.touchable}

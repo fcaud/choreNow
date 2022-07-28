@@ -1,4 +1,5 @@
 import NavBar from './NavBar';
-import ChoreItem from './ChoreItem';
+import ChoreWrapper from './ChoreWrapper';
+import ChoreDetails from './ChoreDetails';
 
-export { NavBar, ChoreItem };
+export { NavBar, ChoreWrapper, ChoreDetails };
