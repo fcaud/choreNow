@@ -2,12 +2,22 @@ const roomsModel = require('../models/rooms.model');
 
 const createRoom = async (req, res) => {
   try {
-    await roomsModel.setOneRoom(req.body);
+    const room = await roomsModel.setOneRoom(req.body);
     res.status(201);
-    res.send(req.body);
+    res.send(room);
   } catch (e) {
     console.log('Create Room Controller error', e);
   }
 };
 
-module.exports = { createRoom };
+const getRooms = async (req, res) => {
+  try {
+    const rooms = await roomsModel.getAllRooms();
+    res.status(200);
+    res.send(rooms);
+  } catch (e) {
+    console.log('Get Rooms Controller error', e);
+  }
+};
+
+module.exports = { createRoom, getRooms };

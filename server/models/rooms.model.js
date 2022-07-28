@@ -8,4 +8,12 @@ const setOneRoom = async (roomData) => {
   }
 };
 
-module.exports = { setOneRoom };
+const getAllRooms = async (roomData) => {
+  try {
+    return await RoomsModel.find({});
+  } catch (e) {
+    console.log('Get Rooms Model error', e);
+  }
+};
+
+module.exports = { setOneRoom, getAllRooms };

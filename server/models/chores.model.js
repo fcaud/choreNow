@@ -8,4 +8,12 @@ const setOneChore = async (choreData) => {
   }
 };
 
-module.exports = { setOneChore };
+const getAllChores = async (choreData) => {
+  try {
+    return await ChoresModel.find({});
+  } catch (e) {
+    console.log('Get Chores Model error', e);
+  }
+};
+
+module.exports = { setOneChore, getAllChores };
