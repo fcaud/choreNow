@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 
 export default function RoomItem({ choreData, room }) {
   const choresForRoom = choreData.filter((chore) => chore.room === room.room);
-  console.log('chore4room', choresForRoom);
 
   return (
     <View>

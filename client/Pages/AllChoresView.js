@@ -10,7 +10,6 @@ export default function AllChoresView({ navigation }) {
   async function getChoreData() {
     const data = await ApiClientService.getAllChores();
     setChoreData(data);
-    console.log('All chores', data);
   }
 
   useEffect(() => {

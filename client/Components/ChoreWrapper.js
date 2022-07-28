@@ -1,10 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './Styles/ChoreWrapperStyles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import ChoreDetails from './ChoreDetails';
 
 export default function ChoreWrapper({ chore }) {
-  console.log('ChoreWrapper chore', chore);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -16,7 +16,7 @@ export default function ChoreWrapper({ chore }) {
           <FontAwesome name="info" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
-          <FontAwesome name="check" style={styles.icon} />
+          <Feather name="check" style={styles.icon} />
         </TouchableOpacity>
       </View>
       <ChoreDetails chore={chore} />

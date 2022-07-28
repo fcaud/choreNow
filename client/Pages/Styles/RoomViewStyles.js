@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: '10%',
   },
+  modal: { flexDirection: 'row', justifyContent: 'space-between' },
 });
 
 export { styles };
