@@ -23,6 +23,16 @@ export default function RoomView({ navigation }) {
     setChoreData(data);
   }
 
+  async function addRoom(room) {
+    if (!room) return;
+    const newRoom = await ApiClientService.createRoom({ room });
+    setRoomData([...roomData, newRoom]);
+  }
+  async function deleteRoom(_id) {
+    await ApiClientService.deleteRoom({ _id });
+    getRoomData();
+  }
+
   useEffect(() => {
     getRoomData();
     getChoreData();
@@ -39,7 +49,11 @@ export default function RoomView({ navigation }) {
 
       <Modal visible={roomModal}>
         <View style={styles.modal}>
-          <EditRoomForm roomData={roomData} />
+          <EditRoomForm
+            roomData={roomData}
+            addRoom={addRoom}
+            deleteRoom={deleteRoom}
+          />
           <TouchableOpacity onPress={editRoomsModal}>
             <Ionicons name="close" />
           </TouchableOpacity>

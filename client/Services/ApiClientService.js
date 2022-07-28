@@ -27,9 +27,23 @@ async function getAllRooms() {
     console.log('getAllRooms error', e);
   }
 }
-async function createRoom() {}
+async function createRoom(room) {
+  let roomAdded = await fetch(roomUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(room),
+  });
+  roomAdded = await roomAdded.json();
+  return roomAdded;
+}
 async function editRoom() {}
-async function deleteRoom() {}
+async function deleteRoom(id) {
+  await fetch(roomUrl, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(id),
+  });
+}
 
 module.exports = {
   getAllChores,
