@@ -1,29 +1,31 @@
 import { View, Text } from 'react-native';
 import { styles } from './Styles/ChoreDetailsStyles';
 
-export default function ChoreDetails() {
+export default function ChoreDetails({ chore }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.indicator}></View>
         <View>
-          <Text> priority</Text>
-          <Text> to complete</Text>
-          <Text> Last done ago</Text>
+          <Text> {chore.priority} priority</Text>
+          <Text> {chore.timeToComplete} to complete</Text>
+          <Text>
+            Last done {chore.dateLastCompleted} {chore.freqUnit} ago
+          </Text>
         </View>
         <View>
           <Text style={styles.text}>Frequency:</Text>
           <View style={styles.freqWrapper}>
-            <Text>3</Text>
+            <Text>{chore.minFreq}</Text>
             <View style={styles.desiredFreqWrapper}>
-              <Text style={styles.text}>4</Text>
+              <Text style={styles.text}>{chore.desiredFreq}</Text>
             </View>
-            <Text>6</Text>
+            <Text>{chore.maxFreq}</Text>
           </View>
-          <Text style={styles.text}>months</Text>
+          <Text style={styles.text}>{chore.freqUnit}</Text>
         </View>
       </View>
-      <Text>Notes:</Text>
+      <Text>Notes: {chore.notes}</Text>
     </View>
   );
 }

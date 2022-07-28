@@ -23,7 +23,9 @@ export default function RoomView({ navigation }) {
   }, []);
   return (
     <View style={styles.container}>
-      <RoomItem />
+      {roomData.map((room) => (
+        <RoomItem choreData={choreData} room={room} key={room._id} />
+      ))}
       <NavBar navigation={navigation} />
     </View>
   );

@@ -4,11 +4,11 @@ import ChoreDetails from './ChoreDetails';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-export default function RoomItem() {
+export default function RoomItem({ chore }) {
   return (
     <View>
       <View style={styles.choreHeader}>
-        <Text style={styles.text}>Chore</Text>
+        <Text style={styles.text}>{chore.taskName}</Text>
         <TouchableOpacity>
           <Feather name="check" style={styles.icon} />
         </TouchableOpacity>
@@ -20,7 +20,7 @@ export default function RoomItem() {
         </TouchableOpacity>
       </View>
       <View style={styles.choreDetailsWrapper}>
-        <ChoreDetails />
+        <ChoreDetails chore={chore} />
       </View>
     </View>
   );
