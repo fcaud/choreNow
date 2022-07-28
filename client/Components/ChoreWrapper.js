@@ -7,11 +7,14 @@ export default function ChoreWrapper() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text>Kitchen: clean oven</Text>
-        <TouchableOpacity>
+        <View>
+          <Text style={styles.text}>Clean oven</Text>
+          <Text style={[styles.text, styles.subText]}>Kitchen</Text>
+        </View>
+        <TouchableOpacity style={styles.button}>
           <FontAwesome name="info" style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
           <FontAwesome name="check" style={styles.icon} />
         </TouchableOpacity>
       </View>

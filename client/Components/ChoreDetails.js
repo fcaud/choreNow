@@ -12,15 +12,15 @@ export default function ChoreDetails() {
           <Text> Last done ago</Text>
         </View>
         <View>
-          <Text>Frequency:</Text>
+          <Text style={styles.text}>Frequency:</Text>
           <View style={styles.freqWrapper}>
             <Text>3</Text>
             <View style={styles.desiredFreqWrapper}>
-              <Text>4</Text>
+              <Text style={styles.text}>4</Text>
             </View>
             <Text>6</Text>
           </View>
-          <Text>months</Text>
+          <Text style={styles.text}>months</Text>
         </View>
       </View>
       <Text>Notes:</Text>
