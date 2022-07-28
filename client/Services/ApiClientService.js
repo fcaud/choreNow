@@ -13,9 +13,23 @@ async function getAllChores() {
     console.log('getAllChores error', e);
   }
 }
-async function createChore() {}
+async function createChore(chore) {
+  let choreAdded = await fetch(choreUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(chore),
+  });
+  choreAdded = await choreAdded.json();
+  return choreAdded;
+}
 async function editChore() {}
-async function deleteChore() {}
+async function deleteChore(id) {
+  await fetch(choreUrl, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(id),
+  });
+}
 
 //room calls
 async function getAllRooms() {
@@ -36,7 +50,7 @@ async function createRoom(room) {
   roomAdded = await roomAdded.json();
   return roomAdded;
 }
-async function editRoom() {}
+async function editRoom(id, data) {}
 async function deleteRoom(id) {
   await fetch(roomUrl, {
     method: 'DELETE',

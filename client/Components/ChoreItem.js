@@ -4,7 +4,7 @@ import ChoreDetails from './ChoreDetails';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 
-export default function RoomItem({ chore }) {
+export default function RoomItem({ chore, editChoresModal }) {
   return (
     <View>
       <View style={styles.choreHeader}>
@@ -13,7 +13,11 @@ export default function RoomItem({ chore }) {
           <Feather name="check" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Octicons name="pencil" style={styles.icon} />
+          <Octicons
+            name="pencil"
+            style={styles.icon}
+            onPress={editChoresModal}
+          />
         </TouchableOpacity>
         <TouchableOpacity>
           <Feather name="chevron-down" style={styles.icon} />

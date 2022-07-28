@@ -6,10 +6,6 @@ import { useState } from 'react';
 export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
   const [newRoom, setNewRoom] = useState('');
 
-  // function updateNewRoom(event) {
-  //   console.log(event.target.value);
-  //   setNewRoom(event.target.value);
-  // }
   return (
     <View style={styles.container}>
       {roomData.map((room) => {

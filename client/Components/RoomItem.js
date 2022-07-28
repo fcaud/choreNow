@@ -4,14 +4,19 @@ import Feather from 'react-native-vector-icons/Feather';
 import ChoreItem from './ChoreItem';
 import { useEffect } from 'react';
 
-export default function RoomItem({ choreData, room }) {
+export default function RoomItem({
+  choreData,
+  room,
+  addChoresModal,
+  editChoresModal,
+}) {
   const choresForRoom = choreData.filter((chore) => chore.room === room.room);
 
   return (
     <View>
       <View style={styles.roomHeader}>
         <Text style={styles.text}>{room.room}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => addChoresModal(room)}>
           <Feather name="plus" style={styles.icon} />
         </TouchableOpacity>
         {/* <TouchableOpacity>
@@ -22,7 +27,11 @@ export default function RoomItem({ choreData, room }) {
         </TouchableOpacity>
       </View>
       {choresForRoom.map((chore) => (
-        <ChoreItem chore={chore} key={chore._id} />
+        <ChoreItem
+          chore={chore}
+          key={chore._id}
+          editChoresModal={editChoresModal}
+        />
       ))}
     </View>
   );
