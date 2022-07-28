@@ -1,16 +1,32 @@
 import { View, Text } from 'react-native';
 import { styles } from './Styles/ChoreDetailsStyles';
+import moment from 'moment';
 
 export default function ChoreDetails({ chore }) {
+  const hoursDur = Number(chore.timeToComplete.split(':')[0]);
+  const minsDur = Number(chore.timeToComplete.split(':')[1]);
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
         <View style={styles.indicator}></View>
         <View>
           <Text> {chore.priority} priority</Text>
-          <Text> {chore.timeToComplete} to complete</Text>
           <Text>
-            Last done {chore.dateLastCompleted} {chore.freqUnit} ago
+            {' '}
+            {!hoursDur
+              ? ''
+              : hoursDur === 1
+              ? `${hoursDur} hr`
+              : `${hoursDur} hrs`}{' '}
+            {!minsDur
+              ? ''
+              : minsDur === 1
+              ? `${minsDur} min`
+              : `${minsDur} mins`}{' '}
+            to complete
+          </Text>
+          <Text>
+            Last done {moment(chore.dateLastCompleted, 'YYYYMMDD').fromNow()}
           </Text>
         </View>
         <View>
