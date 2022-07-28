@@ -10,7 +10,7 @@ const dbInit = async () => {
   }
 };
 
-const Schema = new mongoose.Schema({
+const ChoreSchema = new mongoose.Schema({
   taskName: { type: String, required: true },
   room: { type: String, required: true },
   priority: { type: String, required: true },
@@ -22,7 +22,11 @@ const Schema = new mongoose.Schema({
   maxFreq: { type: Number, required: true },
   desiredFreq: { type: Number, required: true },
 });
+const RoomSchema = new mongoose.Schema({
+  room: { type: String, required: true },
+});
 
-const ChoresModel = mongoose.model('Chores', Schema);
+const ChoresModel = mongoose.model('Chores', ChoreSchema);
+const RoomsModel = mongoose.model('Rooms', RoomSchema);
 
-module.exports = { dbInit, ChoresModel };
+module.exports = { dbInit, ChoresModel, RoomsModel };
