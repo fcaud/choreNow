@@ -23,7 +23,6 @@ export default function RoomView({ navigation }) {
   }, []);
   return (
     <View style={styles.container}>
-      <Text>RoomView</Text>
       <RoomItem />
       <NavBar navigation={navigation} />
     </View>

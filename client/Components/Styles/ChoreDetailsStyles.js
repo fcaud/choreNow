@@ -2,8 +2,12 @@ import { StyleSheet } from 'react-native';
 import globalStyles from '../../Config/Styling';
 
 const styles = StyleSheet.create({
-  container: {},
-  innerContainer: { flexDirection: 'row' },
+  container: { marginHorizontal: '3%', marginVertical: '3%' },
+  innerContainer: {
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center',
+  },
   indicator: {
     backgroundColor: globalStyles.red,
     width: 15,

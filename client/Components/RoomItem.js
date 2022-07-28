@@ -7,7 +7,7 @@ export default function RoomItem() {
   return (
     <View>
       <View style={styles.roomHeader}>
-        <Text>Room</Text>
+        <Text style={styles.text}>Room</Text>
         <TouchableOpacity>
           <Feather name="plus" style={styles.icon} />
         </TouchableOpacity>

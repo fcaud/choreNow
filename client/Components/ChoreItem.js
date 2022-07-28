@@ -8,7 +8,7 @@ export default function RoomItem() {
   return (
     <View>
       <View style={styles.choreHeader}>
-        <Text>Chore</Text>
+        <Text style={styles.text}>Chore</Text>
         <TouchableOpacity>
           <Feather name="check" style={styles.icon} />
         </TouchableOpacity>
