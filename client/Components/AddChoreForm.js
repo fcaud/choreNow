@@ -1,8 +1,10 @@
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { styles } from './Styles/EditRoomFormStyles';
 import { useState } from 'react';
+import { Picker } from '@react-native-picker/picker';
 
 export default function AddChoreForm({ curRoom }) {
+  const [freqMeasure, setFreqMeasure] = useState('days');
   return (
     <View>
       <Text>Add Task</Text>
@@ -14,6 +16,14 @@ export default function AddChoreForm({ curRoom }) {
       <View>
         <Text>Frequency</Text>
         <Text>Frequency measure</Text>
+        <Picker
+          selectedValue={freqMeasure}
+          onValueChange={(val) => setFreqMeasure(val)}
+        >
+          <Picker.Item label="days" value="days" />
+          <Picker.Item label="weeks" value="weeks" />
+          <Picker.Item label="months" value="months" />
+        </Picker>
         <Text>No more than every:</Text>
         <TextInput placeholder="Frequency..." />
         <Text>Should be done every:</Text>
