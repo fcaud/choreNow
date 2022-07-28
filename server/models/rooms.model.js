@@ -15,5 +15,19 @@ const getAllRooms = async (roomData) => {
     console.log('Get Rooms Model error', e);
   }
 };
+const editOneRoom = async (id, data) => {
+  try {
+    return await RoomsModel.findByIdAndUpdate(id, data);
+  } catch (e) {
+    console.log('edit Rooms Model error', e);
+  }
+};
+const deleteOneRoom = async (id) => {
+  try {
+    return await RoomsModel.findByIdAndDelete(id);
+  } catch (e) {
+    console.log('Delete Rooms Model error', e);
+  }
+};
 
-module.exports = { setOneRoom, getAllRooms };
+module.exports = { setOneRoom, getAllRooms, editOneRoom, deleteOneRoom };

@@ -19,5 +19,23 @@ const getRooms = async (req, res) => {
     console.log('Get Rooms Controller error', e);
   }
 };
+const editRoom = async (req, res) => {
+  try {
+    await roomsModel.editOneRoom(req.body._id, req.body);
+    res.status(204);
+    res.end();
+  } catch (e) {
+    console.log('Get Rooms Controller error', e);
+  }
+};
+const deleteRoom = async (req, res) => {
+  try {
+    await roomsModel.deleteOneRoom(req.body._id);
+    res.status(204);
+    res.end();
+  } catch (e) {
+    console.log('Get Rooms Controller error', e);
+  }
+};
 
-module.exports = { createRoom, getRooms };
+module.exports = { createRoom, getRooms, editRoom, deleteRoom };
