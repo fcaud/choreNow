@@ -82,16 +82,20 @@ export default function RoomView({ navigation }) {
         </View>
       </Modal>
       <Modal visible={addChoreModal}>
-        <AddChoreForm curRoom={curRoom} />
-        <TouchableOpacity onPress={addChoresModal}>
-          <Ionicons name="close" />
-        </TouchableOpacity>
+        <View style={styles.modal}>
+          <AddChoreForm curRoom={curRoom} />
+          <TouchableOpacity onPress={addChoresModal}>
+            <Ionicons name="close" />
+          </TouchableOpacity>
+        </View>
       </Modal>
       <Modal visible={editChoreModal}>
-        <Text>edit Chores</Text>
-        <TouchableOpacity onPress={editChoresModal}>
-          <Ionicons name="close" />
-        </TouchableOpacity>
+        <View style={styles.modal}>
+          <Text>edit Chores</Text>
+          <TouchableOpacity onPress={editChoresModal}>
+            <Ionicons name="close" />
+          </TouchableOpacity>
+        </View>
       </Modal>
     </View>
   );
