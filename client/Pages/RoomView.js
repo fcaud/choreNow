@@ -4,7 +4,7 @@ import {
   EditRoomForm,
   AddChoreForm,
 } from '../Components/index';
-import { Text, TouchableOpacity, View, Modal } from 'react-native';
+import { Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
 import { styles } from './Styles/RoomViewStyles';
 import ApiClientService from '../Services/ApiClientService';
 import { useEffect, useState } from 'react';
@@ -64,16 +64,18 @@ export default function RoomView({ navigation }) {
   }, []);
   return (
     <View style={styles.container}>
-      {roomData.map((room) => (
-        <RoomItem
-          choreData={choreData}
-          room={room}
-          key={room._id}
-          addChoresModal={addChoresModal}
-          editChoresModal={editChoresModal}
-        />
-      ))}
-      <NavBar navigation={navigation} />
+      <ScrollView>
+        {roomData.map((room) => (
+          <RoomItem
+            choreData={choreData}
+            room={room}
+            key={room._id}
+            addChoresModal={addChoresModal}
+            editChoresModal={editChoresModal}
+          />
+        ))}
+      </ScrollView>
+
       <TouchableOpacity onPress={editRoomsModal}>
         <Text>Edit rooms</Text>
       </TouchableOpacity>
@@ -106,6 +108,7 @@ export default function RoomView({ navigation }) {
           </TouchableOpacity>
         </View>
       </Modal>
+      <NavBar navigation={navigation} />
     </View>
   );
 }
