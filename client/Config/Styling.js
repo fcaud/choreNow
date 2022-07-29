@@ -8,5 +8,6 @@ export default globalStyles = {
   textLight: '#fff',
   red: '#FFB3BA',
   amber: '#FFDFBA',
+  yellow: '#FFFFBA',
   green: '#BAFFC9',
 };

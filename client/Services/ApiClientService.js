@@ -1,5 +1,7 @@
 const choreUrl =
   'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/chores';
+const rankUrl =
+  'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/chores/ranked';
 const roomUrl =
   'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/rooms';
 
@@ -7,6 +9,15 @@ const roomUrl =
 async function getAllChores() {
   try {
     let chores = await fetch(choreUrl);
+    chores = await chores.json();
+    return chores;
+  } catch (e) {
+    console.log('getAllChores error', e);
+  }
+}
+async function getRankedChores() {
+  try {
+    let chores = await fetch(rankUrl);
     chores = await chores.json();
     return chores;
   } catch (e) {
@@ -61,6 +72,7 @@ async function deleteRoom(id) {
 
 module.exports = {
   getAllChores,
+  getRankedChores,
   createChore,
   editChore,
   deleteChore,
