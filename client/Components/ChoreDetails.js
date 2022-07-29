@@ -5,6 +5,8 @@ import moment from 'moment';
 export default function ChoreDetails({ chore }) {
   const hoursDur = Number(chore.timeToComplete.split(':')[0]);
   const minsDur = Number(chore.timeToComplete.split(':')[1]);
+  const defaultTime = '1970-01-01T00:00:00.000Z';
+
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
@@ -25,9 +27,13 @@ export default function ChoreDetails({ chore }) {
               : `${minsDur} mins`}{' '}
             to complete
           </Text>
-          <Text>
-            Last done {moment(chore.dateLastCompleted, 'YYYYMMDD').fromNow()}
-          </Text>
+          {chore.dateLastCompleted === defaultTime ? (
+            <Text>Task not previously done</Text>
+          ) : (
+            <Text>
+              Last done {moment(chore.dateLastCompleted, 'YYYYMMDD').fromNow()}
+            </Text>
+          )}
         </View>
         <View>
           <Text style={styles.text}>Frequency:</Text>
