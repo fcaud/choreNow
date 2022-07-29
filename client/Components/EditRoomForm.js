@@ -21,22 +21,21 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
       {roomData.map((room) => {
         return (
           <View style={styles.row} key={room._id}>
-            <TextInput value={room.room} style={styles.input} />
+            <Text style={styles.input}> {room.room}</Text>
             <TouchableOpacity
               style={styles.button}
               onPress={() => areYouSure(room._id)}
             >
               <Feather name="minus" style={styles.icon} />
             </TouchableOpacity>
-
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.button}
               onPress={() => {
                 cancel();
               }}
             >
               <Feather name="check" style={styles.icon} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         );
       })}
@@ -45,6 +44,7 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
           style={styles.input}
           onChangeText={setNewRoom}
           value={newRoom}
+          placeholder="Add new room..."
         />
         <TouchableOpacity
           style={styles.button}
