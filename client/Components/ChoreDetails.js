@@ -10,7 +10,18 @@ export default function ChoreDetails({ chore }) {
   return (
     <View style={styles.container}>
       <View style={styles.innerContainer}>
-        <View style={styles.indicator}></View>
+        {chore.status === 'Overdue' && (
+          <View style={[styles.indicator, styles.overdue]}></View>
+        )}
+        {chore.status === 'Due' && (
+          <View style={[styles.indicator, styles.due]}></View>
+        )}
+        {chore.status === 'Nearly due' && (
+          <View style={[styles.indicator, styles.nearlyDue]}></View>
+        )}
+        {chore.status === 'Not due' && (
+          <View style={[styles.indicator, styles.notDue]}></View>
+        )}
         <View>
           <Text> {chore.priority} priority</Text>
           <Text>

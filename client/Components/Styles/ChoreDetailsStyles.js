@@ -9,11 +9,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   indicator: {
-    backgroundColor: globalStyles.red,
     width: 15,
     height: 15,
     borderRadius: 10,
     marginHorizontal: 3,
+  },
+  overdue: {
+    backgroundColor: globalStyles.red,
+  },
+  due: {
+    backgroundColor: globalStyles.amber,
+  },
+  nearlyDue: {
+    backgroundColor: globalStyles.yellow,
+  },
+  notDue: {
+    backgroundColor: globalStyles.green,
   },
   freqWrapper: {
     flexDirection: 'row',

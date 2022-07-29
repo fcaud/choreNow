@@ -22,7 +22,6 @@ export default function AllChoresView({ navigation }) {
       notDue: notDue,
     }));
   }
-  console.log(choreData);
 
   useEffect(() => {
     getChoreData();

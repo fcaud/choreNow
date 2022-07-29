@@ -35,7 +35,7 @@ export default function RoomView({ navigation }) {
     setRoomData(data);
   }
   async function getChoreData() {
-    const data = await ApiClientService.getAllChores();
+    const data = await ApiClientService.getRankedChores();
     setChoreData(data);
   }
 
