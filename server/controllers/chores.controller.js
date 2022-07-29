@@ -38,4 +38,20 @@ const deleteChore = async (req, res) => {
   }
 };
 
-module.exports = { createChore, getChores, editChore, deleteChore };
+const getChoresInOrder = async (req, res) => {
+  try {
+    const chores = await choresModel.getRankedChores();
+    res.status(200);
+    res.send(chores);
+  } catch (e) {
+    console.log('Get Chores Controller error', e);
+  }
+};
+
+module.exports = {
+  createChore,
+  getChores,
+  editChore,
+  deleteChore,
+  getChoresInOrder,
+};
