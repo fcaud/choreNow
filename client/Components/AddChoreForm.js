@@ -3,27 +3,86 @@ import { styles } from './Styles/AddChoreFormStyles';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 
-export default function AddChoreForm({ curRoom }) {
-  const [freqMeasure, setFreqMeasure] = useState('days');
-  const [priority, setPriority] = useState('Medium');
+export default function AddChoreForm({ curRoom, addChore }) {
+  const [time, setTime] = useState({ hours: '00', mins: '00' });
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [choreData, setChoreData] = useState({
+    taskName: '',
+    room: curRoom.room,
+    priority: 'Medium',
+    timeToComplete: '00:00',
+    dateLastCompleted: 0,
+    notes: '',
+    freqUnit: 'days',
+    minFreq: 0,
+    maxFreq: 0,
+    desiredFreq: 0,
+  });
+
+  function updateChoreData(field) {
+    return (newFieldVal) => {
+      setChoreData((oldVal) => {
+        return { ...oldVal, [field]: newFieldVal };
+      });
+    };
+  }
+
+  function formatTime(field) {
+    return (newFieldVal) => {
+      setChoreData((oldVal) => {
+        if (field === 'hours')
+          return { ...oldVal, timeToComplete: `${newFieldVal}:${time.mins}` };
+        if (field === 'mins')
+          return { ...oldVal, timeToComplete: `${time.hours}:${newFieldVal}` };
+      });
+      setTime((oldVal) => {
+        return { ...oldVal, [field]: newFieldVal };
+      });
+      if (
+        (field === 'hours' && newFieldVal > 23) ||
+        (field === 'mins' && newFieldVal > 59)
+      ) {
+        setDisableSubmit(true);
+      } else {
+        setDisableSubmit(false);
+      }
+    };
+  }
+
   return (
     <View>
       <Text>Add Task</Text>
       <Text>{curRoom.room}</Text>
-      <TextInput placeholder="Task Name..." maxLength={20} />
-
+      <TextInput
+        placeholder="Task Name..."
+        maxLength={20}
+        onChangeText={updateChoreData('taskName')}
+        autoCapitalize="sentences"
+      />
       <Text>Time required</Text>
       <View style={styles.row}>
-        <TextInput placeholder="00" keyboardType="numeric" />
+        <TextInput
+          placeholder="00"
+          keyboardType="numeric"
+          onChangeText={formatTime('hours')}
+          maxLength={2}
+        />
         <Text>:</Text>
-        <TextInput placeholder="00" keyboardType="numeric" />
+        <TextInput
+          placeholder="00"
+          keyboardType="numeric"
+          onChangeText={formatTime('mins')}
+          maxLength={2}
+        />
+        {time.hours > 23 && <Text>Please enter a valid time</Text>}
+        {time.mins > 59 && <Text>Please enter a valid time</Text>}
       </View>
 
-      <Text>Priority rating</Text>
+      <Text>Priority rating {choreData.priority}</Text>
       <View>
         <Picker
-          selectedValue={priority}
-          onValueChange={(val) => setPriority(val)}
+          selectedValue={choreData.priority}
+          onValueChange={updateChoreData('priority')}
         >
           <Picker.Item label="High" value="High" />
           <Picker.Item label="Medium" value="Medium" />
@@ -32,24 +91,42 @@ export default function AddChoreForm({ curRoom }) {
       </View>
       <View>
         <Text>Frequency</Text>
-        <Text>Frequency measure</Text>
+        <Text>Frequency measure {choreData.freqUnit}</Text>
         <Picker
-          selectedValue={freqMeasure}
-          onValueChange={(val) => setFreqMeasure(val)}
+          selectedValue={choreData.freqUnit}
+          onValueChange={updateChoreData('freqUnit')}
         >
           <Picker.Item label="days" value="days" />
           <Picker.Item label="weeks" value="weeks" />
           <Picker.Item label="months" value="months" />
         </Picker>
         <Text>No more than every:</Text>
-        <TextInput placeholder="Frequency..." keyboardType="numeric" />
+        <TextInput
+          placeholder="Frequency..."
+          keyboardType="numeric"
+          onChangeText={updateChoreData('minFreq')}
+        />
         <Text>Should be done every:</Text>
-        <TextInput placeholder="Frequency..." keyboardType="numeric" />
+        <TextInput
+          placeholder="Frequency..."
+          keyboardType="numeric"
+          onChangeText={updateChoreData('desiredFreq')}
+        />
         <Text>No less than every:</Text>
-        <TextInput placeholder="Frequency..." keyboardType="numeric" />
+        <TextInput
+          placeholder="Frequency..."
+          keyboardType="numeric"
+          onChangeText={updateChoreData('maxFreq')}
+        />
       </View>
-      <TextInput placeholder="Notes..." />
-      <TouchableOpacity>
+      <TextInput
+        placeholder="Notes..."
+        onChangeText={updateChoreData('notes')}
+      />
+      <TouchableOpacity
+        disabled={disableSubmit}
+        onPress={() => addChore(choreData)}
+      >
         <Text>Create task</Text>
       </TouchableOpacity>
     </View>
