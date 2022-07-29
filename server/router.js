@@ -15,4 +15,9 @@ router.get('/rooms', roomsController.getRooms);
 router.put('/rooms', roomsController.editRoom);
 router.delete('/rooms', roomsController.deleteRoom);
 
+//settings routes
+router.get('/settings');
+router.post('/settings');
+router.put('/settings');
+
 module.exports = router;
