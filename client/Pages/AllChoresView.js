@@ -5,10 +5,16 @@ import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 
 export default function AllChoresView({ navigation }) {
-  const [choreData, setChoreData] = useState({});
+  const [choreData, setChoreData] = useState({
+    overdue: [],
+    due: [],
+    nearlyDue: [],
+    notDue: [],
+  });
 
   async function getChoreData() {
     const data = await ApiClientService.getRankedChores();
+    console.log(data);
     const overdue = data.filter((chore) => chore.status === 'Overdue');
     const due = data.filter((chore) => chore.status === 'Due');
     const nearlyDue = data.filter((chore) => chore.status === 'Nearly due');
@@ -22,8 +28,10 @@ export default function AllChoresView({ navigation }) {
       notDue: notDue,
     }));
   }
+  // console.log(choreData);
 
   useEffect(() => {
+    // console.log('hi');
     getChoreData();
   }, []);
 
