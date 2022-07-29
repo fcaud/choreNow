@@ -53,7 +53,33 @@ const getRankedChores = async (choreData) => {
       return chore;
     });
 
-    return chores;
+    //initially sort for longest time to undertake
+    chores.sort((a, b) => b.timeToComplete - a.timeToComplete);
+    //Logic for order of priority of tasks
+    const order = [
+      { p: 'High', s: 'Overdue' },
+      { p: 'Medium', s: 'Overdue' },
+      { p: 'High', s: 'Due' },
+      { p: 'Medium', s: 'Due' },
+      { p: 'Low', s: 'Overdue' },
+      { p: 'Low', s: 'Due' },
+      { p: 'High', s: 'Nearly due' },
+      { p: 'Medium', s: 'Nearly due' },
+      { p: 'Low', s: 'Nearly due' },
+      { p: 'High', s: 'Not due' },
+      { p: 'Medium', s: 'Not due' },
+      { p: 'Low', s: 'Not due' },
+    ];
+    //loop through order and add each task to array
+    let orderedChores = [];
+    order.forEach((item) => {
+      const filteredChores = chores.filter(
+        (el) => el.status === item.s && el.priority === item.p
+      );
+      orderedChores = [...orderedChores, ...filteredChores];
+    });
+
+    return orderedChores;
   } catch (e) {
     console.log('Get Chores Model error', e);
   }
