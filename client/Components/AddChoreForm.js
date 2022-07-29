@@ -29,13 +29,17 @@ export default function AddChoreForm({ curRoom, addChore }) {
 
   function formatTime(field) {
     return (newFieldVal) => {
-      if (newFieldVal.length === 1) newFieldVal = `0${newFieldVal}`;
-      if (newFieldVal.length === 0) newFieldVal = '00';
       setChoreData((oldVal) => {
         if (field === 'hours')
-          return { ...oldVal, timeToComplete: `${newFieldVal}:${time.mins}` };
+          return {
+            ...oldVal,
+            timeToComplete: Number(time.mins) + Number(newFieldVal * 60),
+          };
         if (field === 'mins')
-          return { ...oldVal, timeToComplete: `${time.hours}:${newFieldVal}` };
+          return {
+            ...oldVal,
+            timeToComplete: Number(newFieldVal) + Number(time.hours * 60),
+          };
       });
       setTime((oldVal) => {
         return { ...oldVal, [field]: newFieldVal };

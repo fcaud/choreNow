@@ -45,7 +45,6 @@ export default function RoomView({ navigation }) {
     setRoomData([...roomData, newRoom]);
   }
   async function addChore(chore) {
-    console.log(chore);
     if (!chore) return;
     const newChore = await ApiClientService.createChore(chore);
     setChoreData([...choreData, newChore]);

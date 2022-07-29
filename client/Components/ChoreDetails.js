@@ -3,8 +3,8 @@ import { styles } from './Styles/ChoreDetailsStyles';
 import moment from 'moment';
 
 export default function ChoreDetails({ chore }) {
-  const hoursDur = Number(chore.timeToComplete.split(':')[0]);
-  const minsDur = Number(chore.timeToComplete.split(':')[1]);
+  const minsDur = chore.timeToComplete % 60;
+  const hoursDur = (chore.timeToComplete - minsDur) / 60;
   const defaultTime = '1970-01-01T00:00:00.000Z';
 
   return (
