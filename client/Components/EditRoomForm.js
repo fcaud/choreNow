@@ -41,11 +41,16 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
         );
       })}
       <View style={styles.row}>
-        <TextInput style={styles.input} onChangeText={setNewRoom} />
+        <TextInput
+          style={styles.input}
+          onChangeText={setNewRoom}
+          value={newRoom}
+        />
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
             addRoom(newRoom);
+            setNewRoom('');
             cancel();
           }}
         >
