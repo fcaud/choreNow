@@ -14,12 +14,10 @@ export default function AllChoresView({ navigation }) {
 
   async function getChoreData() {
     const data = await ApiClientService.getRankedChores();
-    console.log(data);
     const overdue = data.filter((chore) => chore.status === 'Overdue');
     const due = data.filter((chore) => chore.status === 'Due');
     const nearlyDue = data.filter((chore) => chore.status === 'Nearly due');
     const notDue = data.filter((chore) => chore.status === 'Not due');
-    // console.log('overdue', overdue);
     setChoreData((oldObj) => ({
       ...oldObj,
       overdue: overdue,
@@ -28,10 +26,8 @@ export default function AllChoresView({ navigation }) {
       notDue: notDue,
     }));
   }
-  // console.log(choreData);
 
   useEffect(() => {
-    // console.log('hi');
     getChoreData();
   }, []);
 
