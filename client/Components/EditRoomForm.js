@@ -6,11 +6,11 @@ import { useState } from 'react';
 export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
   const [newRoom, setNewRoom] = useState('');
   const [confirmPopUp, setConfirmPopUp] = useState(false);
-  const [curId, setCurId] = useState('');
+  const [curRoom, setCurRoom] = useState('');
 
-  function areYouSure(id) {
+  function areYouSure(room) {
     setConfirmPopUp(true);
-    setCurId(id);
+    setCurRoom(room);
   }
   function cancel() {
     setConfirmPopUp(false);
@@ -24,7 +24,7 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
             <Text style={styles.input}> {room.room}</Text>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => areYouSure(room._id)}
+              onPress={() => areYouSure(room)}
             >
               <Feather name="minus" style={styles.icon} />
             </TouchableOpacity>
@@ -45,6 +45,7 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
           onChangeText={setNewRoom}
           value={newRoom}
           placeholder="Add new room..."
+          maxLength={15}
         />
         <TouchableOpacity
           style={styles.button}
@@ -59,10 +60,13 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
       </View>
       {confirmPopUp && (
         <View style={styles.row}>
-          <Text>Are you sure?</Text>
+          <View>
+            {/* <Text>Warning: this will delete any chores for this room</Text> */}
+            <Text>Are you sure?</Text>
+          </View>
           <TouchableOpacity
             onPress={() => {
-              deleteRoom(curId);
+              deleteRoom(curRoom);
               cancel();
             }}
           >

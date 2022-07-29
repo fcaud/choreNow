@@ -44,8 +44,12 @@ export default function RoomView({ navigation }) {
     const newRoom = await ApiClientService.createRoom({ room });
     setRoomData([...roomData, newRoom]);
   }
-  async function deleteRoom(_id) {
-    await ApiClientService.deleteRoom({ _id });
+  async function deleteRoom(room) {
+    await ApiClientService.deleteRoom({ _id: room._id });
+    // const choresForRoom = choreData.filter((chore) => chore.room === room.room);
+    // await choresForRoom.forEach(
+    //   async (chore) => await ApiClientService.deleteChore(chore._id)
+    // );
     getRoomData();
   }
 
