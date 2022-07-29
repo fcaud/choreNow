@@ -1,9 +1,5 @@
-import {
-  NavBar,
-  RoomItem,
-  EditRoomForm,
-  AddChoreForm,
-} from '../Components/index';
+import { NavBar, RoomItem } from '../Components/index';
+import { EditRoomForm, AddChoreForm } from '../Features/index';
 import { Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
 import { styles } from './Styles/RoomViewStyles';
 import ApiClientService from '../Services/ApiClientService';

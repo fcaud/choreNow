@@ -11,7 +11,7 @@ export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
       if (field === 'hours') {
         total = Number(newFieldVal * 60) + Number(time.mins);
       } else {
-        total = Number(newFieldVal) + Number(oldVal.hours * 60);
+        total = Number(newFieldVal) + Number(time.hours * 60);
       }
 
       setTime((oldVal) => {
@@ -19,9 +19,6 @@ export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
           ...oldVal,
           [field]: newFieldVal,
           total: total,
-          // field === 'hours'
-          //   ? Number(newFieldVal * 60) + Number(oldVal.mins)
-          //   : Number(newFieldVal) + Number(oldVal.hours * 60),
         };
       });
       if (
@@ -33,7 +30,7 @@ export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
       } else {
         setDisableSubmit(false);
       }
-      setTimeOutput((oldVal) => ({ [id]: total }));
+      setTimeOutput((oldVal) => ({ ...oldVal, [id]: total }));
     };
   }
 
