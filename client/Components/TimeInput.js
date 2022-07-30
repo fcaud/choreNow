@@ -23,8 +23,7 @@ export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
       });
       if (
         (field === 'hours' && newFieldVal > 23) ||
-        (field === 'mins' && newFieldVal > 59) ||
-        total === 0
+        (field === 'mins' && newFieldVal > 59)
       ) {
         setDisableSubmit(true);
       } else {

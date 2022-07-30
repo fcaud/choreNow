@@ -4,6 +4,8 @@ const rankUrl =
   'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/chores/ranked';
 const roomUrl =
   'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/rooms';
+const settingsUrl =
+  'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/settings';
 
 //Chore calls
 async function getAllChores() {
@@ -70,6 +72,41 @@ async function deleteRoom(id) {
   });
 }
 
+//Settings calls
+async function getSettings() {
+  try {
+    let settings = await fetch(settingsUrl);
+    settings = await settings.json();
+    return settings;
+  } catch (e) {
+    console.log('getSettings error', e);
+  }
+}
+async function setSettings(settingsData) {
+  try {
+    let settings = await fetch(settingsUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settingsData),
+    });
+    settings = await settings.json();
+    return settings;
+  } catch (e) {
+    console.log('getSettings error', e);
+  }
+}
+async function updateSettings(settingsData) {
+  try {
+    let settings = await fetch(settingsUrl, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(settingsData),
+    });
+  } catch (e) {
+    console.log('getSettings error', e);
+  }
+}
+
 module.exports = {
   getAllChores,
   getRankedChores,
@@ -80,4 +117,7 @@ module.exports = {
   createRoom,
   editRoom,
   deleteRoom,
+  getSettings,
+  setSettings,
+  updateSettings,
 };
