@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const choresController = require('./controllers/chores.controller');
 const roomsController = require('./controllers/rooms.controller');
+const settingsController = require('./controllers/settings.controller');
 
 //chore routes
 router.post('/chores', choresController.createChore);
@@ -16,8 +17,8 @@ router.put('/rooms', roomsController.editRoom);
 router.delete('/rooms', roomsController.deleteRoom);
 
 //settings routes
-router.get('/settings');
-router.post('/settings');
-router.put('/settings');
+router.get('/settings', settingsController.getSettings);
+router.post('/settings', settingsController.setInitialSettings);
+router.put('/settings', settingsController.updateSettings);
 
 module.exports = router;
