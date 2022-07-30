@@ -61,10 +61,11 @@ export default function ScheduleView({ navigation }) {
       Object.values(res).map((data, i) => {
         chores.map((chore) => {
           //pick out chore duration < time available
+          const nextDue = new Date(chore.nextMin).getTime();
           if (
             chore.timeToComplete <= data.time - data.timeUsed &&
             !allocatedChores.includes(chore._id) &&
-            chore.status !== 'Not due'
+            nextDue < data.date
           ) {
             //add chore to chore array
             data.chores.push(chore);
