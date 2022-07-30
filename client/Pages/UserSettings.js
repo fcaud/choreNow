@@ -28,10 +28,11 @@ export default function UserSettings({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>UserSettings {settingsData.mon}</Text>
+      <Text>UserSettings </Text>
       <UserTimePreferenceForm
         setDisableSubmit={setDisableSubmit}
         setTimeOutput={setTimeOutput}
+        settingsData={settingsData}
       />
       <TouchableOpacity
         onPress={() => saveSettings(timeOutput)}
