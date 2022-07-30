@@ -11,6 +11,7 @@ export default function AllChoresView({ navigation }) {
     nearlyDue: [],
     notDue: [],
   });
+  const statusCodes = ['Overdue', 'Due', 'Nearly due', 'Not due'];
 
   async function getChoreData() {
     const data = await ApiClientService.getRankedChores();
@@ -35,21 +36,39 @@ export default function AllChoresView({ navigation }) {
     <View style={styles.container}>
       <ScrollView>
         <Text>Overdue</Text>
-        {choreData.overdue.map((chore) => (
-          <ChoreWrapper chore={chore} key={chore._id} />
-        ))}
+        {choreData.overdue.length !== 0 ? (
+          choreData.overdue.map((chore) => (
+            <ChoreWrapper chore={chore} key={chore._id} />
+          ))
+        ) : (
+          <Text>No tasks</Text>
+        )}
         <Text>Due</Text>
-        {choreData.due.map((chore) => (
-          <ChoreWrapper chore={chore} key={chore._id} />
-        ))}
+        {choreData.due.length !== 0 ? (
+          choreData.due.map((chore) => (
+            <ChoreWrapper chore={chore} key={chore._id} />
+          ))
+        ) : (
+          <Text>No tasks</Text>
+        )}
+
         <Text>Nearly due</Text>
-        {choreData.nearlyDue.map((chore) => (
-          <ChoreWrapper chore={chore} key={chore._id} />
-        ))}
+        {choreData.nearlyDue.length !== 0 ? (
+          choreData.nearlyDue.map((chore) => (
+            <ChoreWrapper chore={chore} key={chore._id} />
+          ))
+        ) : (
+          <Text>No tasks</Text>
+        )}
+
         <Text>Not due</Text>
-        {choreData.notDue.map((chore) => (
-          <ChoreWrapper chore={chore} key={chore._id} />
-        ))}
+        {choreData.notDue.length !== 0 ? (
+          choreData.notDue.map((chore) => (
+            <ChoreWrapper chore={chore} key={chore._id} />
+          ))
+        ) : (
+          <Text>No tasks</Text>
+        )}
       </ScrollView>
       <NavBar navigation={navigation} />
     </View>
