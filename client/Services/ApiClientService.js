@@ -97,7 +97,7 @@ async function setSettings(settingsData) {
 }
 async function updateSettings(settingsData) {
   try {
-    let settings = await fetch(settingsUrl, {
+    await fetch(settingsUrl, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(settingsData),
