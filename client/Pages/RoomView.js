@@ -1,6 +1,13 @@
 import { NavBar, RoomItem } from '../Components/index';
 import { EditRoomForm, AddChoreForm } from '../Features/index';
-import { Text, TouchableOpacity, View, Modal, ScrollView } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  Modal,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import { styles } from './Styles/RoomViewStyles';
 import ApiClientService from '../Services/ApiClientService';
 import { useEffect, useState } from 'react';
@@ -14,6 +21,7 @@ export default function RoomView({ navigation }) {
   const [roomModal, setRoomModal] = useState(false);
   const [addChoreModal, setAddChoreModal] = useState(false);
   const [editChoreModal, setEditChoreModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   function editRoomsModal() {
     setRoomModal(!roomModal);
@@ -33,6 +41,7 @@ export default function RoomView({ navigation }) {
   async function getChoreData() {
     const data = await ApiClientService.getRankedChores();
     setChoreData(data);
+    setIsLoading(false);
   }
 
   async function addRoom(room) {
@@ -60,17 +69,21 @@ export default function RoomView({ navigation }) {
   }, []);
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {roomData.map((room) => (
-          <RoomItem
-            choreData={choreData}
-            room={room}
-            key={room._id}
-            addChoresModal={addChoresModal}
-            editChoresModal={editChoresModal}
-          />
-        ))}
-      </ScrollView>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <ScrollView>
+          {roomData.map((room) => (
+            <RoomItem
+              choreData={choreData}
+              room={room}
+              key={room._id}
+              addChoresModal={addChoresModal}
+              editChoresModal={editChoresModal}
+            />
+          ))}
+        </ScrollView>
+      )}
 
       <TouchableOpacity onPress={editRoomsModal}>
         <Text>Edit rooms</Text>

@@ -1,6 +1,6 @@
 import { NavBar } from '../Components/index';
 import { UserTimePreferenceForm } from '../Features';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/UserSettingsStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
@@ -9,18 +9,17 @@ export default function UserSettings({ navigation }) {
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [timeOutput, setTimeOutput] = useState({});
   const [settingsData, setSettingsData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   async function saveSettings(timeData) {
-    // console.log(timeData);
     timeData = { ...timeData, _id: settingsData._id };
-    console.log(timeData);
     await ApiClientService.updateSettings(timeData);
   }
 
   async function getSettings() {
     let settings = await ApiClientService.getSettings();
-    // console.log(...settings);
     setSettingsData(...settings);
+    setIsLoading(false);
   }
   useEffect(() => {
     getSettings();
@@ -29,11 +28,15 @@ export default function UserSettings({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>UserSettings </Text>
-      <UserTimePreferenceForm
-        setDisableSubmit={setDisableSubmit}
-        setTimeOutput={setTimeOutput}
-        settingsData={settingsData}
-      />
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <UserTimePreferenceForm
+          setDisableSubmit={setDisableSubmit}
+          setTimeOutput={setTimeOutput}
+          settingsData={settingsData}
+        />
+      )}
       <TouchableOpacity
         onPress={() => saveSettings(timeOutput)}
         disabled={disableSubmit}

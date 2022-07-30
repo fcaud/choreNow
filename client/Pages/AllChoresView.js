@@ -1,10 +1,11 @@
 import { NavBar, ChoreWrapper } from '../Components/index';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/AllChoresViewStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 
 export default function AllChoresView({ navigation }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [choreData, setChoreData] = useState({
     overdue: [],
     due: [],
@@ -26,6 +27,7 @@ export default function AllChoresView({ navigation }) {
       nearlyDue: nearlyDue,
       notDue: notDue,
     }));
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -34,42 +36,46 @@ export default function AllChoresView({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <Text>Overdue</Text>
-        {choreData.overdue.length !== 0 ? (
-          choreData.overdue.map((chore) => (
-            <ChoreWrapper chore={chore} key={chore._id} />
-          ))
-        ) : (
-          <Text>No tasks</Text>
-        )}
-        <Text>Due</Text>
-        {choreData.due.length !== 0 ? (
-          choreData.due.map((chore) => (
-            <ChoreWrapper chore={chore} key={chore._id} />
-          ))
-        ) : (
-          <Text>No tasks</Text>
-        )}
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <ScrollView>
+          <Text>Overdue</Text>
+          {choreData.overdue.length !== 0 ? (
+            choreData.overdue.map((chore) => (
+              <ChoreWrapper chore={chore} key={chore._id} />
+            ))
+          ) : (
+            <Text>No tasks</Text>
+          )}
+          <Text>Due</Text>
+          {choreData.due.length !== 0 ? (
+            choreData.due.map((chore) => (
+              <ChoreWrapper chore={chore} key={chore._id} />
+            ))
+          ) : (
+            <Text>No tasks</Text>
+          )}
 
-        <Text>Nearly due</Text>
-        {choreData.nearlyDue.length !== 0 ? (
-          choreData.nearlyDue.map((chore) => (
-            <ChoreWrapper chore={chore} key={chore._id} />
-          ))
-        ) : (
-          <Text>No tasks</Text>
-        )}
+          <Text>Nearly due</Text>
+          {choreData.nearlyDue.length !== 0 ? (
+            choreData.nearlyDue.map((chore) => (
+              <ChoreWrapper chore={chore} key={chore._id} />
+            ))
+          ) : (
+            <Text>No tasks</Text>
+          )}
 
-        <Text>Not due</Text>
-        {choreData.notDue.length !== 0 ? (
-          choreData.notDue.map((chore) => (
-            <ChoreWrapper chore={chore} key={chore._id} />
-          ))
-        ) : (
-          <Text>No tasks</Text>
-        )}
-      </ScrollView>
+          <Text>Not due</Text>
+          {choreData.notDue.length !== 0 ? (
+            choreData.notDue.map((chore) => (
+              <ChoreWrapper chore={chore} key={chore._id} />
+            ))
+          ) : (
+            <Text>No tasks</Text>
+          )}
+        </ScrollView>
+      )}
       <NavBar navigation={navigation} />
     </View>
   );

@@ -1,5 +1,5 @@
 import NavBar from '../Components/NavBar';
-import { Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/ScheduleViewStyles';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
@@ -8,6 +8,7 @@ import { ChoreWrapper } from '../Components';
 
 export default function ScheduleView({ navigation }) {
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
+  const [isLoading, setIsLoading] = useState(true);
 
   function populateWeekAhead() {
     const today = new Date().getTime();
@@ -72,6 +73,7 @@ export default function ScheduleView({ navigation }) {
           }
         });
       });
+      setIsLoading(false);
       return res;
     });
   }
@@ -79,20 +81,24 @@ export default function ScheduleView({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>ScheduleView</Text>
-      <ScrollView>
-        {Object.values(weekAhead).map((day) => {
-          return (
-            <View key={day.date}>
-              <Text key={day.date}>
-                {moment(day.date).format('ddd Do MMM')}
-              </Text>
-              {day.chores.map((chore) => (
-                <ChoreWrapper chore={chore} key={chore._id} />
-              ))}
-            </View>
-          );
-        })}
-      </ScrollView>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <ScrollView>
+          {Object.values(weekAhead).map((day) => {
+            return (
+              <View key={day.date}>
+                <Text key={day.date}>
+                  {moment(day.date).format('ddd Do MMM')}
+                </Text>
+                {day.chores.map((chore, i) => (
+                  <ChoreWrapper chore={chore} key={i} />
+                ))}
+              </View>
+            );
+          })}
+        </ScrollView>
+      )}
       <NavBar navigation={navigation} />
     </View>
   );
