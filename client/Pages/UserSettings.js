@@ -10,12 +10,16 @@ export default function UserSettings({ navigation }) {
   const [timeOutput, setTimeOutput] = useState({});
   const [settingsData, setSettingsData] = useState({});
 
-  function saveSettings() {
-    console.log('save');
+  async function saveSettings(timeData) {
+    // console.log(timeData);
+    timeData = { ...timeData, _id: settingsData._id };
+    console.log(timeData);
+    await ApiClientService.updateSettings(timeData);
   }
 
   async function getSettings() {
     let settings = await ApiClientService.getSettings();
+    // console.log(...settings);
     setSettingsData(...settings);
   }
   useEffect(() => {
@@ -29,7 +33,10 @@ export default function UserSettings({ navigation }) {
         setDisableSubmit={setDisableSubmit}
         setTimeOutput={setTimeOutput}
       />
-      <TouchableOpacity onPress={() => saveSettings()} disabled={disableSubmit}>
+      <TouchableOpacity
+        onPress={() => saveSettings(timeOutput)}
+        disabled={disableSubmit}
+      >
         <Text>Save settings</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Splash')}>

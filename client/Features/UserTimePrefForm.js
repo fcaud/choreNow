@@ -14,7 +14,7 @@ export default function UserTimePreferenceForm({
         <Text>Monday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={1}
+          id={'mon'}
           setTimeOutput={setTimeOutput}
         />
       </View>
@@ -22,7 +22,7 @@ export default function UserTimePreferenceForm({
         <Text>Tuesday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={2}
+          id={'tue'}
           setTimeOutput={setTimeOutput}
         />
       </View>
@@ -30,7 +30,7 @@ export default function UserTimePreferenceForm({
         <Text>Wednesday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={3}
+          id={'wed'}
           setTimeOutput={setTimeOutput}
         />
       </View>
@@ -38,7 +38,7 @@ export default function UserTimePreferenceForm({
         <Text>Thursday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={4}
+          id={'thu'}
           setTimeOutput={setTimeOutput}
         />
       </View>
@@ -46,7 +46,7 @@ export default function UserTimePreferenceForm({
         <Text>Friday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={5}
+          id={'fri'}
           setTimeOutput={setTimeOutput}
         />
       </View>
@@ -54,7 +54,7 @@ export default function UserTimePreferenceForm({
         <Text>Saturday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={6}
+          id={'sat'}
           setTimeOutput={setTimeOutput}
         />
       </View>
@@ -62,7 +62,7 @@ export default function UserTimePreferenceForm({
         <Text>Sunday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
-          id={7}
+          id={'sun'}
           setTimeOutput={setTimeOutput}
         />
       </View>
