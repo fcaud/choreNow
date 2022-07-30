@@ -58,7 +58,7 @@ export default function ChoreDetails({ chore }) {
           <Text style={styles.text}>{chore.freqUnit}</Text>
         </View>
       </View>
-      <Text>Notes: {chore.notes}</Text>
+      {chore.notes && <Text>Notes: {chore.notes}</Text>}
     </View>
   );
 }

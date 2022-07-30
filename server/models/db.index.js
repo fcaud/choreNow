@@ -16,6 +16,7 @@ const ChoreSchema = new mongoose.Schema({
   priority: { type: String, required: true },
   timeToComplete: { type: Number, required: true },
   dateLastCompleted: { type: Date, required: true },
+  prevDateLastCompleted: { type: Date, default: 0 },
   notes: { type: String, required: false },
   freqUnit: { type: String, required: true },
   minFreq: { type: Number, required: true },
