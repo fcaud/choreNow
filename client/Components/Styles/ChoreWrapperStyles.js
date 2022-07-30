@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
   text: { color: globalStyles.textLight, marginRight: '2%' },
   subText: { fontSize: 10, fontStyle: 'italic' },
   icon: { textAlign: 'center' },
+  completed: { textDecorationLine: 'line-through' },
 });
 
 export { styles };

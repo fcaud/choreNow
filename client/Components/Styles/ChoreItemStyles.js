@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   choreDetailsWrapper: {},
   icon: { flexGrow: 1, marginHorizontal: 3 },
   text: { flexGrow: 4 },
+  completed: { textDecorationLine: 'line-through' },
 });
 
 export { styles };
