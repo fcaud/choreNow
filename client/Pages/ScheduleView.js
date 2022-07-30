@@ -7,8 +7,6 @@ import ApiClientService from '../Services/ApiClientService';
 import { ChoreWrapper } from '../Components';
 
 export default function ScheduleView({ navigation }) {
-  // const [settingsData, setSettingsData] = useState({});
-  // const [choresData, setChoresData] = useState([]);
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
 
   function populateWeekAhead() {
@@ -27,13 +25,11 @@ export default function ScheduleView({ navigation }) {
   //get user time settings for each day
   async function getSettings() {
     let settings = await ApiClientService.getSettings();
-    // setSettingsData(...settings);
     return settings[0];
   }
   //get prioritized list of chores
   async function getRankedChores() {
     let chores = await ApiClientService.getRankedChores();
-    // setChoresData(chores);
     return chores;
   }
   useEffect(() => {
