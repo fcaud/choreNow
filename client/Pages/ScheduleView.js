@@ -4,10 +4,11 @@ import { styles } from './Styles/ScheduleViewStyles';
 import moment from 'moment';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
+import { ChoreWrapper } from '../Components';
 
 export default function ScheduleView({ navigation }) {
-  const [settingsData, setSettingsData] = useState({});
-  const [choresData, setChoresData] = useState([]);
+  // const [settingsData, setSettingsData] = useState({});
+  // const [choresData, setChoresData] = useState([]);
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
 
   function populateWeekAhead() {
@@ -26,25 +27,48 @@ export default function ScheduleView({ navigation }) {
   //get user time settings for each day
   async function getSettings() {
     let settings = await ApiClientService.getSettings();
-    setSettingsData(...settings);
+    // setSettingsData(...settings);
+    return settings[0];
   }
   //get prioritized list of chores
   async function getRankedChores() {
     let chores = await ApiClientService.getRankedChores();
-    setChoresData(chores);
+    // setChoresData(chores);
+    return chores;
   }
   useEffect(() => {
-    getSettings();
-    getRankedChores();
+    const fetchData = async () => {
+      const settings = await getSettings();
+      await getRankedChores();
+      addSettingsToWeekAhead(settings);
+    };
+    fetchData();
   }, []);
-  //map through prioritized chores and if time space in a day render it
-  function choresToRender() {}
+  //map through days and chores and if time space in a day render chores
+  function addSettingsToWeekAhead(settings) {
+    //add time settings to weekAhead
+    setWeekAhead((oldVal) => {
+      let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+      let res = { ...oldVal };
+      Object.values(weekAhead).map((data, i) => {
+        let lookUpDayIndex = new Date(data.date).getDay();
+        data = { ...data, time: settings[days[lookUpDayIndex]] };
+        res = { ...res, [i + 1]: data };
+      });
+      return res;
+    });
+  }
   return (
     <View style={styles.container}>
       <Text>ScheduleView</Text>
       {Object.values(weekAhead).map((day) => {
         return (
-          <Text key={day.date}>{moment(day.date).format('ddd Do MMM')}</Text>
+          <View key={day.date}>
+            <Text key={day.date}>{moment(day.date).format('ddd Do MMM')}</Text>
+            {day.chores.map((chore) => (
+              <ChoreWrapper chore={chore} key={chore._id} />
+            ))}
+          </View>
         );
       })}
       <NavBar navigation={navigation} />
