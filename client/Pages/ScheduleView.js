@@ -2,10 +2,11 @@ import NavBar from '../Components/NavBar';
 import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/ScheduleViewStyles';
 import moment from 'moment';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { ChoreWrapper } from '../Components';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
+import { useIsFocused } from '@react-navigation/native';
 
 const getWeekAheadWithTime = (previousValue, settings) => {
   const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -32,7 +33,10 @@ const allocateChores = (weekAheadWithTime, chores) => {
       if (i === 0) {
         chores.map((chore) => {
           const currentDay = acc.weekAheadWithTime[indexInObject];
-          if (checkIfCompletedToday(chore)) {
+          if (
+            checkIfCompletedToday(chore) &&
+            !acc.choreCache.includes(chore._id)
+          ) {
             acc.weekAheadWithTime[indexInObject] = {
               ...currentDay,
               chores: [...currentDay.chores, chore],
@@ -73,6 +77,7 @@ const allocateChores = (weekAheadWithTime, chores) => {
 export default function ScheduleView({ navigation }) {
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
   const [isLoading, setIsLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   function populateWeekAhead() {
     const today = new Date().getTime();
@@ -102,14 +107,16 @@ export default function ScheduleView({ navigation }) {
       const settings = await getSettings();
       const chores = await getRankedChores();
       addDataToWeekAhead(settings, chores);
-      // addChoresToWeekAhead(chores);
     };
     fetchData();
-  }, []);
+  }, [isFocused]);
 
   function addDataToWeekAhead(settings, chores) {
-    setWeekAhead((oldVal) => {
-      const weekAheadWithTime = getWeekAheadWithTime(oldVal, settings);
+    setWeekAhead(() => {
+      const weekAheadWithTime = getWeekAheadWithTime(
+        populateWeekAhead(),
+        settings
+      );
       return allocateChores(weekAheadWithTime, chores);
     });
     setIsLoading(false);
