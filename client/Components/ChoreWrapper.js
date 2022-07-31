@@ -5,7 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import ChoreDetails from './ChoreDetails';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 
-export default function ChoreWrapper({ chore }) {
+export default function ChoreWrapper({ chore, choreCompleted }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -22,7 +22,10 @@ export default function ChoreWrapper({ chore }) {
         <TouchableOpacity style={styles.button}>
           <FontAwesome name="info" style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => choreCompleted(chore._id, chore.dateLastCompleted)}
+        >
           <Feather name="check" style={styles.icon} />
         </TouchableOpacity>
       </View>

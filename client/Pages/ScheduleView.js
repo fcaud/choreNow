@@ -5,74 +5,12 @@ import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { ChoreWrapper } from '../Components';
-import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 import { useIsFocused } from '@react-navigation/native';
-
-const getWeekAheadWithTime = (previousValue, settings) => {
-  const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-
-  return Object.values(previousValue).reduce((acc, nextValue, i) => {
-    const lookUpDayIndex = new Date(nextValue.date).getDay();
-    const dayOfWeek = days[lookUpDayIndex];
-
-    acc[i + 1] = {
-      ...nextValue,
-      time: settings[dayOfWeek],
-    };
-    return acc;
-  }, previousValue);
-};
-
-const allocateChores = (weekAheadWithTime, chores) => {
-  const weekDays = Object.values(weekAheadWithTime);
-
-  const result = weekDays.reduce(
-    (acc, currDay, i) => {
-      const indexInObject = i + 1;
-      //check for tasks completed today and render them today
-      if (i === 0) {
-        chores.map((chore) => {
-          const currentDay = acc.weekAheadWithTime[indexInObject];
-          if (
-            checkIfCompletedToday(chore) &&
-            !acc.choreCache.includes(chore._id)
-          ) {
-            acc.weekAheadWithTime[indexInObject] = {
-              ...currentDay,
-              chores: [...currentDay.chores, chore],
-              timeUsed: currentDay.timeUsed + chore.timeToComplete,
-            };
-            acc.choreCache = [...acc.choreCache, chore._id];
-          }
-        });
-      }
-
-      chores.map((chore, i) => {
-        const currentDay = acc.weekAheadWithTime[indexInObject];
-        if (currentDay.time === currentDay.timeUsed) return;
-        //pick out chore duration < time available
-        const nextDue = new Date(chore.nextMin).getTime();
-        if (
-          chore.timeToComplete <= currentDay.time - currentDay.timeUsed &&
-          !acc.choreCache.includes(chore._id) &&
-          nextDue < currentDay.date
-        ) {
-          acc.weekAheadWithTime[indexInObject] = {
-            ...currentDay,
-            chores: [...currentDay.chores, chore],
-            timeUsed: currentDay.timeUsed + chore.timeToComplete,
-          };
-          acc.choreCache = [...acc.choreCache, chore._id];
-        }
-      });
-
-      return acc;
-    },
-    { weekAheadWithTime, choreCache: [] }
-  );
-
-  return result.weekAheadWithTime;
-};
+import {
+  getWeekAheadWithTime,
+  allocateChores,
+} from '../Utils/ScheduleViewAlgorithm';
+import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 
 export default function ScheduleView({ navigation }) {
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
@@ -102,16 +40,7 @@ export default function ScheduleView({ navigation }) {
     let chores = await ApiClientService.getRankedChores();
     return chores;
   }
-  useEffect(() => {
-    const fetchData = async () => {
-      const settings = await getSettings();
-      const chores = await getRankedChores();
-      addDataToWeekAhead(settings, chores);
-    };
-    if (isFocused) fetchData();
-    else setIsLoading(true);
-  }, [isFocused]);
-
+  //updating data into required format - using algorthim helper function
   function addDataToWeekAhead(settings, chores) {
     setWeekAhead(() => {
       const weekAheadWithTime = getWeekAheadWithTime(
@@ -122,6 +51,21 @@ export default function ScheduleView({ navigation }) {
     });
     setIsLoading(false);
   }
+  useEffect(() => {
+    const fetchData = async () => {
+      const settings = await getSettings();
+      const chores = await getRankedChores();
+      addDataToWeekAhead(settings, chores);
+    };
+    if (isFocused) fetchData();
+    else setIsLoading(true);
+  }, [isFocused]);
+
+  async function choreCompleted(_id, date) {
+    await checkOffChore(_id, date);
+    //rerender page with chore checked off & last done updated
+  }
+  async function choreRemoveCompleted(_id, date) {}
 
   return (
     <View style={styles.container}>
@@ -135,7 +79,11 @@ export default function ScheduleView({ navigation }) {
               <View key={day.date}>
                 <Text>{moment(day.date).format('ddd Do MMM')}</Text>
                 {day.chores.map((chore, i) => (
-                  <ChoreWrapper chore={chore} key={i} />
+                  <ChoreWrapper
+                    chore={chore}
+                    key={i}
+                    choreCompleted={choreCompleted}
+                  />
                 ))}
               </View>
             );

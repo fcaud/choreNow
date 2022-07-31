@@ -35,7 +35,13 @@ async function createChore(chore) {
   choreAdded = await choreAdded.json();
   return choreAdded;
 }
-async function editChore() {}
+async function editChore(_id, dataToUpdate) {
+  await fetch(choreUrl, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ _id, dataToUpdate }),
+  });
+}
 async function deleteChore(id) {
   await fetch(choreUrl, {
     method: 'DELETE',
@@ -63,7 +69,13 @@ async function createRoom(room) {
   roomAdded = await roomAdded.json();
   return roomAdded;
 }
-async function editRoom(id, data) {}
+async function editRoom(_id, dataToUpdate) {
+  await fetch(roomUrl, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ _id, dataToUpdate }),
+  });
+}
 async function deleteRoom(id) {
   await fetch(roomUrl, {
     method: 'DELETE',
