@@ -13,6 +13,7 @@ export default function ChoreNowInputForm() {
         setDisableSubmit={setDisableSubmit}
         setTimeOutput={setTimeOutput}
         id={1}
+        defaultVal={{ mins: undefined, hours: undefined }}
       />
       <TouchableOpacity>
         <Text>ChoreNow</Text>

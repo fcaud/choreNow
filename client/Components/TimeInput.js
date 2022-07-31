@@ -2,18 +2,20 @@ import { View, Text, TextInput } from 'react-native';
 import { styles } from './Styles/TimeInputStyles';
 import { useState } from 'react';
 
-export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
-  const [time, setTime] = useState({ hours: 0, mins: 0, total: 0 });
-  const [valEntered, setValEntered] = useState(false);
+export default function TimeInput({
+  setDisableSubmit,
+  setTimeOutput,
+  id,
+  defaultVal,
+}) {
+  const [time, setTime] = useState({
+    hours: defaultVal.hours,
+    mins: defaultVal.mins,
+    total: 0,
+  });
 
   function formatTime(field) {
     return (newFieldVal) => {
-      //placeholder logic to prevent user confusion if they start entering values into form
-      if (newFieldVal) {
-        setValEntered(true);
-      } else {
-        setValEntered(false);
-      }
       //calc total time in mins
       let total;
       if (field === 'hours') {
@@ -51,6 +53,7 @@ export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
           keyboardType="numeric"
           onChangeText={formatTime('hours')}
           maxLength={2}
+          value={time.hours}
         />
         <Text>:</Text>
         <TextInput
@@ -58,6 +61,7 @@ export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
           keyboardType="numeric"
           onChangeText={formatTime('mins')}
           maxLength={2}
+          value={time.mins}
         />
       </View>
       {time.hours > 23 && <Text>Please enter a valid time</Text>}

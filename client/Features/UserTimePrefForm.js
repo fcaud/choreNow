@@ -17,6 +17,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'mon'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.mon)}
         />
       </View>
       <View style={styles.row}>
@@ -25,6 +26,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'tue'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.tue)}
         />
       </View>
       <View style={styles.row}>
@@ -33,6 +35,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'wed'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.wed)}
         />
       </View>
       <View style={styles.row}>
@@ -41,6 +44,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'thu'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.thu)}
         />
       </View>
       <View style={styles.row}>
@@ -49,6 +53,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'fri'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.fri)}
         />
       </View>
       <View style={styles.row}>
@@ -57,6 +62,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'sat'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.sat)}
         />
       </View>
       <View style={styles.row}>
@@ -65,6 +71,7 @@ export default function UserTimePreferenceForm({
           setDisableSubmit={setDisableSubmit}
           id={'sun'}
           setTimeOutput={setTimeOutput}
+          defaultVal={minsToHoursAndMins(settingsData.sun)}
         />
       </View>
     </View>
