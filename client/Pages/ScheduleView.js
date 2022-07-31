@@ -51,23 +51,23 @@ export default function ScheduleView({ navigation }) {
     });
     setIsLoading(false);
   }
+  const fetchData = async () => {
+    const settings = await getSettings();
+    const chores = await getRankedChores();
+    addDataToWeekAhead(settings, chores);
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const settings = await getSettings();
-      const chores = await getRankedChores();
-      addDataToWeekAhead(settings, chores);
-    };
     if (isFocused) fetchData();
     else setIsLoading(true);
   }, [isFocused]);
 
   async function choreCompleted(_id, date) {
     await checkOffChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    await fetchData();
   }
   async function choreRemoveCompleted(_id, date) {
     await uncheckChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    await fetchData();
   }
 
   return (

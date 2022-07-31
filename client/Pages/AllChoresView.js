@@ -39,11 +39,11 @@ export default function AllChoresView({ navigation }) {
 
   async function choreCompleted(_id, date) {
     await checkOffChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    getChoreData();
   }
   async function choreRemoveCompleted(_id, date) {
     await uncheckChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    getChoreData();
   }
 
   return (

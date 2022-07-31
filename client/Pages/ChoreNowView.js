@@ -15,6 +15,7 @@ export default function ChoreNowView({ navigation }) {
   const [choresToRender, setChoresToRender] = useState([]);
 
   async function getChoreData() {
+    console.log('hi');
     const chores = await ApiClientService.getRankedChores();
     setChoreData(chores);
     setIsLoading(false);
@@ -27,23 +28,25 @@ export default function ChoreNowView({ navigation }) {
   function selectChores() {
     //map through chores and if have time add to render
     let timeRemaining = timeOutput[1];
-    const res = [];
+    const chores = [];
     choreData.map((chore) => {
       if (chore.timeToComplete <= timeRemaining) {
-        res.push(chore);
+        chores.push(chore);
         timeRemaining -= chore.timeToComplete;
       }
     });
-    setChoresToRender(res);
+    setChoresToRender(chores);
   }
 
   async function choreCompleted(_id, date) {
     await checkOffChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    await getChoreData();
+    selectChores();
   }
   async function choreRemoveCompleted(_id, date) {
     await uncheckChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    await getChoreData();
+    selectChores();
   }
 
   return (

@@ -46,11 +46,13 @@ export default function RoomView({ navigation }) {
     setChoreData(data);
     setIsLoading(false);
   }
+  async function fetchData() {
+    await getRoomData();
+    await getChoreData();
+  }
   useEffect(() => {
-    if (isFocused) {
-      getRoomData();
-      getChoreData();
-    } else setIsLoading(true);
+    if (isFocused) fetchData();
+    else setIsLoading(true);
   }, [isFocused]);
 
   async function addRoom(room) {
@@ -74,11 +76,11 @@ export default function RoomView({ navigation }) {
 
   async function choreCompleted(_id, date) {
     await checkOffChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    await fetchData();
   }
   async function choreRemoveCompleted(_id, date) {
     await uncheckChore(_id, date);
-    //rerender page with chore checked off & last done updated
+    await fetchData();
   }
 
   return (
