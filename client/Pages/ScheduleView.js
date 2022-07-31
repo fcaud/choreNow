@@ -8,11 +8,12 @@ import { ChoreWrapper } from '../Components';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 
 const getWeekAheadWithTime = (previousValue, settings) => {
-  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
   return Object.values(previousValue).reduce((acc, nextValue, i) => {
     const lookUpDayIndex = new Date(nextValue.date).getDay();
     const dayOfWeek = days[lookUpDayIndex];
+    console.log(nextValue, lookUpDayIndex, dayOfWeek, settings[dayOfWeek]);
 
     acc[i + 1] = {
       ...nextValue,
@@ -27,8 +28,8 @@ const allocateChores = (weekAheadWithTime, chores) => {
 
   const result = weekDays.reduce(
     (acc, currDay, i) => {
-      const indexInObject = (i + 1).toString();
-
+      const indexInObject = i + 1;
+      //check for tasks completed today and render them today
       if (i === 0) {
         chores.map((chore) => {
           const currentDay = acc.weekAheadWithTime[indexInObject];
@@ -36,7 +37,7 @@ const allocateChores = (weekAheadWithTime, chores) => {
             acc.weekAheadWithTime[indexInObject] = {
               ...currentDay,
               chores: [...currentDay.chores, chore],
-              timeUsed: currDay.timeUsed + chore.timeToComplete,
+              timeUsed: currentDay.timeUsed + chore.timeToComplete,
             };
             acc.choreCache = [...acc.choreCache, chore._id];
           }
@@ -45,19 +46,19 @@ const allocateChores = (weekAheadWithTime, chores) => {
 
       chores.map((chore, i) => {
         const currentDay = acc.weekAheadWithTime[indexInObject];
-        if (currDay.time === currDay.timeUsed) return;
+        if (currentDay.time === currentDay.timeUsed) return;
         //pick out chore duration < time available
         const nextDue = new Date(chore.nextMin).getTime();
-
+        // console.log(currentDay.time, currentDay.timeUsed);
         if (
-          chore.timeToComplete <= currDay.time - currDay.timeUsed &&
+          chore.timeToComplete <= currentDay.time - currentDay.timeUsed &&
           !acc.choreCache.includes(chore._id) &&
-          nextDue < currDay.date
+          nextDue < currentDay.date
         ) {
           acc.weekAheadWithTime[indexInObject] = {
             ...currentDay,
             chores: [...currentDay.chores, chore],
-            timeUsed: currDay.timeUsed + chore.timeToComplete,
+            timeUsed: currentDay.timeUsed + chore.timeToComplete,
           };
           acc.choreCache = [...acc.choreCache, chore._id];
         }
@@ -81,7 +82,7 @@ export default function ScheduleView({ navigation }) {
     for (let i = 0; i < 7; i++) {
       weekAhead[i + 1] = {};
       //calc dates for next 7 days
-      weekAhead[i + 1].date = Number(today) + 86400000 * i;
+      weekAhead[i + 1].date = Number(today) + Number(86400000 * i);
       weekAhead[i + 1].chores = [];
       weekAhead[i + 1].time = 0;
       weekAhead[i + 1].timeUsed = 0;
@@ -126,9 +127,7 @@ export default function ScheduleView({ navigation }) {
           {Object.values(weekAhead).map((day) => {
             return (
               <View key={day.date}>
-                <Text key={day.date}>
-                  {moment(day.date).format('ddd Do MMM')}
-                </Text>
+                <Text>{moment(day.date).format('ddd Do MMM')}</Text>
                 {day.chores.map((chore, i) => (
                   <ChoreWrapper chore={chore} key={i} />
                 ))}
