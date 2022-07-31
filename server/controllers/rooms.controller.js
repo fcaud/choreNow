@@ -21,7 +21,7 @@ const getRooms = async (req, res) => {
 };
 const editRoom = async (req, res) => {
   try {
-    await roomsModel.editOneRoom(req.body._id, req.body);
+    await roomsModel.editOneRoom(req.body._id, req.body.dataToUpdate);
     res.status(204);
     res.end();
   } catch (e) {

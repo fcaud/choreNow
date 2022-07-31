@@ -21,7 +21,7 @@ const getChores = async (req, res) => {
 };
 const editChore = async (req, res) => {
   try {
-    await choresModel.editOneChore(req.body._id, req.body);
+    await choresModel.editOneChore(req.body._id, req.body.dataToUpdate);
     res.status(204);
     res.end();
   } catch (e) {
