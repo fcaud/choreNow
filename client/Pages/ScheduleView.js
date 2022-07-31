@@ -7,6 +7,70 @@ import ApiClientService from '../Services/ApiClientService';
 import { ChoreWrapper } from '../Components';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 
+const getWeekAheadWithTime = (previousValue, settings) => {
+  const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+  return Object.values(previousValue).reduce((acc, nextValue, i) => {
+    const lookUpDayIndex = new Date(nextValue.date).getDay();
+    const dayOfWeek = days[lookUpDayIndex];
+
+    acc[i + 1] = {
+      ...nextValue,
+      time: settings[dayOfWeek],
+    };
+    return acc;
+  }, previousValue);
+};
+
+const allocateChores = (weekAheadWithTime, chores) => {
+  const weekDays = Object.values(weekAheadWithTime);
+
+  const result = weekDays.reduce(
+    (acc, currDay, i) => {
+      const indexInObject = (i + 1).toString();
+
+      if (i === 0) {
+        chores.map((chore) => {
+          const currentDay = acc.weekAheadWithTime[indexInObject];
+          if (checkIfCompletedToday(chore)) {
+            acc.weekAheadWithTime[indexInObject] = {
+              ...currentDay,
+              chores: [...currentDay.chores, chore],
+              timeUsed: currDay.timeUsed + chore.timeToComplete,
+            };
+            acc.choreCache = [...acc.choreCache, chore._id];
+          }
+        });
+      }
+
+      chores.map((chore, i) => {
+        const currentDay = acc.weekAheadWithTime[indexInObject];
+        if (currDay.time === currDay.timeUsed) return;
+        //pick out chore duration < time available
+        const nextDue = new Date(chore.nextMin).getTime();
+
+        if (
+          chore.timeToComplete <= currDay.time - currDay.timeUsed &&
+          !acc.choreCache.includes(chore._id) &&
+          nextDue < currDay.date
+        ) {
+          acc.weekAheadWithTime[indexInObject] = {
+            ...currentDay,
+            chores: [...currentDay.chores, chore],
+            timeUsed: currDay.timeUsed + chore.timeToComplete,
+          };
+          acc.choreCache = [...acc.choreCache, chore._id];
+        }
+      });
+
+      return acc;
+    },
+    { weekAheadWithTime, choreCache: [] }
+  );
+
+  return result.weekAheadWithTime;
+};
+
 export default function ScheduleView({ navigation }) {
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
   const [isLoading, setIsLoading] = useState(true);
@@ -45,68 +109,11 @@ export default function ScheduleView({ navigation }) {
   }, []);
 
   function addDataToWeekAhead(settings, chores) {
-    console.log('____________________\n', '____________________\n', 'Calling');
     setWeekAhead((oldVal) => {
-      console.log(
-        '____________________\n',
-        '____________________\n',
-        'Calling 2',
-        oldVal
-      );
-      let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-      let res = { ...oldVal };
-      //add time settings to weekAhead
-      Object.values(oldVal).map((data, i) => {
-        let lookUpDayIndex = new Date(data.date).getDay();
-        const updatedData = { ...data, time: settings[days[lookUpDayIndex]] };
-        res = { ...res, [i + 1]: updatedData };
-      });
-      //map through days and chores and if time space in a day add to chore array in weekAhead
-      let allocatedChores = [];
-      console.log('other', Object.values(res));
-      Object.values(res).map((data, i) => {
-        console.log('Day', i + 1, '*******************\n');
-        // if (i === 0) {
-        //   chores.map((chore) => {
-        //     if (checkIfCompletedToday(chore)) {
-        //       data.chores.push(chore);
-        //       allocatedChores.push(chore._id);
-        //       data.timeUsed = data.timeUsed + chore.timeToComplete;
-        //     }
-        //   });
-        // }
-        chores.map((chore, i) => {
-          if (data.time === data.timeUsed) return;
-          //pick out chore duration < time available
-          const nextDue = new Date(chore.nextMin).getTime();
-          console.log(
-            'chore',
-            i + 1,
-            // 'allocated chores',
-            // allocatedChores,
-            // chore.timeToComplete <= data.time - data.timeUsed &&
-            //   !allocatedChores.includes(chore._id) &&
-            //   nextDue < data.date,
-            '________________\n'
-          );
-          // if (
-          //   chore.timeToComplete <= data.time - data.timeUsed &&
-          //   !allocatedChores.includes(chore._id) &&
-          //   nextDue < data.date
-          // ) {
-          //   //add chore to chore array
-          //   data.chores.push(chore);
-          //   //Prevent chore from being reselected
-          //   allocatedChores.push(chore._id);
-          //   //update time used
-          //   data.timeUsed = data.timeUsed + chore.timeToComplete;
-          // }
-        });
-      });
-      setIsLoading(false);
-      // console.log('Show result', res, '___________________________');
-      return res;
+      const weekAheadWithTime = getWeekAheadWithTime(oldVal, settings);
+      return allocateChores(weekAheadWithTime, chores);
     });
+    setIsLoading(false);
   }
 
   return (
