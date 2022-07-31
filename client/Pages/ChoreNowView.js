@@ -1,4 +1,5 @@
-import NavBar from '../Components/NavBar';
+import { NavBar } from '../Components/index';
+import { ChoreNowInputForm } from '../Features/index';
 import { Text, View, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/ChoreNowViewStyles';
 import { useState } from 'react';
@@ -9,6 +10,7 @@ export default function ChoreNowView({ navigation }) {
   return (
     <View style={styles.container}>
       <Text>ChoreNowView</Text>
+      <ChoreNowInputForm />
       {isLoading ? <ActivityIndicator /> : <View></View>}
       <NavBar navigation={navigation} />
     </View>

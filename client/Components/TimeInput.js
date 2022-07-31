@@ -2,12 +2,7 @@ import { View, Text, TextInput } from 'react-native';
 import { styles } from './Styles/TimeInputStyles';
 import { useState } from 'react';
 
-export default function TimeInput({
-  setDisableSubmit,
-  setTimeOutput,
-  id,
-  placeholderVal,
-}) {
+export default function TimeInput({ setDisableSubmit, setTimeOutput, id }) {
   const [time, setTime] = useState({ hours: 0, mins: 0, total: 0 });
   const [valEntered, setValEntered] = useState(false);
 
@@ -52,14 +47,14 @@ export default function TimeInput({
     <View>
       <View style={styles.row}>
         <TextInput
-          placeholder={valEntered ? '00' : placeholderVal.hours}
+          placeholder="00"
           keyboardType="numeric"
           onChangeText={formatTime('hours')}
           maxLength={2}
         />
         <Text>:</Text>
         <TextInput
-          placeholder={valEntered ? '00' : placeholderVal.mins}
+          placeholder="00"
           keyboardType="numeric"
           onChangeText={formatTime('mins')}
           maxLength={2}
