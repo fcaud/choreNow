@@ -13,7 +13,6 @@ const getWeekAheadWithTime = (previousValue, settings) => {
   return Object.values(previousValue).reduce((acc, nextValue, i) => {
     const lookUpDayIndex = new Date(nextValue.date).getDay();
     const dayOfWeek = days[lookUpDayIndex];
-    console.log(nextValue, lookUpDayIndex, dayOfWeek, settings[dayOfWeek]);
 
     acc[i + 1] = {
       ...nextValue,
@@ -49,7 +48,6 @@ const allocateChores = (weekAheadWithTime, chores) => {
         if (currentDay.time === currentDay.timeUsed) return;
         //pick out chore duration < time available
         const nextDue = new Date(chore.nextMin).getTime();
-        // console.log(currentDay.time, currentDay.timeUsed);
         if (
           chore.timeToComplete <= currentDay.time - currentDay.timeUsed &&
           !acc.choreCache.includes(chore._id) &&
