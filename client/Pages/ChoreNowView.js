@@ -41,6 +41,10 @@ export default function ChoreNowView({ navigation }) {
     await checkOffChore(_id, date);
     //rerender page with chore checked off & last done updated
   }
+  async function choreRemoveCompleted(_id, date) {
+    await uncheckChore(_id, date);
+    //rerender page with chore checked off & last done updated
+  }
 
   return (
     <View style={styles.container}>
@@ -61,6 +65,7 @@ export default function ChoreNowView({ navigation }) {
             chore={chore}
             key={chore._id}
             choreCompleted={choreCompleted}
+            choreRemoveCompleted={choreRemoveCompleted}
           />
         ))}
       </ScrollView>

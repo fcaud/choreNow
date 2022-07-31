@@ -76,6 +76,10 @@ export default function RoomView({ navigation }) {
     await checkOffChore(_id, date);
     //rerender page with chore checked off & last done updated
   }
+  async function choreRemoveCompleted(_id, date) {
+    await uncheckChore(_id, date);
+    //rerender page with chore checked off & last done updated
+  }
 
   return (
     <View style={styles.container}>
@@ -91,6 +95,7 @@ export default function RoomView({ navigation }) {
               addChoresModal={addChoresModal}
               editChoresModal={editChoresModal}
               choreCompleted={choreCompleted}
+              choreRemoveCompleted={choreRemoveCompleted}
             />
           ))}
         </ScrollView>

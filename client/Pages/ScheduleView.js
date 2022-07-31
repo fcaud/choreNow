@@ -67,7 +67,6 @@ export default function ScheduleView({ navigation }) {
   }
   async function choreRemoveCompleted(_id, date) {
     await uncheckChore(_id, date);
-
     //rerender page with chore checked off & last done updated
   }
 
