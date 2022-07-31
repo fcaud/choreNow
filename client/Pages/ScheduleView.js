@@ -108,7 +108,8 @@ export default function ScheduleView({ navigation }) {
       const chores = await getRankedChores();
       addDataToWeekAhead(settings, chores);
     };
-    fetchData();
+    if (isFocused) fetchData();
+    else setIsLoading(true);
   }, [isFocused]);
 
   function addDataToWeekAhead(settings, chores) {

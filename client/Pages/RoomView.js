@@ -12,6 +12,7 @@ import { styles } from './Styles/RoomViewStyles';
 import ApiClientService from '../Services/ApiClientService';
 import { useEffect, useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function RoomView({ navigation }) {
   const [roomData, setRoomData] = useState([]);
@@ -22,6 +23,7 @@ export default function RoomView({ navigation }) {
   const [addChoreModal, setAddChoreModal] = useState(false);
   const [editChoreModal, setEditChoreModal] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const isFocused = useIsFocused();
 
   function editRoomsModal() {
     setRoomModal(!roomModal);
@@ -42,6 +44,7 @@ export default function RoomView({ navigation }) {
     const data = await ApiClientService.getRankedChores();
     setChoreData(data);
     setIsLoading(false);
+    console.log('hi');
   }
 
   async function addRoom(room) {
@@ -64,9 +67,11 @@ export default function RoomView({ navigation }) {
   }
 
   useEffect(() => {
-    getRoomData();
-    getChoreData();
-  }, []);
+    if (isFocused) {
+      getRoomData();
+      getChoreData();
+    } else setIsLoading(true);
+  }, [isFocused]);
   return (
     <View style={styles.container}>
       {isLoading ? (

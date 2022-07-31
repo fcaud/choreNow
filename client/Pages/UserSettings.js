@@ -4,8 +4,10 @@ import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/UserSettingsStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function UserSettings({ navigation }) {
+  const isFocused = useIsFocused();
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [timeOutput, setTimeOutput] = useState({});
   const [settingsData, setSettingsData] = useState({});
@@ -22,8 +24,9 @@ export default function UserSettings({ navigation }) {
     setIsLoading(false);
   }
   useEffect(() => {
-    getSettings();
-  }, []);
+    if (isFocused) getSettings();
+    else setIsLoading(true);
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

@@ -4,8 +4,10 @@ import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import { styles } from './Styles/ChoreNowViewStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function ChoreNowView({ navigation }) {
+  const isFocused = useIsFocused();
   const [isLoading, setIsLoading] = useState(true);
   const [choreData, setChoreData] = useState({});
   const [timeOutput, setTimeOutput] = useState({});
@@ -18,7 +20,6 @@ export default function ChoreNowView({ navigation }) {
   }
   function selectChores() {
     //map through chores and if have time add to render
-    console.log('timeOutput', timeOutput, 'choreData', choreData);
     let timeRemaining = timeOutput[1];
     const res = [];
     choreData.map((chore) => {
@@ -27,12 +28,12 @@ export default function ChoreNowView({ navigation }) {
         timeRemaining -= chore.timeToComplete;
       }
     });
-    console.log('res', res);
     setChoresToRender(res);
   }
   useEffect(() => {
-    getChoreData();
-  }, []);
+    if (isFocused) getChoreData();
+    else setIsLoading(true);
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>

@@ -3,8 +3,10 @@ import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/AllChoresViewStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function AllChoresView({ navigation }) {
+  const isFocused = useIsFocused();
   const [isLoading, setIsLoading] = useState(true);
   const [choreData, setChoreData] = useState({
     overdue: [],
@@ -31,8 +33,9 @@ export default function AllChoresView({ navigation }) {
   }
 
   useEffect(() => {
-    getChoreData();
-  }, []);
+    if (isFocused) getChoreData();
+    else setIsLoading(true);
+  }, [isFocused]);
 
   return (
     <View style={styles.container}>
