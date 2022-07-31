@@ -65,7 +65,11 @@ export default function ScheduleView({ navigation }) {
     await checkOffChore(_id, date);
     //rerender page with chore checked off & last done updated
   }
-  async function choreRemoveCompleted(_id, date) {}
+  async function choreRemoveCompleted(_id, date) {
+    await uncheckChore(_id, date);
+
+    //rerender page with chore checked off & last done updated
+  }
 
   return (
     <View style={styles.container}>
@@ -83,6 +87,7 @@ export default function ScheduleView({ navigation }) {
                     chore={chore}
                     key={i}
                     choreCompleted={choreCompleted}
+                    choreRemoveCompleted={choreRemoveCompleted}
                   />
                 ))}
               </View>

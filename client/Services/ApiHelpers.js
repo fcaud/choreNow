@@ -7,9 +7,10 @@ async function checkOffChore(_id, prevDate) {
   });
 }
 async function uncheckChore(_id, retrievedDate) {
+  const defaultDate = new Date(0);
   await ApiClientService.editChore(_id, {
     dateLastCompleted: retrievedDate,
-    prevDateLastCompleted: 0,
+    prevDateLastCompleted: defaultDate,
   });
 }
 
