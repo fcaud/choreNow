@@ -5,6 +5,7 @@ import moment from 'moment';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { ChoreWrapper } from '../Components';
+import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 
 export default function ScheduleView({ navigation }) {
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
@@ -37,43 +38,73 @@ export default function ScheduleView({ navigation }) {
     const fetchData = async () => {
       const settings = await getSettings();
       const chores = await getRankedChores();
-      const weekData = await addDataToWeekAhead(settings, chores);
+      addDataToWeekAhead(settings, chores);
       // addChoresToWeekAhead(chores);
     };
     fetchData();
   }, []);
 
   function addDataToWeekAhead(settings, chores) {
+    console.log('____________________\n', '____________________\n', 'Calling');
     setWeekAhead((oldVal) => {
+      console.log(
+        '____________________\n',
+        '____________________\n',
+        'Calling 2',
+        oldVal
+      );
       let days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
       let res = { ...oldVal };
       //add time settings to weekAhead
       Object.values(oldVal).map((data, i) => {
         let lookUpDayIndex = new Date(data.date).getDay();
-        data = { ...data, time: settings[days[lookUpDayIndex]] };
-        res = { ...res, [i + 1]: data };
+        const updatedData = { ...data, time: settings[days[lookUpDayIndex]] };
+        res = { ...res, [i + 1]: updatedData };
       });
       //map through days and chores and if time space in a day add to chore array in weekAhead
       let allocatedChores = [];
+      console.log('other', Object.values(res));
       Object.values(res).map((data, i) => {
-        chores.map((chore) => {
+        console.log('Day', i + 1, '*******************\n');
+        // if (i === 0) {
+        //   chores.map((chore) => {
+        //     if (checkIfCompletedToday(chore)) {
+        //       data.chores.push(chore);
+        //       allocatedChores.push(chore._id);
+        //       data.timeUsed = data.timeUsed + chore.timeToComplete;
+        //     }
+        //   });
+        // }
+        chores.map((chore, i) => {
+          if (data.time === data.timeUsed) return;
           //pick out chore duration < time available
           const nextDue = new Date(chore.nextMin).getTime();
-          if (
-            chore.timeToComplete <= data.time - data.timeUsed &&
-            !allocatedChores.includes(chore._id) &&
-            nextDue < data.date
-          ) {
-            //add chore to chore array
-            data.chores.push(chore);
-            //Prevent chore from being reselected
-            allocatedChores.push(chore._id);
-            //update time used
-            data.timeUsed = data.timeUsed + chore.timeToComplete;
-          }
+          console.log(
+            'chore',
+            i + 1,
+            // 'allocated chores',
+            // allocatedChores,
+            // chore.timeToComplete <= data.time - data.timeUsed &&
+            //   !allocatedChores.includes(chore._id) &&
+            //   nextDue < data.date,
+            '________________\n'
+          );
+          // if (
+          //   chore.timeToComplete <= data.time - data.timeUsed &&
+          //   !allocatedChores.includes(chore._id) &&
+          //   nextDue < data.date
+          // ) {
+          //   //add chore to chore array
+          //   data.chores.push(chore);
+          //   //Prevent chore from being reselected
+          //   allocatedChores.push(chore._id);
+          //   //update time used
+          //   data.timeUsed = data.timeUsed + chore.timeToComplete;
+          // }
         });
       });
       setIsLoading(false);
+      // console.log('Show result', res, '___________________________');
       return res;
     });
   }
