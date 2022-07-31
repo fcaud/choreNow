@@ -3,6 +3,7 @@ export default globalStyles = {
   backgroundLightOrange: '#ffba82',
   backgroundLightGrey: '#d6d6d6',
   backgroundDarkGrey: '#b2b2b2',
+  backgroundWhite: '#fff',
   border: '#d6d6d6',
   buttonWhite: '#fff',
   textLight: '#fff',
