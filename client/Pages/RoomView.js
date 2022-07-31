@@ -13,6 +13,7 @@ import ApiClientService from '../Services/ApiClientService';
 import { useEffect, useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
+import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 
 export default function RoomView({ navigation }) {
   const [roomData, setRoomData] = useState([]);
@@ -45,6 +46,12 @@ export default function RoomView({ navigation }) {
     setChoreData(data);
     setIsLoading(false);
   }
+  useEffect(() => {
+    if (isFocused) {
+      getRoomData();
+      getChoreData();
+    } else setIsLoading(true);
+  }, [isFocused]);
 
   async function addRoom(room) {
     if (!room) return;
@@ -65,12 +72,11 @@ export default function RoomView({ navigation }) {
     getRoomData();
   }
 
-  useEffect(() => {
-    if (isFocused) {
-      getRoomData();
-      getChoreData();
-    } else setIsLoading(true);
-  }, [isFocused]);
+  async function choreCompleted(_id, date) {
+    await checkOffChore(_id, date);
+    //rerender page with chore checked off & last done updated
+  }
+
   return (
     <View style={styles.container}>
       {isLoading ? (
@@ -84,6 +90,7 @@ export default function RoomView({ navigation }) {
               key={room._id}
               addChoresModal={addChoresModal}
               editChoresModal={editChoresModal}
+              choreCompleted={choreCompleted}
             />
           ))}
         </ScrollView>

@@ -9,6 +9,7 @@ export default function RoomItem({
   room,
   addChoresModal,
   editChoresModal,
+  choreCompleted,
 }) {
   const choresForRoom = choreData.filter((chore) => chore.room === room.room);
 
@@ -31,6 +32,7 @@ export default function RoomItem({
           chore={chore}
           key={chore._id}
           editChoresModal={editChoresModal}
+          choreCompleted={choreCompleted}
         />
       ))}
     </View>

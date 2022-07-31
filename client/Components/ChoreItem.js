@@ -5,7 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 
-export default function RoomItem({ chore, editChoresModal }) {
+export default function RoomItem({ chore, editChoresModal, choreCompleted }) {
   return (
     <View>
       <View style={styles.choreHeader}>
@@ -14,7 +14,9 @@ export default function RoomItem({ chore, editChoresModal }) {
         ) : (
           <Text style={styles.text}>{chore.taskName}</Text>
         )}
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => choreCompleted(chore._id, chore.dateLastCompleted)}
+        >
           <Feather name="check" style={styles.icon} />
         </TouchableOpacity>
         <TouchableOpacity>

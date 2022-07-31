@@ -4,6 +4,7 @@ import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import { styles } from './Styles/ChoreNowViewStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
+import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 import { useIsFocused } from '@react-navigation/native';
 
 export default function ChoreNowView({ navigation }) {
@@ -18,6 +19,11 @@ export default function ChoreNowView({ navigation }) {
     setChoreData(chores);
     setIsLoading(false);
   }
+  useEffect(() => {
+    if (isFocused) getChoreData();
+    else setIsLoading(true);
+  }, [isFocused]);
+
   function selectChores() {
     //map through chores and if have time add to render
     let timeRemaining = timeOutput[1];
@@ -30,10 +36,11 @@ export default function ChoreNowView({ navigation }) {
     });
     setChoresToRender(res);
   }
-  useEffect(() => {
-    if (isFocused) getChoreData();
-    else setIsLoading(true);
-  }, [isFocused]);
+
+  async function choreCompleted(_id, date) {
+    await checkOffChore(_id, date);
+    //rerender page with chore checked off & last done updated
+  }
 
   return (
     <View style={styles.container}>
@@ -50,7 +57,11 @@ export default function ChoreNowView({ navigation }) {
       )}
       <ScrollView>
         {choresToRender.map((chore) => (
-          <ChoreWrapper chore={chore} key={chore._id} />
+          <ChoreWrapper
+            chore={chore}
+            key={chore._id}
+            choreCompleted={choreCompleted}
+          />
         ))}
       </ScrollView>
       <NavBar navigation={navigation} />

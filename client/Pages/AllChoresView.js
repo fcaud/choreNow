@@ -4,6 +4,7 @@ import { styles } from './Styles/AllChoresViewStyles';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { useIsFocused } from '@react-navigation/native';
+import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 
 export default function AllChoresView({ navigation }) {
   const isFocused = useIsFocused();
@@ -31,11 +32,15 @@ export default function AllChoresView({ navigation }) {
     }));
     setIsLoading(false);
   }
-
   useEffect(() => {
     if (isFocused) getChoreData();
     else setIsLoading(true);
   }, [isFocused]);
+
+  async function choreCompleted(_id, date) {
+    await checkOffChore(_id, date);
+    //rerender page with chore checked off & last done updated
+  }
 
   return (
     <View style={styles.container}>
@@ -46,7 +51,11 @@ export default function AllChoresView({ navigation }) {
           <Text>Overdue</Text>
           {choreData.overdue.length !== 0 ? (
             choreData.overdue.map((chore) => (
-              <ChoreWrapper chore={chore} key={chore._id} />
+              <ChoreWrapper
+                chore={chore}
+                key={chore._id}
+                choreCompleted={choreCompleted}
+              />
             ))
           ) : (
             <Text>No tasks</Text>
@@ -54,7 +63,11 @@ export default function AllChoresView({ navigation }) {
           <Text>Due</Text>
           {choreData.due.length !== 0 ? (
             choreData.due.map((chore) => (
-              <ChoreWrapper chore={chore} key={chore._id} />
+              <ChoreWrapper
+                chore={chore}
+                key={chore._id}
+                choreCompleted={choreCompleted}
+              />
             ))
           ) : (
             <Text>No tasks</Text>
@@ -63,7 +76,11 @@ export default function AllChoresView({ navigation }) {
           <Text>Nearly due</Text>
           {choreData.nearlyDue.length !== 0 ? (
             choreData.nearlyDue.map((chore) => (
-              <ChoreWrapper chore={chore} key={chore._id} />
+              <ChoreWrapper
+                chore={chore}
+                key={chore._id}
+                choreCompleted={choreCompleted}
+              />
             ))
           ) : (
             <Text>No tasks</Text>
@@ -72,7 +89,11 @@ export default function AllChoresView({ navigation }) {
           <Text>Not due</Text>
           {choreData.notDue.length !== 0 ? (
             choreData.notDue.map((chore) => (
-              <ChoreWrapper chore={chore} key={chore._id} />
+              <ChoreWrapper
+                chore={chore}
+                key={chore._id}
+                choreCompleted={choreCompleted}
+              />
             ))
           ) : (
             <Text>No tasks</Text>
