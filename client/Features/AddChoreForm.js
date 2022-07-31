@@ -12,7 +12,6 @@ export default function AddChoreForm({ curRoom, addChore }) {
     priority: 'Medium',
     timeToComplete: '00:00',
     dateLastCompleted: 0,
-    notes: '',
     freqUnit: 'days',
     minFreq: 0,
     maxFreq: 0,
@@ -21,9 +20,11 @@ export default function AddChoreForm({ curRoom, addChore }) {
 
   function updateChoreData(field) {
     return (newFieldVal) => {
-      setChoreData((oldVal) => {
-        return { ...oldVal, [field]: newFieldVal };
-      });
+      if (newFieldVal) {
+        setChoreData((oldVal) => {
+          return { ...oldVal, [field]: newFieldVal };
+        });
+      }
     };
   }
 
