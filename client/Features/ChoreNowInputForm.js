@@ -3,9 +3,9 @@ import { styles } from './Styles/ChoreNowInputFormStyles';
 import { TimeInput } from '../Components/index';
 import { useState } from 'react';
 
-export default function ChoreNowInputForm() {
-  const [disableSubmit, setDisableSubmit] = useState(false);
-  const [timeOutput, setTimeOutput] = useState({});
+export default function ChoreNowInputForm({ selectChores, setTimeOutput }) {
+  const [disableSubmit, setDisableSubmit] = useState(true);
+
   return (
     <View>
       <Text>How long do you want to spend?</Text>
@@ -13,9 +13,9 @@ export default function ChoreNowInputForm() {
         setDisableSubmit={setDisableSubmit}
         setTimeOutput={setTimeOutput}
         id={1}
-        defaultVal={{ mins: undefined, hours: undefined }}
+        defaultVal={{ mins: null, hours: null }}
       />
-      <TouchableOpacity>
+      <TouchableOpacity disabled={disableSubmit} onPress={selectChores}>
         <Text>ChoreNow</Text>
       </TouchableOpacity>
     </View>
