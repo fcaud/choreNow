@@ -42,7 +42,7 @@ export default function RoomItem({
           <Octicons
             name="pencil"
             style={styles.icon}
-            onPress={() => editChoresModal(chore.room)}
+            onPress={() => editChoresModal(chore)}
           />
         </TouchableOpacity>
         <TouchableOpacity>

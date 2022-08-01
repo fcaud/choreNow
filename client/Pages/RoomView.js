@@ -34,10 +34,10 @@ export default function RoomView({ navigation }) {
     setAddChoreModal(!addChoreModal);
     setCurRoom(room);
   }
-  function editChoresModal(room) {
-    console.log(room);
+  function editChoresModal(chore) {
     setEditChoreModal(!editChoreModal);
-    setCurRoom(room);
+    setCurRoom(chore.room);
+    setCurChore(chore);
   }
 
   async function getRoomData() {
@@ -67,9 +67,28 @@ export default function RoomView({ navigation }) {
     if (!chore) return;
     const newChore = await ApiClientService.createChore(chore);
     setChoreData([...choreData, newChore]);
+    setAddChoreModal(false);
   }
-  async function editChore(chore) {
-    if (!chore) return;
+  async function editChore(prevChore, updatedChore) {
+    if (
+      !(
+        updatedChore.taskName ||
+        updatedChore.maxFreq ||
+        updatedChore.minFreq ||
+        updatedChore.desiredFreq ||
+        updatedChore.timeToComplete
+      )
+    )
+      return;
+    //adding back the values which are not input into the form
+    updatedChore = {
+      ...updatedChore,
+      dateLastCompleted: prevChore.dateLastCompleted,
+      room: prevChore.room,
+    };
+    await ApiClientService.editChore(prevChore._id, updatedChore);
+    getChoreData();
+    setEditChoreModal(false);
   }
   async function deleteRoom(room) {
     await ApiClientService.deleteRoom({ _id: room._id });
@@ -135,7 +154,11 @@ export default function RoomView({ navigation }) {
       </Modal>
       <Modal visible={editChoreModal}>
         <View style={styles.modal}>
-          <EditChoreForm curRoom={curRoom} editChore={editChore} />
+          <EditChoreForm
+            curRoom={curRoom}
+            editChore={editChore}
+            curChore={curChore}
+          />
           <TouchableOpacity onPress={editChoresModal}>
             <Ionicons name="close" />
           </TouchableOpacity>

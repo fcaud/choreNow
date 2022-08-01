@@ -36,6 +36,7 @@ async function createChore(chore) {
   return choreAdded;
 }
 async function editChore(_id, dataToUpdate) {
+  console.log(_id, dataToUpdate);
   await fetch(choreUrl, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

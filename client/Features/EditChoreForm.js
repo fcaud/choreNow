@@ -13,7 +13,7 @@ import {
   updateChoreData,
 } from '../Utils/AddEditChoreHelperFunctions';
 
-export default function EditChoreForm({ curRoom, editChore }) {
+export default function EditChoreForm({ curRoom, editChore, curChore }) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [showPriorityPicker, setShowPriorityPicker] = useState(false);
@@ -22,7 +22,7 @@ export default function EditChoreForm({ curRoom, editChore }) {
     taskName: '',
     room: curRoom.room,
     priority: 'Medium',
-    timeToComplete: '00:00',
+    timeToComplete: 0,
     dateLastCompleted: 0,
     freqUnit: 'days',
     minFreq: 0,
@@ -133,7 +133,7 @@ export default function EditChoreForm({ curRoom, editChore }) {
       />
       <TouchableOpacity
         disabled={disableSubmit}
-        onPress={() => editChore(choreData)}
+        onPress={() => editChore(curChore, choreData)}
       >
         <Text>Edit chore</Text>
       </TouchableOpacity>
