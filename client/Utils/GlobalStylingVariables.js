@@ -9,7 +9,7 @@ export default globalStyles = {
   textLight: '#fff',
   textOrange: '#FF7B0F',
   textDark: '#000',
-  textGrey: '#5F6368',
+  textGrey: '#989ca0',
   red: '#FFB3BA',
   amber: '#FFDFBA',
   yellow: '#FFFFBA',

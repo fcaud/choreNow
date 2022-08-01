@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 25,
+    paddingBottom: 46,
   },
   scrollView: { width: '75%' },
 });
