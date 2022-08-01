@@ -16,38 +16,42 @@ export default function ChoreNowView({ navigation }) {
   const [choresToRender, setChoresToRender] = useState([]);
 
   async function getChoreData() {
-    console.log('hi');
     const chores = await ApiClientService.getRankedChores();
     setChoreData(chores);
     setIsLoading(false);
+    return chores;
   }
   useEffect(() => {
     if (isFocused) getChoreData();
     else setIsLoading(true);
   }, [isFocused]);
 
-  function selectChores() {
-    //map through chores and if have time add to render
+  function selectChores(_, choresArg) {
+    //click event was passing as argument so included dummy argument
     let timeRemaining = timeOutput[1];
-    const chores = [];
-    choreData.map((chore) => {
+    let chores = choreData;
+    if (choresArg) chores = choresArg;
+
+    //loop through chores and if have time add to render
+    const choresToBeRendered = chores.reduce((acc, chore) => {
       if (chore.timeToComplete <= timeRemaining) {
-        chores.push(chore);
+        acc = [...acc, chore];
         timeRemaining -= chore.timeToComplete;
       }
-    });
-    setChoresToRender(chores);
+      return acc;
+    }, []);
+    setChoresToRender(choresToBeRendered);
   }
 
   async function choreCompleted(_id, date) {
     await checkOffChore(_id, date);
-    await getChoreData();
-    selectChores();
+    const chores = await getChoreData();
+    selectChores('_', chores);
   }
   async function choreRemoveCompleted(_id, date) {
     await uncheckChore(_id, date);
-    await getChoreData();
-    selectChores();
+    const chores = await getChoreData();
+    selectChores('_', chores);
   }
 
   return (
