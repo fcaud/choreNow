@@ -9,11 +9,11 @@ import { styles } from './Styles/AddChoreFormStyles';
 import React, { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
 import {
-  updateChoreData,
   formatTime,
+  updateChoreData,
 } from '../Utils/AddEditChoreHelperFunctions';
 
-export default function AddChoreForm({ curRoom, addChore }) {
+export default function EditChoreForm({ curRoom, editChore }) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [showPriorityPicker, setShowPriorityPicker] = useState(false);
@@ -29,10 +29,9 @@ export default function AddChoreForm({ curRoom, addChore }) {
     maxFreq: 0,
     desiredFreq: 0,
   });
-
   return (
     <ScrollView>
-      <Text>Add Chore</Text>
+      <Text>Edit Chore</Text>
       <Text>{curRoom.room}</Text>
       <TextInput
         placeholder="Chore Name..."
@@ -134,9 +133,9 @@ export default function AddChoreForm({ curRoom, addChore }) {
       />
       <TouchableOpacity
         disabled={disableSubmit}
-        onPress={() => addChore(choreData)}
+        onPress={() => editChore(choreData)}
       >
-        <Text>Create chore</Text>
+        <Text>Edit chore</Text>
       </TouchableOpacity>
     </ScrollView>
   );

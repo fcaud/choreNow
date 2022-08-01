@@ -1,5 +1,5 @@
 import { NavBar, RoomItem } from '../Components/index';
-import { EditRoomForm, AddChoreForm } from '../Features/index';
+import { EditRoomForm, AddChoreForm, EditChoreForm } from '../Features/index';
 import {
   Text,
   TouchableOpacity,
@@ -66,6 +66,9 @@ export default function RoomView({ navigation }) {
     const newChore = await ApiClientService.createChore(chore);
     setChoreData([...choreData, newChore]);
   }
+  async function editChore(chore) {
+    if (!chore) return;
+  }
   async function deleteRoom(room) {
     await ApiClientService.deleteRoom({ _id: room._id });
     // const choresForRoom = choreData.filter((chore) => chore.room === room.room);
@@ -130,7 +133,7 @@ export default function RoomView({ navigation }) {
       </Modal>
       <Modal visible={editChoreModal}>
         <View style={styles.modal}>
-          <Text>edit Chores</Text>
+          <EditChoreForm curRoom={curRoom} editChore={editChore} />
           <TouchableOpacity onPress={editChoresModal}>
             <Ionicons name="close" />
           </TouchableOpacity>
