@@ -11,7 +11,11 @@ import {
   allocateChores,
 } from '../Utils/ScheduleViewAlgorithm';
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
-import { useFonts, Nunito_400Regular } from '@expo-google-fonts/nunito';
+import {
+  useFonts,
+  Nunito_400Regular,
+  Nunito_400Regular_Italic,
+} from '@expo-google-fonts/nunito';
 import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function ScheduleView({ navigation }) {
@@ -74,6 +78,7 @@ export default function ScheduleView({ navigation }) {
 
   let [fontsLoaded] = useFonts({
     Nunito_400Regular,
+    Nunito_400Regular_Italic,
   });
 
   return (

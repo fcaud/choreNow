@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 4,
   },
-  subText: { fontSize: 14, fontStyle: 'italic' },
+  subText: { fontSize: 14, fontFamily: 'Nunito_400Regular_Italic' },
   completed: { textDecorationLine: 'line-through' },
   detailsWrapper: {
     borderWidth: 1,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingTop: 27,
     width: '100%',
-    transform: [{ translateY: -27 }],
+    marginTop: -27,
     zIndex: 1,
   },
   buttonWrapper: { flexDirection: 'row', paddingVertical: 7 },
