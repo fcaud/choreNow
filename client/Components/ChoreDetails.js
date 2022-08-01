@@ -43,7 +43,8 @@ export default function ChoreDetails({ chore }) {
             <Text>Task not previously done</Text>
           ) : (
             <Text>
-              Last done {moment(chore.dateLastCompleted, 'YYYYMMDD').fromNow()}
+              Last done{' '}
+              {moment(chore.dateLastCompleted, 'YYYYMMDDHH').fromNow()}
             </Text>
           )}
         </View>

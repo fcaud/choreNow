@@ -86,7 +86,7 @@ export default function AddChoreForm({ curRoom, addChore }) {
         {time.mins > 59 && <Text>Please enter a valid time</Text>}
       </View>
 
-      <Text>Priority rating {choreData.priority}</Text>
+      <Text>Priority rating</Text>
       <View>
         <Picker
           selectedValue={choreData.priority}
@@ -99,7 +99,7 @@ export default function AddChoreForm({ curRoom, addChore }) {
       </View>
       <View>
         <Text>Frequency</Text>
-        <Text>Frequency measure {choreData.freqUnit}</Text>
+        <Text>Frequency measure</Text>
         <Picker
           selectedValue={choreData.freqUnit}
           onValueChange={updateChoreData('freqUnit')}
