@@ -1,10 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './Styles/ChoreWrapperStyles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import ChoreDetails from './ChoreDetails';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
 import React, { useState } from 'react';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function ChoreWrapper({
   chore,
@@ -17,39 +18,52 @@ export default function ChoreWrapper({
       <View style={styles.header}>
         <View>
           {checkIfCompletedToday(chore) ? (
-            <Text style={[styles.completed, styles.text]}>
+            <Text style={[styles.completed, globalElements.pWhite]}>
               {chore.taskName}
             </Text>
           ) : (
-            <Text style={styles.text}>{chore.taskName}</Text>
+            <Text style={globalElements.pWhite}>{chore.taskName}</Text>
           )}
-          <Text style={[styles.text, styles.subText]}>{chore.room}</Text>
+          <Text style={[globalElements.pWhite, styles.subText]}>
+            {chore.room}
+          </Text>
         </View>
-        <TouchableOpacity
-          style={showChoreDetails ? styles.buttonGreyed : styles.button}
-          onPress={() => setShowChoreDetails(!showChoreDetails)}
-        >
-          <FontAwesome name="info" style={styles.icon} />
-        </TouchableOpacity>
-        {checkIfCompletedToday(chore) ? (
+        <View style={styles.buttonWrapper}>
           <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              choreRemoveCompleted(chore._id, chore.prevDateLastCompleted)
-            }
+            style={globalElements.roundButton}
+            onPress={() => setShowChoreDetails(!showChoreDetails)}
           >
-            <AntDesign name="checkcircle" style={styles.icon} />
+            <FontAwesome
+              name="info"
+              style={
+                showChoreDetails
+                  ? globalElements.icon
+                  : globalElements.iconGreyed
+              }
+            />
           </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => choreCompleted(chore._id, chore.dateLastCompleted)}
-          >
-            <AntDesign name="checkcircleo" style={styles.icon} />
-          </TouchableOpacity>
-        )}
+          {checkIfCompletedToday(chore) ? (
+            <TouchableOpacity
+              style={globalElements.roundButton}
+              onPress={() =>
+                choreRemoveCompleted(chore._id, chore.prevDateLastCompleted)
+              }
+            >
+              <Feather name="check" style={globalElements.icon} />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              style={globalElements.roundButton}
+              onPress={() => choreCompleted(chore._id, chore.dateLastCompleted)}
+            >
+              <Feather name="check" style={globalElements.iconGreyed} />
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
-      {showChoreDetails && <ChoreDetails chore={chore} />}
+      <View style={styles.detailsWrapper}>
+        {showChoreDetails && <ChoreDetails chore={chore} />}
+      </View>
     </View>
   );
 }
