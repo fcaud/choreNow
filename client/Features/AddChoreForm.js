@@ -12,7 +12,6 @@ import {
   updateChoreData,
   formatTime,
 } from '../Utils/AddEditChoreHelperFunctions';
-import { TimeInput } from '../Components/index';
 
 export default function AddChoreForm({ curRoom, addChore }) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });
@@ -23,7 +22,7 @@ export default function AddChoreForm({ curRoom, addChore }) {
     taskName: '',
     room: curRoom.room,
     priority: 'Medium',
-    timeToComplete: '00:00',
+    timeToComplete: 0,
     dateLastCompleted: 0,
     freqUnit: 'days',
     minFreq: 0,
@@ -42,12 +41,35 @@ export default function AddChoreForm({ curRoom, addChore }) {
         autoCapitalize="sentences"
       />
       <Text>Time required </Text>
-      <TimeInput
-        setDisableSubmit={setDisableSubmit}
-        id={1}
-        setTimeOutput={setTime}
-        defaultVal={{ hours: null, mins: null }}
-      />
+      <View style={styles.row}>
+        <TextInput
+          placeholder="00"
+          keyboardType="numeric"
+          onChangeText={formatTime(
+            'hours',
+            setChoreData,
+            setTime,
+            setDisableSubmit,
+            time
+          )}
+          maxLength={2}
+        />
+        <Text>:</Text>
+        <TextInput
+          placeholder="00"
+          keyboardType="numeric"
+          onChangeText={formatTime(
+            'mins',
+            setChoreData,
+            setTime,
+            setDisableSubmit,
+            time
+          )}
+          maxLength={2}
+        />
+        {time.hours > 23 && <Text>Please enter a valid time</Text>}
+        {time.mins > 59 && <Text>Please enter a valid time</Text>}
+      </View>
       <View style={styles.row}>
         <Text>Priority rating</Text>
         <TouchableOpacity

@@ -1,9 +1,5 @@
-function updateChoreData(field, setChoreData, setDisableSubmit) {
+function updateChoreData(field, setChoreData) {
   return (newFieldVal) => {
-    // if (setDisableSubmit) {
-    //   if (!newFieldVal || newFieldVal === '') setDisableSubmit(true);
-    //   else setDisableSubmit(false);
-    // }
     setChoreData((oldVal) => {
       return { ...oldVal, [field]: newFieldVal };
     });

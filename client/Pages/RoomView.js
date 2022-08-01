@@ -113,24 +113,25 @@ export default function RoomView({ navigation }) {
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <ScrollView>
-          {roomData.map((room) => (
-            <RoomItem
-              choreData={choreData}
-              room={room}
-              key={room._id}
-              addChoresModal={addChoresModal}
-              editChoresModal={editChoresModal}
-              choreCompleted={choreCompleted}
-              choreRemoveCompleted={choreRemoveCompleted}
-            />
-          ))}
-        </ScrollView>
+        <>
+          <ScrollView>
+            {roomData.map((room) => (
+              <RoomItem
+                choreData={choreData}
+                room={room}
+                key={room._id}
+                addChoresModal={addChoresModal}
+                editChoresModal={editChoresModal}
+                choreCompleted={choreCompleted}
+                choreRemoveCompleted={choreRemoveCompleted}
+              />
+            ))}
+          </ScrollView>
+          <TouchableOpacity onPress={editRoomsModal}>
+            <Text>Edit rooms</Text>
+          </TouchableOpacity>
+        </>
       )}
-
-      <TouchableOpacity onPress={editRoomsModal}>
-        <Text>Edit rooms</Text>
-      </TouchableOpacity>
 
       <Modal visible={roomModal}>
         <View style={styles.modal}>

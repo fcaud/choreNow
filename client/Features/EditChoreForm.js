@@ -12,7 +12,6 @@ import {
   formatTime,
   updateChoreData,
 } from '../Utils/AddEditChoreHelperFunctions';
-import { TimeInput } from '../Components/index';
 import { minsToHoursAndMins } from '../Utils/HelperFunctions';
 
 export default function EditChoreForm({ curRoom, editChore, curChore }) {
@@ -37,12 +36,37 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
         value={choreData.taskName}
       />
       <Text>Time required </Text>
-      <TimeInput
-        setDisableSubmit={setDisableSubmit}
-        id={1}
-        setTimeOutput={setTime}
-        defaultVal={minsToHoursAndMins(choreData.timeToComplete)}
-      />
+      <View style={styles.row}>
+        <TextInput
+          placeholder="00"
+          keyboardType="numeric"
+          onChangeText={formatTime(
+            'hours',
+            setChoreData,
+            setTime,
+            setDisableSubmit,
+            time
+          )}
+          maxLength={2}
+          value={minsToHoursAndMins(choreData.timeToComplete).hours}
+        />
+        <Text>:</Text>
+        <TextInput
+          placeholder="00"
+          keyboardType="numeric"
+          onChangeText={formatTime(
+            'mins',
+            setChoreData,
+            setTime,
+            setDisableSubmit,
+            time
+          )}
+          maxLength={2}
+          value={minsToHoursAndMins(choreData.timeToComplete).mins}
+        />
+        {time.hours > 23 && <Text>Please enter a valid time</Text>}
+        {time.mins > 59 && <Text>Please enter a valid time</Text>}
+      </View>
 
       <View style={styles.row}>
         <Text>Priority rating</Text>
@@ -135,7 +159,7 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity disabled={true}>
-          <Text>Create chore</Text>
+          <Text>Update chore</Text>
         </TouchableOpacity>
       )}
     </ScrollView>
