@@ -11,4 +11,6 @@ export default globalStyles = {
   amber: '#FFDFBA',
   yellow: '#FFFFBA',
   green: '#BAFFC9',
+  logo: '#000',
+  logoNavbar: '#000',
 };
