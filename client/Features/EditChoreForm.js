@@ -28,7 +28,11 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
       <TextInput
         placeholder="Chore Name..."
         maxLength={20}
-        onChangeText={updateChoreData('taskName', setChoreData)}
+        onChangeText={updateChoreData(
+          'taskName',
+          setChoreData,
+          setDisableSubmit
+        )}
         autoCapitalize="sentences"
         value={choreData.taskName}
       />
@@ -82,21 +86,33 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
-          onChangeText={updateChoreData('minFreq', setChoreData)}
+          onChangeText={updateChoreData(
+            'minFreq',
+            setChoreData,
+            setDisableSubmit
+          )}
           value={choreData.minFreq.toString()}
         />
         <Text>Should be done every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
-          onChangeText={updateChoreData('desiredFreq', setChoreData)}
+          onChangeText={updateChoreData(
+            'desiredFreq',
+            setChoreData,
+            setDisableSubmit
+          )}
           value={choreData.desiredFreq.toString()}
         />
         <Text>No less than every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
-          onChangeText={updateChoreData('maxFreq', setChoreData)}
+          onChangeText={updateChoreData(
+            'maxFreq',
+            setChoreData,
+            setDisableSubmit
+          )}
           value={choreData.maxFreq.toString()}
         />
       </View>
@@ -105,12 +121,23 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
         onChangeText={updateChoreData('notes', setChoreData)}
         value={choreData.notes}
       />
-      <TouchableOpacity
-        disabled={disableSubmit}
-        onPress={() => editChore(curChore, choreData)}
-      >
-        <Text>Edit chore</Text>
-      </TouchableOpacity>
+
+      {choreData.taskName &&
+      choreData.timeToComplete &&
+      choreData.minFreq &&
+      choreData.maxFreq &&
+      choreData.desiredFreq ? (
+        <TouchableOpacity
+          disabled={disableSubmit}
+          onPress={() => editChore(curChore, choreData)}
+        >
+          <Text>Create chore</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity disabled={true}>
+          <Text>Create chore</Text>
+        </TouchableOpacity>
+      )}
     </ScrollView>
   );
 }
