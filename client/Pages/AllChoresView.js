@@ -1,6 +1,7 @@
 import { NavBar, ChoreWrapper } from '../Components/index';
 import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/AllChoresViewStyles';
+import { globalElements } from '../Utils/GlobalStylingElements';
 import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { useIsFocused } from '@react-navigation/native';
@@ -52,62 +53,75 @@ export default function AllChoresView({ navigation }) {
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <ScrollView>
-          <Text>Overdue</Text>
-          {choreData.overdue.length !== 0 ? (
-            choreData.overdue.map((chore) => (
-              <ChoreWrapper
-                chore={chore}
-                key={chore._id}
-                choreCompleted={choreCompleted}
-                choreRemoveCompleted={choreRemoveCompleted}
-              />
-            ))
-          ) : (
-            <Text>No chores &apos;overdue&apos;</Text>
-          )}
-          <Text>Due</Text>
-          {choreData.due.length !== 0 ? (
-            choreData.due.map((chore) => (
-              <ChoreWrapper
-                chore={chore}
-                key={chore._id}
-                choreCompleted={choreCompleted}
-                choreRemoveCompleted={choreRemoveCompleted}
-              />
-            ))
-          ) : (
-            <Text>No chores &apos;due&apos;</Text>
-          )}
+        <>
+          <Text style={[globalElements.h1, { width: '90%' }]}>
+            Chore Status
+          </Text>
+          <ScrollView style={styles.scrollView}>
+            <Text style={globalElements.h2}>Overdue</Text>
+            {choreData.overdue.length !== 0 ? (
+              choreData.overdue.map((chore) => (
+                <ChoreWrapper
+                  chore={chore}
+                  key={chore._id}
+                  choreCompleted={choreCompleted}
+                  choreRemoveCompleted={choreRemoveCompleted}
+                />
+              ))
+            ) : (
+              <Text style={globalElements.pGreyed}>
+                No chores &apos;overdue&apos;
+              </Text>
+            )}
+            <Text style={globalElements.h2}>Due</Text>
+            {choreData.due.length !== 0 ? (
+              choreData.due.map((chore) => (
+                <ChoreWrapper
+                  chore={chore}
+                  key={chore._id}
+                  choreCompleted={choreCompleted}
+                  choreRemoveCompleted={choreRemoveCompleted}
+                />
+              ))
+            ) : (
+              <Text style={globalElements.pGreyed}>
+                No chores &apos;due&apos;
+              </Text>
+            )}
 
-          <Text>Nearly due</Text>
-          {choreData.nearlyDue.length !== 0 ? (
-            choreData.nearlyDue.map((chore) => (
-              <ChoreWrapper
-                chore={chore}
-                key={chore._id}
-                choreCompleted={choreCompleted}
-                choreRemoveCompleted={choreRemoveCompleted}
-              />
-            ))
-          ) : (
-            <Text>No chores &apos;nearly due&apos;</Text>
-          )}
+            <Text style={globalElements.h2}>Nearly due</Text>
+            {choreData.nearlyDue.length !== 0 ? (
+              choreData.nearlyDue.map((chore) => (
+                <ChoreWrapper
+                  chore={chore}
+                  key={chore._id}
+                  choreCompleted={choreCompleted}
+                  choreRemoveCompleted={choreRemoveCompleted}
+                />
+              ))
+            ) : (
+              <Text style={globalElements.pGreyed}>
+                No chores &apos;nearly due&apos;
+              </Text>
+            )}
 
-          <Text>Not due</Text>
-          {choreData.notDue.length !== 0 ? (
-            choreData.notDue.map((chore) => (
-              <ChoreWrapper
-                chore={chore}
-                key={chore._id}
-                choreCompleted={choreCompleted}
-                choreRemoveCompleted={choreRemoveCompleted}
-              />
-            ))
-          ) : (
-            <Text>No chores &apos;not due&apos;</Text>
-          )}
-        </ScrollView>
+            <Text style={globalElements.h2}>Not due</Text>
+            {choreData.notDue.length !== 0 ? (
+              choreData.notDue.map((chore) => (
+                <ChoreWrapper
+                  chore={chore}
+                  key={chore._id}
+                  choreCompleted={choreCompleted}
+                  choreRemoveCompleted={choreRemoveCompleted}
+                />
+              ))
+            ) : (
+              <Text style={globalElements.pGreyed}>
+                No chores &apos;not due&apos;
+              </Text>
+            )}
+          </ScrollView>
+        </>
       )}
       <NavBar navigation={navigation} />
     </View>

@@ -16,4 +16,6 @@ export default globalStyles = {
   green: '#BAFFC9',
   logo: '#fff',
   logoNavbar: '#000',
+  paddingTopScreen: 25,
+  paddingNavBar: 46,
 };
