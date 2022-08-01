@@ -5,8 +5,8 @@ import GlobalStyling from '../Utils/GlobalStylingVariables';
 const SvgComponent = (props) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
-    width="25"
-    height="20"
+    width="31"
+    height="25"
     viewBox="0 0 28.67 23.697"
   >
     <Path

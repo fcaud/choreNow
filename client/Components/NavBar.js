@@ -25,9 +25,7 @@ export default function NavBar({ navigation }) {
         style={styles.touchable}
         onPress={() => navigation.navigate('ChoreNowView')}
       >
-        {/* <Image source={require('../assets/Logo.svg')}></Image> */}
         <SvgComponent />
-        {/* <Octicons name="stopwatch" style={styles.icon} /> */}
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.touchable}

@@ -11,6 +11,8 @@ import {
   allocateChores,
 } from '../Utils/ScheduleViewAlgorithm';
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
+import { useFonts, Nunito_400Regular } from '@expo-google-fonts/nunito';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function ScheduleView({ navigation }) {
   const [weekAhead, setWeekAhead] = useState(populateWeekAhead());
@@ -70,35 +72,53 @@ export default function ScheduleView({ navigation }) {
     await fetchData();
   }
 
+  let [fontsLoaded] = useFonts({
+    Nunito_400Regular,
+  });
+
   return (
     <View style={styles.container}>
-      <Text>ScheduleView</Text>
-      {isLoading ? (
-        <ActivityIndicator />
+      {fontsLoaded ? (
+        <>
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <>
+              <Text style={[globalElements.h1, { width: '90%' }]}>
+                Your Chore Schedule:
+              </Text>
+              <ScrollView style={styles.scrollView}>
+                {Object.values(weekAhead).map((day) => {
+                  return (
+                    <View key={day.date}>
+                      <Text style={globalElements.h2}>
+                        {moment(day.date).format('ddd Do MMM')}
+                      </Text>
+                      {day.chores.length === 0 ? (
+                        <Text style={globalElements.pGreyed}>
+                          No chores on {moment(day.date).format('dddd')}
+                        </Text>
+                      ) : (
+                        day.chores.map((chore, i) => (
+                          <ChoreWrapper
+                            chore={chore}
+                            key={i}
+                            choreCompleted={choreCompleted}
+                            choreRemoveCompleted={choreRemoveCompleted}
+                          />
+                        ))
+                      )}
+                    </View>
+                  );
+                })}
+              </ScrollView>
+            </>
+          )}
+          <NavBar navigation={navigation} />
+        </>
       ) : (
-        <ScrollView>
-          {Object.values(weekAhead).map((day) => {
-            return (
-              <View key={day.date}>
-                <Text>{moment(day.date).format('ddd Do MMM')}</Text>
-                {day.chores.length === 0 ? (
-                  <Text>No chores on {moment(day.date).format('ddd')}</Text>
-                ) : (
-                  day.chores.map((chore, i) => (
-                    <ChoreWrapper
-                      chore={chore}
-                      key={i}
-                      choreCompleted={choreCompleted}
-                      choreRemoveCompleted={choreRemoveCompleted}
-                    />
-                  ))
-                )}
-              </View>
-            );
-          })}
-        </ScrollView>
+        <ActivityIndicator />
       )}
-      <NavBar navigation={navigation} />
     </View>
   );
 }

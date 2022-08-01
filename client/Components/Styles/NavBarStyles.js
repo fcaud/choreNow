@@ -9,16 +9,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     backgroundColor: globalStyles.backgroundWhite,
-    // shadowColor: globalStyles.border,
-    // shadowOffset: { width: 0, height: -5 },
-    // shadowRadius: 5,
-    // shadowOpacity: 0.5,
+    shadowColor: globalStyles.border,
+    shadowOffset: { width: 0, height: -5 },
+    shadowRadius: 5,
+    shadowOpacity: 0.5,
   },
   touchable: {
     margin: 10,
   },
   icon: {
-    fontSize: 20,
+    fontSize: 25,
   },
 });
 

@@ -6,7 +6,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 25,
   },
+  scrollView: { width: '75%' },
 });
 
 export { styles };

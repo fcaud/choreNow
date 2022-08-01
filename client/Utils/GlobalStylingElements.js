@@ -10,12 +10,25 @@ const globalElements = StyleSheet.create({
     paddingVertical: 3,
     margin: 5,
   },
-  h1: {},
-  h2: {},
-  buttonP: {
+  h1: {
+    fontSize: 28,
+    fontFamily: 'Nunito_400Regular',
+    color: GlobalStyling.textOrange,
+  },
+  h2: {
+    fontSize: 20,
+    fontFamily: 'Nunito_400Regular',
+    color: GlobalStyling.textDark,
+  },
+  pButton: {
     fontSize: 18,
     fontFamily: 'Nunito_400Regular',
     color: GlobalStyling.textOrange,
+  },
+  pGreyed: {
+    fontSize: 14,
+    fontFamily: 'Nunito_400Regular',
+    color: GlobalStyling.textGrey,
   },
 });
 
