@@ -32,7 +32,7 @@ export default function EditChoreForm({ curRoom, editChore }) {
   return (
     <ScrollView>
       <Text>Edit Chore</Text>
-      <Text>{curRoom.room}</Text>
+      <Text>{curRoom}</Text>
       <TextInput
         placeholder="Chore Name..."
         maxLength={20}

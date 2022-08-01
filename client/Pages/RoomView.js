@@ -34,8 +34,10 @@ export default function RoomView({ navigation }) {
     setAddChoreModal(!addChoreModal);
     setCurRoom(room);
   }
-  function editChoresModal() {
+  function editChoresModal(room) {
+    console.log(room);
     setEditChoreModal(!editChoreModal);
+    setCurRoom(room);
   }
 
   async function getRoomData() {
