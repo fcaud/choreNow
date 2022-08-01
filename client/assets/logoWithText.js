@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, { Path, G } from 'react-native-svg';
-import GlobalStyling from '../Utils/GlobalStyling';
+import GlobalStyling from '../Utils/GlobalStylingVariables';
 
 const SvgComponent = (props) => (
   <Svg
