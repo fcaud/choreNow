@@ -3,6 +3,7 @@ import { styles } from './Styles/RoomItemStyles';
 import Feather from 'react-native-vector-icons/Feather';
 import ChoreItem from './ChoreItem';
 import { useEffect } from 'react';
+import React from 'react';
 
 export default function RoomItem({
   choreData,

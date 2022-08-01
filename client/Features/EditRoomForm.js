@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { styles } from './Styles/EditRoomFormStyles';
 import Feather from 'react-native-vector-icons/Feather';
 import { useState } from 'react';
+import React from 'react';
 
 export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
   const [newRoom, setNewRoom] = useState('');

@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './Styles/ChoreNowInputFormStyles';
 import { TimeInput } from '../Components/index';
 import { useState } from 'react';
+import React from 'react';
 
 export default function ChoreNowInputForm({ selectChores, setTimeOutput }) {
   const [disableSubmit, setDisableSubmit] = useState(true);

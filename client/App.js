@@ -8,6 +8,7 @@ import {
   Splash,
   UserSettings,
 } from './Pages/index';
+import React from 'react';
 
 const Stack = createNativeStackNavigator();
 

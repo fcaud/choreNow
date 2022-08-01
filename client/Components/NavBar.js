@@ -4,6 +4,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { styles } from './Styles/NavBarStyles';
 import SvgComponent from '../assets/logo';
+import React from 'react';
 
 export default function NavBar({ navigation }) {
   return (

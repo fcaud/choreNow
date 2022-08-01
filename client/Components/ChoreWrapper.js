@@ -4,6 +4,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ChoreDetails from './ChoreDetails';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
+import React from 'react';
 
 export default function ChoreWrapper({
   chore,

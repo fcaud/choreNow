@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { styles } from './Styles/AddChoreFormStyles';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
+import React from 'react';
 
 export default function AddChoreForm({ curRoom, addChore }) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });

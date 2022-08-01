@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import { TimeInput } from '../Components/index';
 import { styles } from './Styles/UserTimePrefFormStyles';
 import { minsToHoursAndMins } from '../Utils/HelperFunctions';
+import React from 'react';
 
 export default function UserTimePreferenceForm({
   setDisableSubmit,

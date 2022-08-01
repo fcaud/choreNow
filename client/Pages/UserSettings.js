@@ -2,7 +2,7 @@ import { NavBar } from '../Components/index';
 import { UserTimePreferenceForm } from '../Features';
 import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { styles } from './Styles/UserSettingsStyles';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { useIsFocused } from '@react-navigation/native';
 

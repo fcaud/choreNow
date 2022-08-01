@@ -5,6 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
+import React from 'react';
 
 export default function RoomItem({
   chore,

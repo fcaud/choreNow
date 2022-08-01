@@ -1,6 +1,7 @@
 import { View, Text, TextInput } from 'react-native';
 import { styles } from './Styles/TimeInputStyles';
 import { useState } from 'react';
+import React from 'react';
 
 export default function TimeInput({
   setDisableSubmit,

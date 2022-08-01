@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
+import React from 'react';
 
 export default function RoomView({ navigation }) {
   const [roomData, setRoomData] = useState([]);

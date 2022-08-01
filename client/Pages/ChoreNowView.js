@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 import { useIsFocused } from '@react-navigation/native';
+import React from 'react';
 
 export default function ChoreNowView({ navigation }) {
   const isFocused = useIsFocused();
