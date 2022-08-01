@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   animation: {
     transform: [{ scaleY: 1.3 }, { translateY: 15 }],
   },
-  loginButton: { marginVertical: 25, fontSize: 35 },
+  loginButton: { marginVertical: 25 },
 });
 
 export { styles };

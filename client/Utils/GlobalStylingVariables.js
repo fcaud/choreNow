@@ -7,10 +7,12 @@ export default globalStyles = {
   border: '#d6d6d6',
   buttonWhite: '#fff',
   textLight: '#fff',
+  textOrange: '#FF7B0F',
+  textDark: '#000',
   red: '#FFB3BA',
   amber: '#FFDFBA',
   yellow: '#FFFFBA',
   green: '#BAFFC9',
-  logo: '#000',
+  logo: '#fff',
   logoNavbar: '#000',
 };
