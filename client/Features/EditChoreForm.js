@@ -12,23 +12,15 @@ import {
   formatTime,
   updateChoreData,
 } from '../Utils/AddEditChoreHelperFunctions';
+import { TimeInput } from '../Components/index';
+import { minsToHoursAndMins } from '../Utils/HelperFunctions';
 
 export default function EditChoreForm({ curRoom, editChore, curChore }) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [showPriorityPicker, setShowPriorityPicker] = useState(false);
   const [showFreqUnitPicker, setShowFreqUnitPicker] = useState(false);
-  const [choreData, setChoreData] = useState({
-    taskName: '',
-    room: curRoom.room,
-    priority: 'Medium',
-    timeToComplete: 0,
-    dateLastCompleted: 0,
-    freqUnit: 'days',
-    minFreq: 0,
-    maxFreq: 0,
-    desiredFreq: 0,
-  });
+  const [choreData, setChoreData] = useState(curChore);
   return (
     <ScrollView>
       <Text>Edit Chore</Text>
@@ -38,37 +30,15 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
         maxLength={20}
         onChangeText={updateChoreData('taskName', setChoreData)}
         autoCapitalize="sentences"
+        value={choreData.taskName}
       />
       <Text>Time required </Text>
-      <View style={styles.row}>
-        <TextInput
-          placeholder="00"
-          keyboardType="numeric"
-          onChangeText={formatTime(
-            'hours',
-            setChoreData,
-            setTime,
-            setDisableSubmit,
-            time
-          )}
-          maxLength={2}
-        />
-        <Text>:</Text>
-        <TextInput
-          placeholder="00"
-          keyboardType="numeric"
-          onChangeText={formatTime(
-            'mins',
-            setChoreData,
-            setTime,
-            setDisableSubmit,
-            time
-          )}
-          maxLength={2}
-        />
-        {time.hours > 23 && <Text>Please enter a valid time</Text>}
-        {time.mins > 59 && <Text>Please enter a valid time</Text>}
-      </View>
+      <TimeInput
+        setDisableSubmit={setDisableSubmit}
+        id={1}
+        setTimeOutput={setTime}
+        defaultVal={minsToHoursAndMins(choreData.timeToComplete)}
+      />
 
       <View style={styles.row}>
         <Text>Priority rating</Text>
@@ -113,23 +83,27 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
           placeholder="Frequency..."
           keyboardType="numeric"
           onChangeText={updateChoreData('minFreq', setChoreData)}
+          value={choreData.minFreq.toString()}
         />
         <Text>Should be done every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
           onChangeText={updateChoreData('desiredFreq', setChoreData)}
+          value={choreData.desiredFreq.toString()}
         />
         <Text>No less than every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
           onChangeText={updateChoreData('maxFreq', setChoreData)}
+          value={choreData.maxFreq.toString()}
         />
       </View>
       <TextInput
         placeholder="Notes..."
         onChangeText={updateChoreData('notes', setChoreData)}
+        value={choreData.notes}
       />
       <TouchableOpacity
         disabled={disableSubmit}
