@@ -90,8 +90,14 @@ export default function RoomView({ navigation }) {
     getChoreData();
     setEditChoreModal(false);
   }
+  async function deleteChore(_id) {
+    await ApiClientService.deleteChore({ _id });
+    getChoreData();
+    setEditChoreModal(false);
+  }
   async function deleteRoom(room) {
     await ApiClientService.deleteRoom({ _id: room._id });
+    //TODO update so delete removes underlying chores
     // const choresForRoom = choreData.filter((chore) => chore.room === room.room);
     // await choresForRoom.forEach(
     //   async (chore) => await ApiClientService.deleteChore(chore._id)
@@ -159,6 +165,7 @@ export default function RoomView({ navigation }) {
             curRoom={curRoom}
             editChore={editChore}
             curChore={curChore}
+            deleteChore={deleteChore}
           />
           <TouchableOpacity onPress={editChoresModal}>
             <Ionicons name="close" />

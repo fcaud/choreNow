@@ -14,7 +14,12 @@ import {
 } from '../Utils/AddEditChoreHelperFunctions';
 import { minsToHoursAndMins } from '../Utils/HelperFunctions';
 
-export default function EditChoreForm({ curRoom, editChore, curChore }) {
+export default function EditChoreForm({
+  curRoom,
+  editChore,
+  curChore,
+  deleteChore,
+}) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [showPriorityPicker, setShowPriorityPicker] = useState(false);
@@ -145,23 +150,27 @@ export default function EditChoreForm({ curRoom, editChore, curChore }) {
         onChangeText={updateChoreData('notes', setChoreData)}
         value={choreData.notes}
       />
-
-      {choreData.taskName &&
-      choreData.timeToComplete &&
-      choreData.minFreq &&
-      choreData.maxFreq &&
-      choreData.desiredFreq ? (
-        <TouchableOpacity
-          disabled={disableSubmit}
-          onPress={() => editChore(curChore, choreData)}
-        >
-          <Text>Create chore</Text>
+      <View style={styles.row}>
+        {choreData.taskName &&
+        choreData.timeToComplete &&
+        choreData.minFreq &&
+        choreData.maxFreq &&
+        choreData.desiredFreq ? (
+          <TouchableOpacity
+            disabled={disableSubmit}
+            onPress={() => editChore(curChore, choreData)}
+          >
+            <Text>Update chore</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity disabled={true}>
+            <Text>Update chore</Text>
+          </TouchableOpacity>
+        )}
+        <TouchableOpacity onPress={() => deleteChore(curChore._id)}>
+          <Text>Delete chore</Text>
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity disabled={true}>
-          <Text>Update chore</Text>
-        </TouchableOpacity>
-      )}
+      </View>
     </ScrollView>
   );
 }
