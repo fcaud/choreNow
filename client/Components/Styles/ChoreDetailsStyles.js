@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import globalStyles from '../../Utils/GlobalStylingVariables';
 
 const styles = StyleSheet.create({
-  container: { marginHorizontal: '3%', marginVertical: '3%' },
+  container: { marginHorizontal: '3%', paddingVertical: 7 },
   innerContainer: {
     flexDirection: 'row',
     alignContent: 'center',

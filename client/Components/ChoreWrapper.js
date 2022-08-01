@@ -61,9 +61,11 @@ export default function ChoreWrapper({
           )}
         </View>
       </View>
-      <View style={styles.detailsWrapper}>
-        {showChoreDetails && <ChoreDetails chore={chore} />}
-      </View>
+      {showChoreDetails && (
+        <View style={styles.detailsWrapper}>
+          <ChoreDetails chore={chore} />
+        </View>
+      )}
     </View>
   );
 }

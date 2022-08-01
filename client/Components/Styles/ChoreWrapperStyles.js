@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 5,
   },
   header: {
     flexDirection: 'row',
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     justifyContent: 'space-between',
     width: '100%',
+    zIndex: 4,
   },
   subText: { fontSize: 14, fontStyle: 'italic' },
   completed: { textDecorationLine: 'line-through' },
@@ -22,6 +24,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: globalStyles.border,
     borderRadius: 8,
+    paddingTop: 27,
+    width: '100%',
+    transform: [{ translateY: -27 }],
+    zIndex: 1,
   },
   buttonWrapper: { flexDirection: 'row', paddingVertical: 7 },
 });
