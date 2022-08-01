@@ -1,7 +1,7 @@
+import React from 'react';
 import { View, Text } from 'react-native';
 import { styles } from './Styles/ChoreDetailsStyles';
 import moment from 'moment';
-import React from 'react';
 
 export default function ChoreDetails({ chore }) {
   const minsDur = chore.timeToComplete % 60;

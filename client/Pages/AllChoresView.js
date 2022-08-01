@@ -64,7 +64,7 @@ export default function AllChoresView({ navigation }) {
               />
             ))
           ) : (
-            <Text>No tasks</Text>
+            <Text>No chores &apos;overdue&apos;</Text>
           )}
           <Text>Due</Text>
           {choreData.due.length !== 0 ? (
@@ -77,7 +77,7 @@ export default function AllChoresView({ navigation }) {
               />
             ))
           ) : (
-            <Text>No tasks</Text>
+            <Text>No chores &apos;due&apos;</Text>
           )}
 
           <Text>Nearly due</Text>
@@ -91,7 +91,7 @@ export default function AllChoresView({ navigation }) {
               />
             ))
           ) : (
-            <Text>No tasks</Text>
+            <Text>No chores &apos;nearly due&apos;</Text>
           )}
 
           <Text>Not due</Text>
@@ -105,7 +105,7 @@ export default function AllChoresView({ navigation }) {
               />
             ))
           ) : (
-            <Text>No tasks</Text>
+            <Text>No chores &apos;not due&apos;</Text>
           )}
         </ScrollView>
       )}

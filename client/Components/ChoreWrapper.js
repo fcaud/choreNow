@@ -4,13 +4,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import ChoreDetails from './ChoreDetails';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function ChoreWrapper({
   chore,
   choreCompleted,
   choreRemoveCompleted,
 }) {
+  const [showChoreDetails, setShowChoreDetails] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -24,7 +25,10 @@ export default function ChoreWrapper({
           )}
           <Text style={[styles.text, styles.subText]}>{chore.room}</Text>
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={showChoreDetails ? styles.buttonGreyed : styles.button}
+          onPress={() => setShowChoreDetails(!showChoreDetails)}
+        >
           <FontAwesome name="info" style={styles.icon} />
         </TouchableOpacity>
         {checkIfCompletedToday(chore) ? (
@@ -45,7 +49,7 @@ export default function ChoreWrapper({
           </TouchableOpacity>
         )}
       </View>
-      <ChoreDetails chore={chore} />
+      {showChoreDetails && <ChoreDetails chore={chore} />}
     </View>
   );
 }

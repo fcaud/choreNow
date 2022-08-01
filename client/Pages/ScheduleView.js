@@ -81,14 +81,18 @@ export default function ScheduleView({ navigation }) {
             return (
               <View key={day.date}>
                 <Text>{moment(day.date).format('ddd Do MMM')}</Text>
-                {day.chores.map((chore, i) => (
-                  <ChoreWrapper
-                    chore={chore}
-                    key={i}
-                    choreCompleted={choreCompleted}
-                    choreRemoveCompleted={choreRemoveCompleted}
-                  />
-                ))}
+                {day.chores.length === 0 ? (
+                  <Text>No chores on {moment(day.date).format('ddd')}</Text>
+                ) : (
+                  day.chores.map((chore, i) => (
+                    <ChoreWrapper
+                      chore={chore}
+                      key={i}
+                      choreCompleted={choreCompleted}
+                      choreRemoveCompleted={choreRemoveCompleted}
+                    />
+                  ))
+                )}
               </View>
             );
           })}

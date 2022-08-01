@@ -1,9 +1,8 @@
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './Styles/RoomItemStyles';
 import Feather from 'react-native-vector-icons/Feather';
 import ChoreItem from './ChoreItem';
-import { useEffect } from 'react';
-import React from 'react';
 
 export default function RoomItem({
   choreData,
@@ -14,6 +13,7 @@ export default function RoomItem({
   choreRemoveCompleted,
 }) {
   const choresForRoom = choreData.filter((chore) => chore.room === room.room);
+  const [showChoreList, setShowChoreList] = useState(false);
 
   return (
     <View>
@@ -22,22 +22,24 @@ export default function RoomItem({
         <TouchableOpacity onPress={() => addChoresModal(room)}>
           <Feather name="plus" style={styles.icon} />
         </TouchableOpacity>
-        {/* <TouchableOpacity>
-          <Feather name="chevron-up" style={styles.icon} />
-        </TouchableOpacity> */}
-        <TouchableOpacity>
-          <Feather name="chevron-down" style={styles.icon} />
+
+        <TouchableOpacity onPress={() => setShowChoreList(!showChoreList)}>
+          <Feather
+            name={showChoreList ? 'chevron-up' : 'chevron-down'}
+            style={styles.icon}
+          />
         </TouchableOpacity>
       </View>
-      {choresForRoom.map((chore) => (
-        <ChoreItem
-          chore={chore}
-          key={chore._id}
-          editChoresModal={editChoresModal}
-          choreCompleted={choreCompleted}
-          choreRemoveCompleted={choreRemoveCompleted}
-        />
-      ))}
+      {showChoreList &&
+        choresForRoom.map((chore) => (
+          <ChoreItem
+            chore={chore}
+            key={chore._id}
+            editChoresModal={editChoresModal}
+            choreCompleted={choreCompleted}
+            choreRemoveCompleted={choreRemoveCompleted}
+          />
+        ))}
     </View>
   );
 }

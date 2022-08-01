@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './Styles/ChoreItemStyles';
 import ChoreDetails from './ChoreDetails';
@@ -5,7 +6,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Octicons from 'react-native-vector-icons/Octicons';
 import { checkIfCompletedToday } from '../Utils/HelperFunctions';
-import React from 'react';
 
 export default function RoomItem({
   chore,
@@ -13,6 +13,7 @@ export default function RoomItem({
   choreCompleted,
   choreRemoveCompleted,
 }) {
+  const [showChoreDetails, setShowChoreDetails] = useState(false);
   return (
     <View>
       <View style={styles.choreHeader}>
@@ -45,13 +46,20 @@ export default function RoomItem({
             onPress={() => editChoresModal(chore)}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Feather name="chevron-down" style={styles.icon} />
+        <TouchableOpacity
+          onPress={() => setShowChoreDetails(!showChoreDetails)}
+        >
+          <Feather
+            name={showChoreDetails ? 'chevron-up' : 'chevron-down'}
+            style={styles.icon}
+          />
         </TouchableOpacity>
       </View>
-      <View style={styles.choreDetailsWrapper}>
-        <ChoreDetails chore={chore} />
-      </View>
+      {showChoreDetails && (
+        <View style={styles.choreDetailsWrapper}>
+          <ChoreDetails chore={chore} />
+        </View>
+      )}
     </View>
   );
 }
