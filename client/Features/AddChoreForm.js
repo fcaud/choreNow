@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { styles } from './Styles/AddChoreFormStyles';
 import { useState } from 'react';
 import { Picker } from '@react-native-picker/picker';
@@ -7,6 +13,8 @@ import React from 'react';
 export default function AddChoreForm({ curRoom, addChore }) {
   const [time, setTime] = useState({ hours: '00', mins: '00' });
   const [disableSubmit, setDisableSubmit] = useState(false);
+  const [showPriorityPicker, setShowPriorityPicker] = useState(false);
+  const [showFreqUnitPicker, setShowFreqUnitPicker] = useState(false);
   const [choreData, setChoreData] = useState({
     taskName: '',
     room: curRoom.room,
@@ -58,7 +66,7 @@ export default function AddChoreForm({ curRoom, addChore }) {
   }
 
   return (
-    <View>
+    <ScrollView>
       <Text>Add Task</Text>
       <Text>{curRoom.room}</Text>
       <TextInput
@@ -86,8 +94,15 @@ export default function AddChoreForm({ curRoom, addChore }) {
         {time.mins > 59 && <Text>Please enter a valid time</Text>}
       </View>
 
-      <Text>Priority rating</Text>
-      <View>
+      <View style={styles.row}>
+        <Text>Priority rating</Text>
+        <TouchableOpacity
+          onPress={() => setShowPriorityPicker(!showPriorityPicker)}
+        >
+          <Text>{choreData.priority}</Text>
+        </TouchableOpacity>
+      </View>
+      {showPriorityPicker && (
         <Picker
           selectedValue={choreData.priority}
           onValueChange={updateChoreData('priority')}
@@ -96,18 +111,27 @@ export default function AddChoreForm({ curRoom, addChore }) {
           <Picker.Item label="Medium" value="Medium" />
           <Picker.Item label="Low" value="Low" />
         </Picker>
-      </View>
+      )}
       <View>
         <Text>Frequency</Text>
-        <Text>Frequency measure</Text>
-        <Picker
-          selectedValue={choreData.freqUnit}
-          onValueChange={updateChoreData('freqUnit')}
-        >
-          <Picker.Item label="days" value="days" />
-          <Picker.Item label="weeks" value="weeks" />
-          <Picker.Item label="months" value="months" />
-        </Picker>
+        <View style={styles.row}>
+          <Text>Frequency measure</Text>
+          <TouchableOpacity
+            onPress={() => setShowFreqUnitPicker(!showFreqUnitPicker)}
+          >
+            <Text>{choreData.freqUnit}</Text>
+          </TouchableOpacity>
+        </View>
+        {showFreqUnitPicker && (
+          <Picker
+            selectedValue={choreData.freqUnit}
+            onValueChange={updateChoreData('freqUnit')}
+          >
+            <Picker.Item label="days" value="days" />
+            <Picker.Item label="weeks" value="weeks" />
+            <Picker.Item label="months" value="months" />
+          </Picker>
+        )}
         <Text>No more than every:</Text>
         <TextInput
           placeholder="Frequency..."
@@ -137,6 +161,6 @@ export default function AddChoreForm({ curRoom, addChore }) {
       >
         <Text>Create task</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }

@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     paddingVertical: '10%',
   },
   modal: { flexDirection: 'row', justifyContent: 'space-between', padding: 20 },
+  row: { flexDirection: 'row' },
 });
 
 export { styles };
