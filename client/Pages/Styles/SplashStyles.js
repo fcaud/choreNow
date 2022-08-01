@@ -10,8 +10,9 @@ const styles = StyleSheet.create({
   },
   animation: {
     transform: [{ scaleY: 1.3 }, { translateY: 15 }],
+    zIndex: 1,
   },
-  loginButton: { marginVertical: 25 },
+  loginButton: { marginVertical: 25, zIndex: 3 },
 });
 
 export { styles };
