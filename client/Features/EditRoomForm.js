@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import { styles } from './Styles/EditRoomFormStyles';
 import Feather from 'react-native-vector-icons/Feather';
 import { useState } from 'react';
@@ -19,7 +25,7 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={globalElements.h1}>Edit Rooms:</Text>
       {roomData.map((room) => {
         return (
@@ -95,6 +101,6 @@ export default function EditRoomForm({ roomData, addRoom, deleteRoom }) {
           </TouchableOpacity>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 }

@@ -55,14 +55,16 @@ export default function TimeInput({
           onChangeText={formatTime('hours')}
           maxLength={2}
           value={time.hours}
+          style={globalElements.inputText}
         />
-        <Text>:</Text>
+        <Text style={globalElements.inputText}>:</Text>
         <TextInput
           placeholder="00"
           keyboardType="numeric"
           onChangeText={formatTime('mins')}
           maxLength={2}
           value={time.mins}
+          style={globalElements.inputText}
         />
       </View>
       {time.hours > 23 && (

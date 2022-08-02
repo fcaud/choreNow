@@ -6,6 +6,7 @@ import {
   Modal,
   ScrollView,
   ActivityIndicator,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { NavBar, RoomItem } from '../Components/index';
@@ -149,56 +150,81 @@ export default function RoomView({ navigation }) {
         </>
       )}
 
-      <Modal visible={roomModal} style={{ backgroundColor: 'red' }}>
-        <View
-          style={{
-            justifyContent: 'center',
-            height: '100%',
-          }}
+      <Modal visible={roomModal}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
         >
-          <View style={[styles.modal, globalElements.borderedView]}>
-            <EditRoomForm
-              roomData={roomData}
-              addRoom={addRoom}
-              deleteRoom={deleteRoom}
-            />
-            <TouchableOpacity
-              onPress={editRoomsModal}
-              style={[globalElements.roundButton]}
-              accessibilityLabel="Close modal"
-            >
-              <Ionicons name="close" style={globalElements.icon} />
-            </TouchableOpacity>
+          <View style={styles.modalWrapper}>
+            <View style={[styles.modal, globalElements.borderedView]}>
+              <EditRoomForm
+                roomData={roomData}
+                addRoom={addRoom}
+                deleteRoom={deleteRoom}
+              />
+              <TouchableOpacity
+                onPress={editRoomsModal}
+                style={[globalElements.roundButton, { marginLeft: -25 }]}
+                accessibilityLabel="Close modal"
+              >
+                <Ionicons name="close" style={globalElements.icon} />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </Modal>
+
       <Modal visible={addChoreModal}>
-        <View style={styles.modal}>
-          <AddChoreForm curRoom={curRoom} addChore={addChore} />
-          <TouchableOpacity
-            onPress={addChoresModal}
-            accessibilityLabel="Close modal"
-          >
-            <Ionicons name="close" />
-          </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
+        >
+          <View style={styles.modalWrapper}>
+            <View style={[styles.modal, globalElements.borderedView]}>
+              <AddChoreForm curRoom={curRoom} addChore={addChore} />
+              <TouchableOpacity
+                onPress={addChoresModal}
+                accessibilityLabel="Close modal"
+                style={[globalElements.roundButton, { marginLeft: -25 }]}
+              >
+                <Ionicons
+                  name="close"
+                  style={[globalElements.icon, styles.icon]}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
       </Modal>
+
       <Modal visible={editChoreModal}>
-        <View style={styles.modal}>
-          <EditChoreForm
-            curRoom={curRoom}
-            editChore={editChore}
-            curChore={curChore}
-            deleteChore={deleteChore}
-          />
-          <TouchableOpacity
-            onPress={editChoresModal}
-            accessibilityLabel="Close modal"
-          >
-            <Ionicons name="close" />
-          </TouchableOpacity>
-        </View>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 20 : 0}
+        >
+          <View style={styles.modalWrapper}>
+            <View style={[styles.modal, globalElements.borderedView]}>
+              <EditChoreForm
+                curRoom={curRoom}
+                editChore={editChore}
+                curChore={curChore}
+                deleteChore={deleteChore}
+              />
+              <TouchableOpacity
+                onPress={editChoresModal}
+                accessibilityLabel="Close modal"
+                style={[globalElements.roundButton, { marginLeft: -25 }]}
+              >
+                <Ionicons
+                  name="close"
+                  style={[globalElements.icon, styles.icon]}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
       </Modal>
+
       <NavBar navigation={navigation} />
     </View>
   );

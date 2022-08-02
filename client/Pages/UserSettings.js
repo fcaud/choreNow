@@ -1,6 +1,12 @@
 import { NavBar } from '../Components/index';
 import { UserTimePreferenceForm } from '../Features';
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { styles } from './Styles/UserSettingsStyles';
 import React, { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
@@ -27,28 +33,33 @@ export default function UserSettings({ navigation }) {
     if (isFocused) getSettings();
     else setIsLoading(true);
   }, [isFocused]);
-
+  //consider how to close the keyboard
   return (
     <View style={styles.container}>
-      <Text>UserSettings </Text>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <UserTimePreferenceForm
-          setDisableSubmit={setDisableSubmit}
-          setTimeOutput={setTimeOutput}
-          settingsData={settingsData}
-        />
-      )}
-      <TouchableOpacity
-        onPress={() => saveSettings(timeOutput)}
-        disabled={disableSubmit}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}
       >
-        <Text>Save settings</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Splash')}>
-        <Text>Log out</Text>
-      </TouchableOpacity>
+        <Text>UserSettings </Text>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <UserTimePreferenceForm
+            setDisableSubmit={setDisableSubmit}
+            setTimeOutput={setTimeOutput}
+            settingsData={settingsData}
+          />
+        )}
+        <TouchableOpacity
+          onPress={() => saveSettings(timeOutput)}
+          disabled={disableSubmit}
+        >
+          <Text>Save settings</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Splash')}>
+          <Text>Log out</Text>
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
       <NavBar navigation={navigation} />
     </View>
   );

@@ -13,6 +13,8 @@ import {
   updateChoreData,
 } from '../Utils/AddEditChoreHelperFunctions';
 import { minsToHoursAndMins } from '../Utils/HelperFunctions';
+import { globalElements } from '../Utils/GlobalStylingElements';
+import Feather from 'react-native-vector-icons/Feather';
 
 export default function EditChoreForm({
   curRoom,
@@ -27,8 +29,8 @@ export default function EditChoreForm({
   const [choreData, setChoreData] = useState(curChore);
   return (
     <ScrollView>
-      <Text>Edit Chore</Text>
-      <Text>{curRoom}</Text>
+      <Text style={globalElements.h1}>Edit Chore</Text>
+      <Text style={globalElements.h2}>{curRoom}</Text>
       <TextInput
         placeholder="Chore Name..."
         maxLength={20}
@@ -39,60 +41,79 @@ export default function EditChoreForm({
         )}
         autoCapitalize="sentences"
         value={choreData.taskName}
+        style={globalElements.input}
       />
-      <Text>Time required </Text>
-      <View style={styles.row}>
-        <TextInput
-          placeholder="00"
-          keyboardType="numeric"
-          onChangeText={formatTime(
-            'hours',
-            setChoreData,
-            setTime,
-            setDisableSubmit,
-            time
-          )}
-          maxLength={2}
-          value={minsToHoursAndMins(choreData.timeToComplete).hours}
-        />
-        <Text>:</Text>
-        <TextInput
-          placeholder="00"
-          keyboardType="numeric"
-          onChangeText={formatTime(
-            'mins',
-            setChoreData,
-            setTime,
-            setDisableSubmit,
-            time
-          )}
-          maxLength={2}
-          value={minsToHoursAndMins(choreData.timeToComplete).mins}
-        />
-        {time.hours > 23 && <Text>Please enter a valid time</Text>}
-        {time.mins > 59 && <Text>Please enter a valid time</Text>}
+      <View style={globalElements.row}>
+        <Text style={globalElements.p}>Time required </Text>
+        <View
+          style={[globalElements.timeInputWrapper, { alignSelf: 'flex-start' }]}
+        >
+          <TextInput
+            placeholder="00"
+            keyboardType="numeric"
+            onChangeText={formatTime(
+              'hours',
+              setChoreData,
+              setTime,
+              setDisableSubmit,
+              time
+            )}
+            maxLength={2}
+            value={minsToHoursAndMins(choreData.timeToComplete).hours}
+            style={globalElements.inputText}
+          />
+          <Text style={globalElements.inputText}>:</Text>
+          <TextInput
+            placeholder="00"
+            keyboardType="numeric"
+            onChangeText={formatTime(
+              'mins',
+              setChoreData,
+              setTime,
+              setDisableSubmit,
+              time
+            )}
+            maxLength={2}
+            value={minsToHoursAndMins(choreData.timeToComplete).mins}
+            style={globalElements.inputText}
+          />
+        </View>
+      </View>
+      <View>
+        {time.hours > 23 && (
+          <Text style={globalElements.pGreyed}>Hours invalid</Text>
+        )}
+        {time.mins > 59 && (
+          <Text style={globalElements.pGreyed}>Mins invalid</Text>
+        )}
       </View>
 
-      <View style={styles.row}>
-        <Text>Priority rating</Text>
+      <View style={globalElements.row}>
+        <Text style={globalElements.p}>Priority rating</Text>
         <TouchableOpacity
           onPress={() => setShowPriorityPicker(!showPriorityPicker)}
+          style={[globalElements.buttonOrange, globalElements.row]}
         >
-          <Text>{choreData.priority}</Text>
+          <Text style={globalElements.pWhite}>{choreData.priority}</Text>
+          <Feather
+            name={showPriorityPicker ? 'chevron-up' : 'chevron-down'}
+            style={[globalElements.pWhite]}
+          />
         </TouchableOpacity>
       </View>
       {showPriorityPicker && (
         <Picker
           selectedValue={choreData.priority}
           onValueChange={updateChoreData('priority', setChoreData)}
+          style={[globalElements.p]}
         >
           <Picker.Item label="High" value="High" />
           <Picker.Item label="Medium" value="Medium" />
           <Picker.Item label="Low" value="Low" />
         </Picker>
       )}
-      <View>
-        <Text>Frequency</Text>
+      <View style={[globalElements.borderedView, styles.freqContainer]}>
+        <Text style={[globalElements.p, styles.freqTitle]}>Frequency</Text>
         <View style={styles.row}>
           <Text>Frequency measure</Text>
           <TouchableOpacity

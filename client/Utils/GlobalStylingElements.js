@@ -15,6 +15,7 @@ const globalElements = StyleSheet.create({
     width: 30,
     height: 30,
     justifyContent: 'center',
+    alignItems: 'center',
     marginHorizontal: 3,
   },
   buttonOrange: {
@@ -43,7 +44,7 @@ const globalElements = StyleSheet.create({
     marginLeft: 15,
     marginBottom: -4,
   },
-  p: { fontSize: 18, fontFamily: 'Nunito_600SemiBold', marginLeft: '2%' },
+  p: { fontSize: 16, fontFamily: 'Nunito_600SemiBold', marginLeft: '2%' },
   pButton: {
     fontSize: 18,
     fontFamily: 'Nunito_600SemiBold',
@@ -86,7 +87,7 @@ const globalElements = StyleSheet.create({
     paddingVertical: 5,
     marginVertical: 5,
   },
-  row: { flexDirection: 'row' },
+  row: { flexDirection: 'row', alignItems: 'center' },
   input: {
     borderColor: globalStyles.border,
     borderWidth: 1,
@@ -98,6 +99,7 @@ const globalElements = StyleSheet.create({
     fontSize: 15,
     fontFamily: 'Nunito_600SemiBold',
   },
+  inputText: { fontSize: 15, fontFamily: 'Nunito_600SemiBold' },
 });
 
 export { globalElements };

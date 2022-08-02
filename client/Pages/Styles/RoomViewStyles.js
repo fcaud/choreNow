@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     paddingTop: GlobalStylingVariables.paddingTopScreen,
     paddingBottom: GlobalStylingVariables.paddingNavBar,
   },
+  modalWrapper: { justifyContent: 'center', height: '100%' },
   modal: {
     flexDirection: 'row',
     justifyContent: 'space-between',
