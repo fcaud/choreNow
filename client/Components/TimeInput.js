@@ -1,7 +1,7 @@
 import { View, Text, TextInput } from 'react-native';
 import { styles } from './Styles/TimeInputStyles';
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function TimeInput({
   setDisableSubmit,
@@ -48,7 +48,7 @@ export default function TimeInput({
 
   return (
     <View>
-      <View style={styles.row}>
+      <View style={globalElements.timeInputWrapper}>
         <TextInput
           placeholder="00"
           keyboardType="numeric"
@@ -65,8 +65,16 @@ export default function TimeInput({
           value={time.mins}
         />
       </View>
-      {time.hours > 23 && <Text>Please enter a valid time</Text>}
-      {time.mins > 59 && <Text>Please enter a valid time</Text>}
+      {time.hours > 23 && (
+        <Text style={[globalElements.pGreyed, { textAlign: 'center' }]}>
+          Hours input not valid
+        </Text>
+      )}
+      {time.mins > 59 && (
+        <Text style={[globalElements.pGreyed, { textAlign: 'center' }]}>
+          Mins input not valid
+        </Text>
+      )}
     </View>
   );
 }

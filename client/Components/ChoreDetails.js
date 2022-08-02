@@ -23,7 +23,7 @@ export default function ChoreDetails({ chore }) {
               : [styles.indicator, styles.notDue]
           }
         >
-          <Text style={styles.indicatorText}>Status</Text>
+          <Text style={styles.indicatorText}>{chore.status}</Text>
         </View>
         <View
           style={
@@ -34,7 +34,7 @@ export default function ChoreDetails({ chore }) {
               : [styles.indicator, styles.low]
           }
         >
-          <Text style={styles.indicatorText}>Priority</Text>
+          <Text style={styles.indicatorText}>{chore.priority} priority</Text>
         </View>
       </View>
       <View style={styles.innerContainer}>

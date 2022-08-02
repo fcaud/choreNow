@@ -1,13 +1,5 @@
 import { StyleSheet } from 'react-native';
 import globalStyles from '../../Utils/GlobalStylingVariables';
 
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignContent: 'center',
-    marginVertical: 4,
-    marginHorizontal: 10,
-  },
-});
+const styles = StyleSheet.create({});
 export { styles };

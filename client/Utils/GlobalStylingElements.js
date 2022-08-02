@@ -77,6 +77,16 @@ const globalElements = StyleSheet.create({
     paddingHorizontal: 10,
     marginVertical: 8,
   },
+  timeInputWrapper: {
+    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: globalStyles.border,
+    borderRadius: 15,
+    alignSelf: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    marginVertical: 5,
+  },
 });
 
 export { globalElements };
