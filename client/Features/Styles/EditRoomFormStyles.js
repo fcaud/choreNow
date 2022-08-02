@@ -3,26 +3,24 @@ import globalStyles from '../../Utils/GlobalStylingVariables';
 
 const styles = StyleSheet.create({
   container: {},
-  row: {
-    flexDirection: 'row',
+  inputRow: {
     justifyContent: 'space-around',
-    alignContent: 'center',
+    alignItems: 'center',
     marginVertical: 4,
     marginHorizontal: 10,
   },
   input: {
     flexGrow: 5,
-    borderColor: globalStyles.border,
-    borderWidth: 1,
-    borderRadius: 15,
-    paddingHorizontal: 10,
-    marginHorizontal: 5,
   },
   button: {
-    flexGrow: 1,
-    marginHorizontal: 5,
-    borderRadius: 15,
+    height: 30,
+    width: 30,
+    borderRadius: 25,
+    alignItems: 'center',
     justifyContent: 'center',
+    paddingLeft: 0,
+    paddingRight: 0,
   },
+  icon: { color: globalStyles.textLight, fontSize: 16 },
 });
 export { styles };

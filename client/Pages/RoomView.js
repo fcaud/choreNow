@@ -149,22 +149,36 @@ export default function RoomView({ navigation }) {
         </>
       )}
 
-      <Modal visible={roomModal}>
-        <View style={styles.modal}>
-          <EditRoomForm
-            roomData={roomData}
-            addRoom={addRoom}
-            deleteRoom={deleteRoom}
-          />
-          <TouchableOpacity onPress={editRoomsModal}>
-            <Ionicons name="close" />
-          </TouchableOpacity>
+      <Modal visible={roomModal} style={{ backgroundColor: 'red' }}>
+        <View
+          style={{
+            justifyContent: 'center',
+            height: '100%',
+          }}
+        >
+          <View style={[styles.modal, globalElements.borderedView]}>
+            <EditRoomForm
+              roomData={roomData}
+              addRoom={addRoom}
+              deleteRoom={deleteRoom}
+            />
+            <TouchableOpacity
+              onPress={editRoomsModal}
+              style={[globalElements.roundButton]}
+              accessibilityLabel="Close modal"
+            >
+              <Ionicons name="close" style={globalElements.icon} />
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
       <Modal visible={addChoreModal}>
         <View style={styles.modal}>
           <AddChoreForm curRoom={curRoom} addChore={addChore} />
-          <TouchableOpacity onPress={addChoresModal}>
+          <TouchableOpacity
+            onPress={addChoresModal}
+            accessibilityLabel="Close modal"
+          >
             <Ionicons name="close" />
           </TouchableOpacity>
         </View>
@@ -177,7 +191,10 @@ export default function RoomView({ navigation }) {
             curChore={curChore}
             deleteChore={deleteChore}
           />
-          <TouchableOpacity onPress={editChoresModal}>
+          <TouchableOpacity
+            onPress={editChoresModal}
+            accessibilityLabel="Close modal"
+          >
             <Ionicons name="close" />
           </TouchableOpacity>
         </View>

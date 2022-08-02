@@ -17,9 +17,8 @@ const styles = StyleSheet.create({
   },
   indicatorText: {
     textAlign: 'center',
-    paddingVertical: 1,
-    fontFamily: 'Nunito_400Regular',
-    color: globalStyles.textDark,
+    fontFamily: 'Nunito_600SemiBold',
+    color: globalStyles.textDarkGrey,
   },
   overdue: {
     backgroundColor: globalStyles.red,
@@ -56,11 +55,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: { fontSize: 14, fontFamily: 'Nunito_400Regular' },
+  text: { fontSize: 14, fontFamily: 'Nunito_600SemiBold' },
   textCenter: {
     textAlign: 'center',
     fontSize: 14,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_600SemiBold',
   },
   timeWrapper: { paddingTop: 3 },
   notesWrapper: { paddingLeft: 8 },

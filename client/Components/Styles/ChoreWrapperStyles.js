@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   subText: {
     fontSize: 14,
-    fontFamily: 'Nunito_400Regular_Italic',
+    fontFamily: 'Nunito_700Bold_Italic',
     marginLeft: 17,
   },
   completed: { textDecorationLine: 'line-through' },

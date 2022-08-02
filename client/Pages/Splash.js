@@ -4,11 +4,11 @@ import React from 'react';
 import Logo from '../assets/logoWithText';
 import LottieView from 'lottie-react-native';
 import { globalElements } from '../Utils/GlobalStylingElements';
-import { useFonts, Nunito_400Regular } from '@expo-google-fonts/nunito';
+import { useFonts, Nunito_600SemiBold } from '@expo-google-fonts/nunito';
 
 export default function Splash({ navigation }) {
   let [fontsLoaded] = useFonts({
-    Nunito_400Regular,
+    Nunito_600SemiBold,
   });
 
   return (

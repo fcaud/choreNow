@@ -13,9 +13,9 @@ import {
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 import {
   useFonts,
-  Nunito_400Regular,
+  Nunito_600SemiBold,
   Nunito_700Bold,
-  Nunito_400Regular_Italic,
+  Nunito_700Bold_Italic,
 } from '@expo-google-fonts/nunito';
 import { globalElements } from '../Utils/GlobalStylingElements';
 
@@ -78,9 +78,9 @@ export default function ScheduleView({ navigation }) {
   }
 
   let [fontsLoaded] = useFonts({
-    Nunito_400Regular,
+    Nunito_600SemiBold,
     Nunito_700Bold,
-    Nunito_400Regular_Italic,
+    Nunito_700Bold_Italic,
   });
 
   return (

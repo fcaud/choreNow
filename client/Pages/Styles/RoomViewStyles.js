@@ -9,7 +9,12 @@ const styles = StyleSheet.create({
     paddingTop: GlobalStylingVariables.paddingTopScreen,
     paddingBottom: GlobalStylingVariables.paddingNavBar,
   },
-  modal: { flexDirection: 'row', justifyContent: 'space-between', padding: 20 },
+  modal: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+    alignSelf: 'center',
+  },
   scrollContainer: {
     borderRadius: 5,
     borderWidth: 1,

@@ -28,36 +28,36 @@ const globalElements = StyleSheet.create({
   },
   h1: {
     fontSize: 28,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_600SemiBold',
     color: GlobalStyling.textOrange,
   },
   h2: {
     fontSize: 20,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_600SemiBold',
     color: GlobalStyling.textDark,
   },
   h3: {
     fontSize: 18,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_700Bold',
     color: GlobalStyling.textLight,
     marginLeft: 15,
     marginBottom: -4,
   },
-  p: { fontSize: 18, fontFamily: 'Nunito_400Regular', marginLeft: '2%' },
+  p: { fontSize: 18, fontFamily: 'Nunito_600SemiBold', marginLeft: '2%' },
   pButton: {
     fontSize: 18,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_600SemiBold',
     color: GlobalStyling.textOrange,
   },
   pGreyed: {
     fontSize: 14,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_600SemiBold',
     color: GlobalStyling.textGrey,
     marginLeft: '2%',
   },
   pWhite: {
     fontSize: 18,
-    fontFamily: 'Nunito_400Regular',
+    fontFamily: 'Nunito_600SemiBold',
     color: GlobalStyling.textLight,
   },
   icon: { textAlign: 'center', fontSize: 18 },
@@ -87,6 +87,17 @@ const globalElements = StyleSheet.create({
     marginVertical: 5,
   },
   row: { flexDirection: 'row' },
+  input: {
+    borderColor: globalStyles.border,
+    borderWidth: 1,
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    marginHorizontal: 5,
+    height: 30,
+    fontSize: 15,
+    fontFamily: 'Nunito_600SemiBold',
+  },
 });
 
 export { globalElements };
