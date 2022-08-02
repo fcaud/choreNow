@@ -1,8 +1,9 @@
+import React from 'react';
 import { View, Text } from 'react-native';
 import { TimeInput } from '../Components/index';
 import { styles } from './Styles/UserTimePrefFormStyles';
 import { minsToHoursAndMins } from '../Utils/HelperFunctions';
-import React from 'react';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function UserTimePreferenceForm({
   setDisableSubmit,
@@ -11,9 +12,9 @@ export default function UserTimePreferenceForm({
 }) {
   return (
     <View>
-      <Text>Daily chore limits:</Text>
-      <View style={styles.row}>
-        <Text>Monday</Text>
+      <Text style={[globalElements.p]}>Daily chore limits:</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Monday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'mon'}
@@ -21,8 +22,8 @@ export default function UserTimePreferenceForm({
           defaultVal={minsToHoursAndMins(settingsData.mon)}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Tuesday</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Tuesday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'tue'}
@@ -30,8 +31,8 @@ export default function UserTimePreferenceForm({
           defaultVal={minsToHoursAndMins(settingsData.tue)}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Wednesday</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Wednesday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'wed'}
@@ -39,8 +40,8 @@ export default function UserTimePreferenceForm({
           defaultVal={minsToHoursAndMins(settingsData.wed)}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Thursday</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Thursday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'thu'}
@@ -48,8 +49,8 @@ export default function UserTimePreferenceForm({
           defaultVal={minsToHoursAndMins(settingsData.thu)}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Friday</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Friday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'fri'}
@@ -57,8 +58,8 @@ export default function UserTimePreferenceForm({
           defaultVal={minsToHoursAndMins(settingsData.fri)}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Saturday</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Saturday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'sat'}
@@ -66,8 +67,8 @@ export default function UserTimePreferenceForm({
           defaultVal={minsToHoursAndMins(settingsData.sat)}
         />
       </View>
-      <View style={styles.row}>
-        <Text>Sunday</Text>
+      <View style={[globalElements.row]}>
+        <Text style={[globalElements.p, styles.p]}>Sunday</Text>
         <TimeInput
           setDisableSubmit={setDisableSubmit}
           id={'sun'}

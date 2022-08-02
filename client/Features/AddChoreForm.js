@@ -170,7 +170,7 @@ export default function AddChoreForm({ curRoom, addChore }) {
         <TouchableOpacity
           disabled={disableSubmit}
           onPress={() => addChore(choreData)}
-          style={globalElements.buttonOrange}
+          style={[globalElements.buttonOrange, styles.button]}
         >
           <Text style={globalElements.pWhite}>Create chore</Text>
         </TouchableOpacity>

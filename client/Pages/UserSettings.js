@@ -6,11 +6,13 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   KeyboardAvoidingView,
+  ScrollView,
 } from 'react-native';
 import { styles } from './Styles/UserSettingsStyles';
 import React, { useState, useEffect } from 'react';
 import ApiClientService from '../Services/ApiClientService';
 import { useIsFocused } from '@react-navigation/native';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function UserSettings({ navigation }) {
   const isFocused = useIsFocused();
@@ -40,25 +42,31 @@ export default function UserSettings({ navigation }) {
         behavior={Platform.OS === 'ios' ? 'padding' : null}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}
       >
-        <Text>UserSettings </Text>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <UserTimePreferenceForm
-            setDisableSubmit={setDisableSubmit}
-            setTimeOutput={setTimeOutput}
-            settingsData={settingsData}
-          />
-        )}
-        <TouchableOpacity
-          onPress={() => saveSettings(timeOutput)}
-          disabled={disableSubmit}
-        >
-          <Text>Save settings</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Splash')}>
-          <Text>Log out</Text>
-        </TouchableOpacity>
+        <Text style={globalElements.h1}>UserSettings </Text>
+        <ScrollView style={globalElements.scrollView}>
+          {isLoading ? (
+            <ActivityIndicator />
+          ) : (
+            <UserTimePreferenceForm
+              setDisableSubmit={setDisableSubmit}
+              setTimeOutput={setTimeOutput}
+              settingsData={settingsData}
+            />
+          )}
+          <TouchableOpacity
+            onPress={() => saveSettings(timeOutput)}
+            disabled={disableSubmit}
+            style={[globalElements.buttonOrange]}
+          >
+            <Text style={[globalElements.pWhite]}>Save</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Splash')}
+            style={[globalElements.buttonOrange]}
+          >
+            <Text style={[globalElements.pWhite]}>Log out</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </KeyboardAvoidingView>
       <NavBar navigation={navigation} />
     </View>

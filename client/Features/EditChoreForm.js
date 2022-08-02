@@ -114,25 +114,31 @@ export default function EditChoreForm({
       )}
       <View style={[globalElements.borderedView, styles.freqContainer]}>
         <Text style={[globalElements.p, styles.freqTitle]}>Frequency</Text>
-        <View style={styles.row}>
-          <Text>Frequency measure</Text>
+        <View style={globalElements.row}>
+          <Text style={globalElements.p}>Unit</Text>
           <TouchableOpacity
             onPress={() => setShowFreqUnitPicker(!showFreqUnitPicker)}
+            style={[globalElements.buttonOrange, globalElements.row]}
           >
-            <Text>{choreData.freqUnit}</Text>
+            <Text style={globalElements.pWhite}>{choreData.freqUnit}</Text>
+            <Feather
+              name={showFreqUnitPicker ? 'chevron-up' : 'chevron-down'}
+              style={[globalElements.pWhite]}
+            />
           </TouchableOpacity>
         </View>
         {showFreqUnitPicker && (
           <Picker
             selectedValue={choreData.freqUnit}
             onValueChange={updateChoreData('freqUnit', setChoreData)}
+            style={[globalElements.p]}
           >
             <Picker.Item label="days" value="days" />
             <Picker.Item label="weeks" value="weeks" />
             <Picker.Item label="months" value="months" />
           </Picker>
         )}
-        <Text>No more than every:</Text>
+        <Text style={globalElements.p}>No more than every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
@@ -142,8 +148,9 @@ export default function EditChoreForm({
             setDisableSubmit
           )}
           value={choreData.minFreq.toString()}
+          style={globalElements.input}
         />
-        <Text>Should be done every:</Text>
+        <Text style={globalElements.p}>Should be done every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
@@ -153,8 +160,9 @@ export default function EditChoreForm({
             setDisableSubmit
           )}
           value={choreData.desiredFreq.toString()}
+          style={globalElements.input}
         />
-        <Text>No less than every:</Text>
+        <Text style={globalElements.p}>No less than every:</Text>
         <TextInput
           placeholder="Frequency..."
           keyboardType="numeric"
@@ -164,12 +172,14 @@ export default function EditChoreForm({
             setDisableSubmit
           )}
           value={choreData.maxFreq.toString()}
+          style={globalElements.input}
         />
       </View>
       <TextInput
         placeholder="Notes..."
         onChangeText={updateChoreData('notes', setChoreData)}
         value={choreData.notes}
+        style={globalElements.input}
       />
       <View style={styles.row}>
         {choreData.taskName &&
@@ -180,16 +190,25 @@ export default function EditChoreForm({
           <TouchableOpacity
             disabled={disableSubmit}
             onPress={() => editChore(curChore, choreData)}
+            style={[globalElements.buttonOrange]}
           >
-            <Text>Update chore</Text>
+            <Text style={globalElements.pWhite}>Update</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity disabled={true}>
-            <Text>Update chore</Text>
+          <TouchableOpacity
+            disabled={true}
+            style={[globalElements.buttonOrange]}
+          >
+            <Text style={[globalElements.pWhite, styles.submitText]}>
+              Update
+            </Text>
           </TouchableOpacity>
         )}
-        <TouchableOpacity onPress={() => deleteChore(curChore._id)}>
-          <Text>Delete chore</Text>
+        <TouchableOpacity
+          onPress={() => deleteChore(curChore._id)}
+          style={[globalElements.buttonOrange]}
+        >
+          <Text style={[globalElements.pWhite, styles.submitText]}>Delete</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

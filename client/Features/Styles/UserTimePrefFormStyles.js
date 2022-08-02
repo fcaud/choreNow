@@ -3,13 +3,8 @@ import globalStyles from '../../Utils/GlobalStylingVariables';
 
 const styles = StyleSheet.create({
   container: {},
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignContent: 'center',
-    marginVertical: 4,
-    marginHorizontal: 10,
-  },
+  p: { marginRight: 15, width: 100 },
+  row: { alignItems: 'space-between' },
 });
 
 export { styles };
