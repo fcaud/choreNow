@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     paddingTop: GlobalStyling.paddingTopScreen,
     paddingBottom: GlobalStyling.paddingNavBar,
   },
-  scrollView: { width: '75%' },
 });
 
 export { styles };

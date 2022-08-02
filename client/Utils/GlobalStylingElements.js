@@ -58,6 +58,16 @@ const globalElements = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
+  scrollView: { width: '75%' },
+  borderedView: {
+    borderWidth: 1,
+    borderColor: globalStyles.border,
+    borderRadius: 8,
+    width: '75%',
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    marginVertical: 8,
+  },
 });
 
 export { globalElements };

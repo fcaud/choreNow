@@ -57,7 +57,7 @@ export default function AllChoresView({ navigation }) {
           <Text style={[globalElements.h1, { width: '90%' }]}>
             Chore Status
           </Text>
-          <ScrollView style={styles.scrollView}>
+          <ScrollView style={globalElements.scrollView}>
             <Text style={globalElements.h2}>Overdue</Text>
             {choreData.overdue.length !== 0 ? (
               choreData.overdue.map((chore) => (

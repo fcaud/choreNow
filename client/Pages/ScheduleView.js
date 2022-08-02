@@ -94,7 +94,7 @@ export default function ScheduleView({ navigation }) {
               <Text style={[globalElements.h1, { width: '90%' }]}>
                 Your Chore Schedule:
               </Text>
-              <ScrollView style={styles.scrollView}>
+              <ScrollView style={globalElements.scrollView}>
                 {Object.values(weekAhead).map((day) => {
                   return (
                     <View key={day.date}>

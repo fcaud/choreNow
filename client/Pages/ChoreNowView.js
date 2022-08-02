@@ -1,12 +1,12 @@
+import React, { useState, useEffect } from 'react';
+import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import { NavBar, ChoreWrapper } from '../Components/index';
 import { ChoreNowInputForm } from '../Features/index';
-import { Text, View, ActivityIndicator, ScrollView } from 'react-native';
 import { styles } from './Styles/ChoreNowViewStyles';
-import { useState, useEffect } from 'react';
+import { globalElements } from '../Utils/GlobalStylingElements';
 import ApiClientService from '../Services/ApiClientService';
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
 import { useIsFocused } from '@react-navigation/native';
-import React from 'react';
 
 export default function ChoreNowView({ navigation }) {
   const isFocused = useIsFocused();
@@ -56,18 +56,18 @@ export default function ChoreNowView({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text>ChoreNowView</Text>
+      <Text style={globalElements.h1}>ChoreNow</Text>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
-        <View>
+        <View style={globalElements.borderedView}>
           <ChoreNowInputForm
             selectChores={selectChores}
             setTimeOutput={setTimeOutput}
           />
         </View>
       )}
-      <ScrollView>
+      <ScrollView style={globalElements.scrollView}>
         {choresToRender.map((chore) => (
           <ChoreWrapper
             chore={chore}
