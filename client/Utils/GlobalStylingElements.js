@@ -27,6 +27,13 @@ const globalElements = StyleSheet.create({
     fontFamily: 'Nunito_400Regular',
     color: GlobalStyling.textDark,
   },
+  h3: {
+    fontSize: 18,
+    fontFamily: 'Nunito_400Regular',
+    color: GlobalStyling.textLight,
+    marginLeft: '10%',
+    marginBottom: -4,
+  },
   p: { fontSize: 18, fontFamily: 'Nunito_400Regular', marginLeft: '2%' },
   pButton: {
     fontSize: 18,

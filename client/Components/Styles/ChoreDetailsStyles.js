@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'center',
     justifyContent: 'space-around',
-    paddingVertical: 6,
+    paddingTop: 4,
   },
   indicator: {
     width: '47%',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   low: { backgroundColor: globalStyles.green },
   freqContainer: {
     justifyContent: 'center',
-    paddingTop: 10,
+    paddingTop: 2,
   },
   freqWrapper: {
     flexDirection: 'row',
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'Nunito_400Regular',
   },
-  timeWrapper: { paddingTop: 10 },
+  timeWrapper: { paddingTop: 3 },
   notesWrapper: { paddingLeft: 8 },
   subFreq: {
     textAlign: 'center',

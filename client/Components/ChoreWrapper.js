@@ -17,11 +17,11 @@ export default function ChoreWrapper({
       <View style={styles.header}>
         <View>
           {checkIfCompletedToday(chore) ? (
-            <Text style={[styles.completed, globalElements.pWhite]}>
+            <Text style={[styles.completed, globalElements.h3]}>
               {chore.taskName}
             </Text>
           ) : (
-            <Text style={globalElements.pWhite}>{chore.taskName}</Text>
+            <Text style={globalElements.h3}>{chore.taskName}</Text>
           )}
           <Text style={[globalElements.pWhite, styles.subText]}>
             {chore.room}
