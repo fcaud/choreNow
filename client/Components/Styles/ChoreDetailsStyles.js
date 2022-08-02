@@ -15,7 +15,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 3,
   },
-  indicatorText: { textAlign: 'center', paddingVertical: 1 },
+  indicatorText: {
+    textAlign: 'center',
+    paddingVertical: 1,
+    fontFamily: 'Nunito_400Regular',
+    color: globalStyles.textDark,
+  },
   overdue: {
     backgroundColor: globalStyles.red,
   },
@@ -33,6 +38,10 @@ const styles = StyleSheet.create({
   },
   medium: { backgroundColor: globalStyles.amber },
   low: { backgroundColor: globalStyles.green },
+  freqContainer: {
+    justifyContent: 'center',
+    paddingTop: 10,
+  },
   freqWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -40,15 +49,19 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingLeft: 3,
     borderRadius: 15,
-    backgroundColor: globalStyles.backgroundDarkGrey,
+    // backgroundColor: globalStyles.backgroundDarkGrey,
     width: 39,
   },
   minMaxFreqWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: { fontSize: 14 },
-  textCenter: { textAlign: 'center', fontSize: 14 },
+  text: { fontSize: 14, fontFamily: 'Nunito_400Regular' },
+  textCenter: {
+    textAlign: 'center',
+    fontSize: 14,
+    fontFamily: 'Nunito_400Regular',
+  },
   timeWrapper: { paddingTop: 10 },
   notesWrapper: { paddingLeft: 8 },
   subFreq: {

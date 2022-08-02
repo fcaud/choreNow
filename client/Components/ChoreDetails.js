@@ -62,22 +62,30 @@ export default function ChoreDetails({ chore }) {
             </Text>
           )}
         </View>
-        <View>
-          {/* <Text style={styles.textCenter}>Freq</Text> */}
+        <View style={styles.freqContainer}>
+          <Text style={[styles.textCenter, { marginBottom: -6 }]}>Every</Text>
           <View style={styles.freqWrapper}>
             <Text style={(styles.textCenter, { fontSize: 17 })}>
               {chore.desiredFreq}
             </Text>
             <View style={styles.minMaxFreqWrapper}>
-              <Text style={[globalElements.pWhite, styles.subFreq]}>
+              <Text style={[globalElements.pGreyed, styles.subFreq]}>
                 +{chore.maxFreq - chore.desiredFreq}
               </Text>
-              <Text style={[globalElements.pWhite, styles.subFreq]}>
+              <Text style={[globalElements.pGreyed, styles.subFreq]}>
                 -{chore.desiredFreq - chore.minFreq}
               </Text>
             </View>
+            <Text
+              style={[
+                styles.textCenter,
+                chore.freqUnit === 'months' && { width: 50, marginRight: 3 },
+                chore.freqUnit === 'weeks' && { width: 45 },
+              ]}
+            >
+              {chore.freqUnit}
+            </Text>
           </View>
-          <Text style={styles.textCenter}>{chore.freqUnit}</Text>
         </View>
       </View>
       {chore.notes && (

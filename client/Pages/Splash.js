@@ -19,7 +19,7 @@ export default function Splash({ navigation }) {
           onPress={() => navigation.navigate('ScheduleView')}
           style={[globalElements.button, styles.loginButton]}
         >
-          <Text style={globalElements.pButton}>Login</Text>
+          <Text style={globalElements.pButton}>Enter</Text>
         </TouchableOpacity>
       ) : (
         <ActivityIndicator />
