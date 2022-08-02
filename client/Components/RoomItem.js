@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { styles } from './Styles/RoomItemStyles';
 import Feather from 'react-native-vector-icons/Feather';
 import ChoreItem from './ChoreItem';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function RoomItem({
   choreData,
@@ -17,18 +18,28 @@ export default function RoomItem({
 
   return (
     <View>
-      <View style={styles.roomHeader}>
-        <Text style={styles.text}>{room.room}</Text>
-        <TouchableOpacity onPress={() => addChoresModal(room)}>
-          <Feather name="plus" style={styles.icon} />
-        </TouchableOpacity>
+      <View style={[styles.roomHeader]}>
+        <Text style={[globalElements.pWhite, styles.text]}>{room.room}</Text>
+        <View
+          style={[globalElements.row, { marginRight: 10, alignSelf: 'center' }]}
+        >
+          <TouchableOpacity
+            onPress={() => addChoresModal(room)}
+            style={[styles.button]}
+          >
+            <Feather name="plus" style={styles.icon} />
+          </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => setShowChoreList(!showChoreList)}>
-          <Feather
-            name={showChoreList ? 'chevron-up' : 'chevron-down'}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setShowChoreList(!showChoreList)}
+            style={[styles.button]}
+          >
+            <Feather
+              name={showChoreList ? 'chevron-up' : 'chevron-down'}
+              style={styles.icon}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
       {showChoreList &&
         choresForRoom.map((chore) => (

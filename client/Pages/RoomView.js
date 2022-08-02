@@ -1,5 +1,4 @@
-import { NavBar, RoomItem } from '../Components/index';
-import { EditRoomForm, AddChoreForm, EditChoreForm } from '../Features/index';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -8,13 +7,14 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import { styles } from './Styles/RoomViewStyles';
-import ApiClientService from '../Services/ApiClientService';
-import { useEffect, useState } from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
+import { NavBar, RoomItem } from '../Components/index';
+import { EditRoomForm, AddChoreForm, EditChoreForm } from '../Features/index';
+import ApiClientService from '../Services/ApiClientService';
 import { checkOffChore, uncheckChore } from '../Services/ApiHelpers';
-import React from 'react';
+import { styles } from './Styles/RoomViewStyles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function RoomView({ navigation }) {
   const [roomData, setRoomData] = useState([]);
@@ -120,7 +120,10 @@ export default function RoomView({ navigation }) {
         <ActivityIndicator />
       ) : (
         <>
-          <ScrollView>
+          <Text style={globalElements.h1}>Your Chores</Text>
+          <ScrollView
+            style={[globalElements.scrollView, styles.scrollContainer]}
+          >
             {roomData.map((room) => (
               <RoomItem
                 choreData={choreData}
@@ -133,8 +136,15 @@ export default function RoomView({ navigation }) {
               />
             ))}
           </ScrollView>
-          <TouchableOpacity onPress={editRoomsModal}>
-            <Text>Edit rooms</Text>
+          <TouchableOpacity
+            onPress={editRoomsModal}
+            style={[globalElements.buttonOrange, { marginBottom: 8 }]}
+          >
+            <Text
+              style={[globalElements.pWhite, { marginLeft: 4, marginRight: 4 }]}
+            >
+              Edit rooms
+            </Text>
           </TouchableOpacity>
         </>
       )}

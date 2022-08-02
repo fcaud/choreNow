@@ -18,7 +18,11 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 4,
   },
-  subText: { fontSize: 14, fontFamily: 'Nunito_400Regular_Italic' },
+  subText: {
+    fontSize: 14,
+    fontFamily: 'Nunito_400Regular_Italic',
+    marginLeft: 17,
+  },
   completed: { textDecorationLine: 'line-through' },
   detailsWrapper: {
     borderWidth: 1,

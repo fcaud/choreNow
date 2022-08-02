@@ -6,9 +6,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: globalStyles.backgroundBoldOrange,
+    borderColor: globalStyles.borderDark,
+    borderBottomWidth: 1,
   },
-  icon: { flexGrow: 1, marginHorizontal: 3 },
-  text: { flexGrow: 4 },
+  icon: {
+    flexGrow: 1,
+    marginHorizontal: 4,
+    color: globalStyles.textLight,
+    fontSize: 23,
+  },
+  text: { flexGrow: 4, marginLeft: 15, marginVertical: 7, fontSize: 21 },
+  button: { marginVertical: 4 },
 });
 
 export { styles };

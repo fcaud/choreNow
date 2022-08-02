@@ -40,7 +40,7 @@ const globalElements = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Nunito_400Regular',
     color: GlobalStyling.textLight,
-    marginLeft: '10%',
+    marginLeft: 15,
     marginBottom: -4,
   },
   p: { fontSize: 18, fontFamily: 'Nunito_400Regular', marginLeft: '2%' },
@@ -59,7 +59,6 @@ const globalElements = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Nunito_400Regular',
     color: GlobalStyling.textLight,
-    marginLeft: '10%',
   },
   icon: { textAlign: 'center', fontSize: 18 },
   iconGreyed: {
@@ -87,6 +86,7 @@ const globalElements = StyleSheet.create({
     paddingVertical: 5,
     marginVertical: 5,
   },
+  row: { flexDirection: 'row' },
 });
 
 export { globalElements };

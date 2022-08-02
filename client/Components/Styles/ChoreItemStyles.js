@@ -6,11 +6,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: globalStyles.backgroundLightOrange,
+    borderColor: globalStyles.borderDark,
+    borderBottomWidth: 1,
   },
-  choreDetailsWrapper: {},
-  icon: { flexGrow: 1, marginHorizontal: 3 },
-  text: { flexGrow: 4 },
+  choreDetailsWrapper: {
+    borderColor: globalStyles.borderDark,
+    borderBottomWidth: 1,
+  },
+  icon: { marginHorizontal: 7, fontSize: 17, color: globalStyles.textDarkGrey },
+  text: {
+    flexGrow: 4,
+    marginVertical: 4,
+    marginLeft: 20,
+    color: globalStyles.textDarkGrey,
+  },
   completed: { textDecorationLine: 'line-through' },
+  iconWrapper: { marginRight: 8, alignSelf: 'center' },
 });
 
 export { styles };
