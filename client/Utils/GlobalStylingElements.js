@@ -17,6 +17,15 @@ const globalElements = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 3,
   },
+  buttonOrange: {
+    backgroundColor: globalStyles.backgroundBoldOrange,
+    borderRadius: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 3,
+    marginVertical: 5,
+    marginHorizontal: 3,
+    alignSelf: 'center',
+  },
   h1: {
     fontSize: 28,
     fontFamily: 'Nunito_400Regular',
