@@ -36,27 +36,29 @@ const styles = StyleSheet.create({
   freqWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginHorizontal: 3,
-    paddingHorizontal: 3,
-  },
-  desiredFreqWrapper: {
+    alignItems: 'center',
+    paddingVertical: 3,
+    paddingLeft: 3,
+    borderRadius: 15,
     backgroundColor: globalStyles.backgroundDarkGrey,
-    width: 20,
-    height: 20,
-    borderRadius: 12,
+    width: 39,
+  },
+  minMaxFreqWrapper: {
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
   },
   text: { fontSize: 14 },
   textCenter: { textAlign: 'center', fontSize: 14 },
   timeWrapper: { paddingTop: 10 },
   notesWrapper: { paddingLeft: 8 },
-  carets: {
-    color: globalStyles.backgroundLightGrey,
-    fontSize: 18,
-    marginHorizontal: -8,
+  subFreq: {
+    textAlign: 'center',
+    marginVertical: -3,
+    paddingVertical: 0,
+    marginRight: 4,
+    fontSize: 13,
+    fontFamily: 'Nunito_700Bold',
   },
-  subFreq: { marginHorizontal: 8 },
 });
 
 export { styles };

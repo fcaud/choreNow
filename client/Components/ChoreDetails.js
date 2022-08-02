@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { styles } from './Styles/ChoreDetailsStyles';
 import moment from 'moment';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import { globalElements } from '../Utils/GlobalStylingElements';
 
 export default function ChoreDetails({ chore }) {
   const minsDur = chore.timeToComplete % 60;
@@ -63,15 +63,19 @@ export default function ChoreDetails({ chore }) {
           )}
         </View>
         <View>
-          <Text style={styles.textCenter}>Every</Text>
+          {/* <Text style={styles.textCenter}>Freq</Text> */}
           <View style={styles.freqWrapper}>
-            <Text style={styles.textCenter}>{chore.minFreq}</Text>
-            <AntDesign name="caretleft" style={styles.carets} />
-            <View style={styles.desiredFreqWrapper}>
-              <Text style={styles.textCenter}>{chore.desiredFreq}</Text>
+            <Text style={(styles.textCenter, { fontSize: 17 })}>
+              {chore.desiredFreq}
+            </Text>
+            <View style={styles.minMaxFreqWrapper}>
+              <Text style={[globalElements.pWhite, styles.subFreq]}>
+                +{chore.maxFreq - chore.desiredFreq}
+              </Text>
+              <Text style={[globalElements.pWhite, styles.subFreq]}>
+                -{chore.desiredFreq - chore.minFreq}
+              </Text>
             </View>
-            <AntDesign name="caretright" style={styles.carets} />
-            <Text style={styles.subFreq}>{chore.maxFreq}</Text>
           </View>
           <Text style={styles.textCenter}>{chore.freqUnit}</Text>
         </View>
