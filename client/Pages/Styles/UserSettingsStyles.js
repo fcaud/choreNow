@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import GlobalStylingVariables from '../../Utils/GlobalStylingVariables';
 
 const styles = StyleSheet.create({
   container: {
@@ -6,6 +7,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: GlobalStylingVariables.paddingTopScreen,
+    paddingBottom: GlobalStylingVariables.paddingNavBar,
   },
 });
 

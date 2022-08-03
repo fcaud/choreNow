@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 25,
   },
+  orangeIcon: { color: globalStyles.textOrange },
 });
 
 export { styles };
