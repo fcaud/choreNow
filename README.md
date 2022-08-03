@@ -2,9 +2,10 @@
 
 ## File structure:
 ### App
-Navigation logic
+- Navigation logic
 ### Pages
-
+- Splash page: as it says on the tin
+-
 ### Features
 ### Components
 ### Assets
