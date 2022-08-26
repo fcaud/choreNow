@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingLeft: 3,
     borderRadius: 15,
-    // backgroundColor: globalStyles.backgroundDarkGrey,
     width: 39,
   },
   minMaxFreqWrapper: {

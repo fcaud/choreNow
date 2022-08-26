@@ -39,7 +39,7 @@ export default function UserSettings({ navigation }) {
       setSaved(false);
     }
   }, [isFocused]);
-  //consider how to close the keyboard
+
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView
@@ -50,7 +50,7 @@ export default function UserSettings({ navigation }) {
           <ActivityIndicator />
         ) : (
           <>
-            <Text style={globalElements.h1}>UserSettings </Text>
+            <Text style={globalElements.h1}>User Settings </Text>
             <ScrollView style={globalElements.scrollView}>
               <UserTimePreferenceForm
                 setDisableSubmit={setDisableSubmit}

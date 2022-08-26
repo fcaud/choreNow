@@ -98,11 +98,6 @@ export default function RoomView({ navigation }) {
   }
   async function deleteRoom(room) {
     await ApiClientService.deleteRoom({ _id: room._id });
-    //TODO update so delete removes underlying chores
-    // const choresForRoom = choreData.filter((chore) => chore.room === room.room);
-    // await choresForRoom.forEach(
-    //   async (chore) => await ApiClientService.deleteChore(chore._id)
-    // );
     getRoomData();
   }
 
@@ -165,9 +160,9 @@ export default function RoomView({ navigation }) {
               <TouchableOpacity
                 onPress={editRoomsModal}
                 style={[globalElements.roundButton, { marginLeft: -25 }]}
-                accessibilityLabel="Close modal"
+                accessibilityLabel='Close modal'
               >
-                <Ionicons name="close" style={globalElements.icon} />
+                <Ionicons name='close' style={globalElements.icon} />
               </TouchableOpacity>
             </View>
           </View>
@@ -184,11 +179,11 @@ export default function RoomView({ navigation }) {
               <AddChoreForm curRoom={curRoom} addChore={addChore} />
               <TouchableOpacity
                 onPress={addChoresModal}
-                accessibilityLabel="Close modal"
+                accessibilityLabel='Close modal'
                 style={[globalElements.roundButton, { marginLeft: -25 }]}
               >
                 <Ionicons
-                  name="close"
+                  name='close'
                   style={[globalElements.icon, styles.icon]}
                 />
               </TouchableOpacity>
@@ -212,11 +207,11 @@ export default function RoomView({ navigation }) {
               />
               <TouchableOpacity
                 onPress={editChoresModal}
-                accessibilityLabel="Close modal"
+                accessibilityLabel='Close modal'
                 style={[globalElements.roundButton, { marginLeft: -25 }]}
               >
                 <Ionicons
-                  name="close"
+                  name='close'
                   style={[globalElements.icon, styles.icon]}
                 />
               </TouchableOpacity>

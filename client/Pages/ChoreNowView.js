@@ -49,7 +49,7 @@ export default function ChoreNowView({ navigation }) {
       chores = chores.filter((chore) => !completedArray.includes(chore._id));
     }
 
-    //loop through chores and if have time add to render (refactor to filter)
+    //loop through chores and if have time add to render
     const choresToBeRendered = chores.reduce((acc, chore) => {
       if (chore.timeToComplete <= timeRemaining) {
         acc = [...acc, chore];
@@ -61,25 +61,17 @@ export default function ChoreNowView({ navigation }) {
   }
 
   async function choreCompleted(_id, date) {
-    //Logic for checked off chores to persist in view
     const choresCompleted = [...completedChores, _id];
     setCompletedChores(choresCompleted);
-    //put request
     await checkOffChore(_id, date);
-    //rerender chore data
     const chores = await getChoreData();
-    //rerun algorithm
     selectChores('_', chores, choresCompleted);
   }
   async function choreRemoveCompleted(_id, date) {
-    //reversal of logic for checked off chores to persist in view
     const choresCompleted = completedChores.filter((id) => id !== _id);
     setCompletedChores(choresCompleted);
-    //put request
     await uncheckChore(_id, date);
-    //rerender chore data
     const chores = await getChoreData();
-    //rerun algorithm
     selectChores('_', chores, choresCompleted);
   }
 

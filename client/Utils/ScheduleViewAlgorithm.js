@@ -20,7 +20,6 @@ const allocateChores = (weekAheadWithTime, chores) => {
   const result = weekDays.reduce(
     (acc, currDay, i) => {
       const indexInObject = i + 1;
-      //check for tasks completed today and render them today
       if (i === 0) {
         chores.map((chore) => {
           const currentDay = acc.weekAheadWithTime[indexInObject];
@@ -41,7 +40,6 @@ const allocateChores = (weekAheadWithTime, chores) => {
       chores.map((chore, i) => {
         const currentDay = acc.weekAheadWithTime[indexInObject];
         if (currentDay.time === currentDay.timeUsed) return;
-        //pick out chore duration < time available
         const nextDue = new Date(chore.nextMin).getTime();
         if (
           chore.timeToComplete <= currentDay.time - currentDay.timeUsed &&

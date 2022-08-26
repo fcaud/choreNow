@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { styles } from './Styles/ChoreNowInputFormStyles';
 import { globalElements } from '../Utils/GlobalStylingElements';
 import { TimeInput } from '../Components/index';
 import Logo from '../assets/logoWithText';

@@ -1,11 +1,9 @@
-const choreUrl =
-  'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/chores';
-const rankUrl =
-  'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/chores/ranked';
-const roomUrl =
-  'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/rooms';
-const settingsUrl =
-  'https://0b3f-2a00-23c5-42e-a001-1590-1888-da02-cbf2.ngrok.io/settings';
+import { NGROK_URL } from '../Utils/NgrokUrl';
+
+const choreUrl = `${NGROK_URL}/chores`;
+const rankUrl = `${NGROK_URL}/chores/ranked`;
+const roomUrl = `${NGROK_URL}/rooms`;
+const settingsUrl = `${NGROK_URL}/settings`;
 
 //Chore calls
 async function getAllChores() {

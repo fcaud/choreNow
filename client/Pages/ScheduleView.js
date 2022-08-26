@@ -37,17 +37,17 @@ export default function ScheduleView({ navigation }) {
     }
     return weekAhead;
   }
-  //get user time settings for each day
+
   async function getSettings() {
     let settings = await ApiClientService.getSettings();
     return settings[0];
   }
-  //get prioritized list of chores
+
   async function getRankedChores() {
     let chores = await ApiClientService.getRankedChores();
     return chores;
   }
-  //updating data into required format - using algorthim helper function
+
   function addDataToWeekAhead(settings, chores) {
     setWeekAhead(() => {
       const weekAheadWithTime = getWeekAheadWithTime(

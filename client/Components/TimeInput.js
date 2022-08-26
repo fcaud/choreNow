@@ -1,5 +1,4 @@
 import { View, Text, TextInput } from 'react-native';
-import { styles } from './Styles/TimeInputStyles';
 import React, { useState } from 'react';
 import { globalElements } from '../Utils/GlobalStylingElements';
 
@@ -50,8 +49,8 @@ export default function TimeInput({
     <View>
       <View style={globalElements.timeInputWrapper}>
         <TextInput
-          placeholder="00"
-          keyboardType="numeric"
+          placeholder='00'
+          keyboardType='numeric'
           onChangeText={formatTime('hours')}
           maxLength={2}
           value={time.hours}
@@ -59,8 +58,8 @@ export default function TimeInput({
         />
         <Text style={globalElements.inputText}>:</Text>
         <TextInput
-          placeholder="00"
-          keyboardType="numeric"
+          placeholder='00'
+          keyboardType='numeric'
           onChangeText={formatTime('mins')}
           maxLength={2}
           value={time.mins}
