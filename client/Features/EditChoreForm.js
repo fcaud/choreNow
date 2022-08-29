@@ -22,24 +22,26 @@ export default function EditChoreForm({
   curChore,
   deleteChore,
 }) {
-  const [time, setTime] = useState({ hours: '00', mins: '00' });
+  const [choreData, setChoreData] = useState(curChore);
+  const [time, setTime] = useState(
+    minsToHoursAndMins(choreData.timeToComplete)
+  );
   const [disableSubmit, setDisableSubmit] = useState(false);
   const [showPriorityPicker, setShowPriorityPicker] = useState(false);
   const [showFreqUnitPicker, setShowFreqUnitPicker] = useState(false);
-  const [choreData, setChoreData] = useState(curChore);
   return (
     <ScrollView>
       <Text style={globalElements.h1}>Edit Chore</Text>
       <Text style={globalElements.h2}>{curRoom}</Text>
       <TextInput
-        placeholder="Chore Name..."
+        placeholder='Chore Name...'
         maxLength={20}
         onChangeText={updateChoreData(
           'taskName',
           setChoreData,
           setDisableSubmit
         )}
-        autoCapitalize="sentences"
+        autoCapitalize='sentences'
         value={choreData.taskName}
         style={globalElements.input}
       />
@@ -49,8 +51,8 @@ export default function EditChoreForm({
           style={[globalElements.timeInputWrapper, { alignSelf: 'flex-start' }]}
         >
           <TextInput
-            placeholder="00"
-            keyboardType="numeric"
+            placeholder='00'
+            keyboardType='numeric'
             onChangeText={formatTime(
               'hours',
               setChoreData,
@@ -59,13 +61,13 @@ export default function EditChoreForm({
               time
             )}
             maxLength={2}
-            value={minsToHoursAndMins(choreData.timeToComplete).hours}
+            value={time.hours}
             style={globalElements.inputText}
           />
           <Text style={globalElements.inputText}>:</Text>
           <TextInput
-            placeholder="00"
-            keyboardType="numeric"
+            placeholder='00'
+            keyboardType='numeric'
             onChangeText={formatTime(
               'mins',
               setChoreData,
@@ -74,7 +76,7 @@ export default function EditChoreForm({
               time
             )}
             maxLength={2}
-            value={minsToHoursAndMins(choreData.timeToComplete).mins}
+            value={time.mins}
             style={globalElements.inputText}
           />
         </View>
@@ -107,9 +109,9 @@ export default function EditChoreForm({
           onValueChange={updateChoreData('priority', setChoreData)}
           style={[globalElements.p]}
         >
-          <Picker.Item label="High" value="High" />
-          <Picker.Item label="Medium" value="Medium" />
-          <Picker.Item label="Low" value="Low" />
+          <Picker.Item label='High' value='High' />
+          <Picker.Item label='Medium' value='Medium' />
+          <Picker.Item label='Low' value='Low' />
         </Picker>
       )}
       <View style={[globalElements.borderedView, styles.freqContainer]}>
@@ -133,15 +135,15 @@ export default function EditChoreForm({
             onValueChange={updateChoreData('freqUnit', setChoreData)}
             style={[globalElements.p]}
           >
-            <Picker.Item label="days" value="days" />
-            <Picker.Item label="weeks" value="weeks" />
-            <Picker.Item label="months" value="months" />
+            <Picker.Item label='days' value='days' />
+            <Picker.Item label='weeks' value='weeks' />
+            <Picker.Item label='months' value='months' />
           </Picker>
         )}
         <Text style={globalElements.p}>No more than every:</Text>
         <TextInput
-          placeholder="Frequency..."
-          keyboardType="numeric"
+          placeholder='Frequency...'
+          keyboardType='numeric'
           onChangeText={updateChoreData(
             'minFreq',
             setChoreData,
@@ -152,8 +154,8 @@ export default function EditChoreForm({
         />
         <Text style={globalElements.p}>Should be done every:</Text>
         <TextInput
-          placeholder="Frequency..."
-          keyboardType="numeric"
+          placeholder='Frequency...'
+          keyboardType='numeric'
           onChangeText={updateChoreData(
             'desiredFreq',
             setChoreData,
@@ -164,8 +166,8 @@ export default function EditChoreForm({
         />
         <Text style={globalElements.p}>No less than every:</Text>
         <TextInput
-          placeholder="Frequency..."
-          keyboardType="numeric"
+          placeholder='Frequency...'
+          keyboardType='numeric'
           onChangeText={updateChoreData(
             'maxFreq',
             setChoreData,
@@ -176,7 +178,7 @@ export default function EditChoreForm({
         />
       </View>
       <TextInput
-        placeholder="Notes..."
+        placeholder='Notes...'
         onChangeText={updateChoreData('notes', setChoreData)}
         value={choreData.notes}
         style={globalElements.input}
